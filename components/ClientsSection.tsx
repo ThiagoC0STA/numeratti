@@ -5,68 +5,84 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { CLIENT_LOGOS, COLORS } from "@/lib/constants";
+import { ArrowRight } from "lucide-react";
+
+function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
+  const ordered = direction === "left" ? CLIENT_LOGOS : [...CLIENT_LOGOS].reverse();
+  const loop = [...ordered, ...ordered];
+
+  return (
+    <div className="relative overflow-hidden py-1">
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-[#fafaf9] to-transparent md:w-28" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-[#fafaf9] to-transparent md:w-28" />
+
+      <motion.div
+        className="flex w-max gap-6 md:gap-8"
+        animate={{ x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }}
+        transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
+      >
+        {loop.map((client, i) => (
+          <div
+            key={`${client.name}-${i}`}
+            className="flex h-32 w-[13rem] shrink-0 items-center justify-center rounded-2xl border border-stone-200/90 bg-white px-5 py-4 shadow-sm transition-all duration-300 hover:border-[#ff6600]/35 hover:shadow-lg md:h-36 md:w-[15.5rem] md:px-6"
+          >
+            <Image
+              src={client.url}
+              alt={client.name}
+              width={280}
+              height={120}
+              className="h-[4.5rem] w-auto max-w-[min(100%,11rem)] object-contain md:h-[6.75rem] md:max-w-[min(100%,13rem)]"
+              unoptimized
+            />
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
 
 export default function ClientsSection() {
   return (
     <section
       id="clients"
-      className="relative overflow-hidden bg-zinc-50 py-24 lg:py-32"
+      className="relative overflow-hidden bg-[#fafaf9] py-28 lg:py-36"
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="pointer-events-none absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-[#ff6600]/8 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff6600]/20 to-transparent" />
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <ScrollReveal>
-          <h2 className="text-center text-3xl font-bold text-black md:text-4xl lg:text-5xl">
-            Mais de <span style={{ color: COLORS.primary }}>200 empresas</span>{" "}
+          <p
+            className="text-center text-sm font-bold uppercase tracking-widest"
+            style={{ color: COLORS.primary }}
+          >
+            Nossos clientes
+          </p>
+          <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-stone-900 md:text-4xl lg:text-5xl">
+            Mais de{" "}
+            <span className="bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">
+              200 empresas
+            </span>{" "}
             escolheram a Numeratti
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-center text-gray-600">
+          <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600">
             Marcas que confiam no nosso trabalho para resultados reais
           </p>
         </ScrollReveal>
 
-        <motion.div
-          className="mt-16 grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            visible: {
-              transition: {
-                staggerChildren: 0.06,
-              },
-            },
-          }}
-        >
-          {CLIENT_LOGOS.map((client, i) => (
-            <motion.div
-              key={client.name}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              whileHover={{ y: -4, scale: 1.03 }}
-              className="flex items-center justify-center rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:border-[#ff6600]/30 hover:shadow-lg"
-            >
-              <Image
-                src={client.url}
-                alt={client.name}
-                width={120}
-                height={60}
-                className="h-12 w-auto object-contain md:h-14"
-                unoptimized
-              />
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="mt-16 space-y-8 md:mt-20 md:space-y-10">
+          <LogoMarquee direction="left" />
+          <LogoMarquee direction="right" />
+        </div>
 
-        <ScrollReveal delay={0.2}>
-          <div className="mt-12 text-center">
+        <ScrollReveal delay={0.15}>
+          <div className="mt-14 text-center">
             <Link
               href="/clientes"
-              className="inline-flex items-center rounded-full px-8 py-3 font-semibold text-white transition-all hover:scale-105 hover:opacity-90"
-              style={{ backgroundColor: COLORS.primary }}
+              className="group inline-flex items-center gap-2 rounded-full border border-[#ff6600]/35 bg-white px-8 py-3.5 text-sm font-bold text-[#ff6600] shadow-md transition-all hover:bg-[#ff6600] hover:text-white"
             >
               Veja quem mais confia em nosso trabalho
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </ScrollReveal>

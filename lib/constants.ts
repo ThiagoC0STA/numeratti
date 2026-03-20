@@ -118,13 +118,89 @@ export const PLATFORMS = [
   "Google Ads",
   "Waze Ads",
   "Criteo",
-  "YouTube",
-  "LinkedIn Ads",
-  "TikTok Ads",
+  "RTB House",
+  "Voxus",
+  "Twitter / X Ads",
   "Bing Ads",
   "Pinterest Ads",
+  "TikTok Ads",
+  "LinkedIn Ads",
   "Google Analytics",
+  "YouTube",
+  "Spotify Ads",
   "Mídia Programática",
+] as const;
+
+/** Official platform badge artwork (legacy site). */
+export const PLATFORM_ASSETS = [
+  {
+    name: "Facebook Ads",
+    image: "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-47.png",
+  },
+  {
+    name: "Instagram Ads",
+    image: "https://numeratti.com.br/wp-content/uploads/2022/04/jpbalthazar-graficos-instagram-ads.png",
+  },
+  {
+    name: "Google Ads",
+    image: "https://numeratti.com.br/wp-content/uploads/2022/04/ads-logo-horizontal.png",
+  },
+  {
+    name: "Waze Ads",
+    image: "https://numeratti.com.br/wp-content/uploads/2022/04/unnamed.png",
+  },
+  {
+    name: "Criteo",
+    image: "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-51.png",
+  },
+  {
+    name: "RBT House",
+    image: "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-52.png",
+  },
+  {
+    name: "Voxus",
+    image: "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-53.png",
+  },
+  {
+    name: "Twitter Ads",
+    image: "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-55.png",
+  },
+  {
+    name: "Bing Ads",
+    image: "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-56.png",
+  },
+  {
+    name: "Pinterest Ads",
+    image: "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-57.png",
+  },
+  {
+    name: "TikTok Ads",
+    image: "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-58.png",
+  },
+  {
+    name: "LinkedIn Ads",
+    image: "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-49.png",
+  },
+  {
+    name: "Google Analytics",
+    image: "https://numeratti.com.br/wp-content/uploads/2022/04/logo_lockup_analytics_icon_horizontal_black_2x.png",
+  },
+  {
+    name: "YouTube",
+    image: "https://numeratti.com.br/wp-content/uploads/2023/09/Retangulo-108.png",
+  },
+  {
+    name: "Tinder",
+    image: "https://numeratti.com.br/wp-content/uploads/2023/09/Retangulo-109.png",
+  },
+  {
+    name: "Spotify",
+    image: "https://numeratti.com.br/wp-content/uploads/2023/09/Retangulo-110.png",
+  },
+  {
+    name: "Mídia Programática",
+    image: "https://numeratti.com.br/wp-content/uploads/2023/09/MIDIAPROGRAMATICA.png",
+  },
 ] as const;
 
 export const CLIENT_LOGOS = [
@@ -196,42 +272,13 @@ export const CASES = [
   },
 ] as const;
 
-export const BLOG_POSTS = [
-  {
-    title: "Aumente suas Vendas na Black Friday Usando Análise de Dados",
-    date: "23 out 2024",
-    excerpt:
-      "Você já imaginou aumentar suas vendas na Black Friday de forma significativa? Segundo a National Retail Federation...",
-    categories: [
-      "Gestão de Investimentos em Publicidade",
-      "Otimização de Orçamento",
-      "Tecnologia",
-    ],
-    url: "https://numeratti.com.br/tecnologia/aumente-vendas-black-friday-analise-dados/",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2024/10/shutterstock_2330107529-1-1-compactado-1-1.png",
-  },
-  {
-    title: "5 Tendências Para Sua Marca Se Destacar em 2024",
-    date: "09 fev 2024",
-    excerpt:
-      "Todo começo de ano uma pergunta ronda os pensamentos de muitas pessoas das mais diversas áreas...",
-    categories: ["#tendência", "2024", "Marketing", "Tendências de Mercado"],
-    url: "https://numeratti.com.br/tendencias-mercado/5-tendencias-para-sua-marca-se-destacar-em-2024/",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2024/02/shutterstock_2351639671-scaled.jpg",
-  },
-  {
-    title: "Evolução do Marketing 1.0 ao 5.0 - Da Era Industrial à Conexão Holística",
-    date: "15 jan 2024",
-    excerpt:
-      "De acordo com Philip Kotler, Marketing é a ciência e arte de explorar, criar e entregar valor...",
-    categories: ["#campanha", "#estratégia", "Liderança", "Marketing", "Tecnologia"],
-    url: "https://numeratti.com.br/marketing/entenda-diferenca-entre-marketing-1-0-ao-5-0/",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2024/01/shutterstock_2243890189-scaled.jpg",
-  },
+export const SOCIAL_LINKS = [
+  { href: "https://www.facebook.com/numerattibr", label: "Facebook", icon: "facebook" as const },
+  { href: "https://www.instagram.com/numerattibr/", label: "Instagram", icon: "instagram" as const },
+  { href: "https://www.linkedin.com/company/numeratti/about/", label: "LinkedIn", icon: "linkedin" as const },
 ] as const;
+
+export const WHATSAPP_SUPPORT_URL = "https://api.whatsapp.com/send?phone=5585988776405";
 
 export const QUEM_SOMOS = {
   intro:
@@ -291,21 +338,26 @@ export const HERO_SLIDES = [
   },
   {
     lines: [
-      { text: "Qualidade", highlight: true },
-      { text: "e desempenho", highlight: true },
-      { text: "nos seus anúncios.", highlight: false },
+      {
+        parts: [
+          { text: "Qualidade e desempenho ", highlight: true },
+          { text: "nos seus anúncios.", highlight: false },
+        ],
+      },
     ],
-    smallImage: "https://numeratti.com.br/wp-content/uploads/2022/07/000103-300x150.png",
+    smallImage: undefined,
     image: "https://numeratti.com.br/wp-content/uploads/2022/05/IMAGEM-BANNER-2.png",
   },
   {
     lines: [
-      { text: "Impulsionando", highlight: false },
-      { text: "marcas a gerar", highlight: false },
-      { text: "resultados para", highlight: true },
-      { text: "seu negócio.", highlight: true },
+      {
+        parts: [
+          { text: "Impulsionando marcas a gerar ", highlight: false },
+          { text: "resultados para seu negócio.", highlight: true },
+        ],
+      },
     ],
-    smallImage: "https://numeratti.com.br/wp-content/uploads/2022/04/logo-1-300x139.png",
+    smallImage: undefined,
     image: "https://numeratti.com.br/wp-content/uploads/2022/05/IMAGEM-BANNER-3.png",
   },
 ] as const;

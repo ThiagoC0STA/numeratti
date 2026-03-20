@@ -47,7 +47,6 @@ export default function MagneticButton({
     });
   };
 
-  const Comp = as;
   const isLink = as === "a" && href;
 
   return (
@@ -65,17 +64,30 @@ export default function MagneticButton({
         >
           {children}
         </a>
-      ) : (
-        <Comp
-          ref={ref as React.RefObject<HTMLButtonElement & HTMLDivElement>}
+      ) : as === "button" ? (
+        <button
+          type="button"
+          ref={ref as React.RefObject<HTMLButtonElement>}
+          style={{ willChange: "transform" }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           onClick={onClick}
-          href={as === "a" ? href : undefined}
           className={className}
         >
           {children}
-        </Comp>
+        </button>
+      ) : (
+        <div
+          ref={ref as React.RefObject<HTMLDivElement>}
+          style={{ willChange: "transform" }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          onClick={onClick}
+          className={className}
+          role={onClick ? "button" : undefined}
+        >
+          {children}
+        </div>
       )}
     </div>
   );

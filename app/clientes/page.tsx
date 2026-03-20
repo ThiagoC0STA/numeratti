@@ -19,7 +19,7 @@ export default function ClientesPage() {
           subtitle="Marcas que escolheram a Numeratti para estruturar ou acelerar o crescimento. Empresas com grande reconhecimento no mercado escolheram melhorar os seus resultados conosco."
           highlight="Clientes"
         />
-        <ClientsSection variant="page" />
+        <ClientsSection />
       </main>
       <Footer />
     </div>

@@ -1,13 +1,13 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { XAxis, YAxis, ResponsiveContainer, Area, AreaChart } from "recharts";
-import { BarChart3, Users, TrendingUp } from "lucide-react";
+import { XAxis, YAxis, ResponsiveContainer, Area, AreaChart, Tooltip } from "recharts";
+import { BarChart3, Users, TrendingUp, Activity } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GsapCounter from "@/components/animations/GsapCounter";
-import ScrollReveal from "@/components/ui/ScrollReveal";
+import ImpressionsShowcaseCard from "@/components/metrics/ImpressionsShowcaseCard";
 import { METRICS, COLORS } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -19,6 +19,8 @@ const CHART_DATA = [
   { month: "Abr", value: 85 },
   { month: "Mai", value: 92 },
   { month: "Jun", value: 78 },
+  { month: "Jul", value: 88 },
+  { month: "Ago", value: 95 },
 ];
 
 const ICON_MAP: Record<(typeof METRICS)[number]["icon"], typeof BarChart3> = {
@@ -26,6 +28,50 @@ const ICON_MAP: Record<(typeof METRICS)[number]["icon"], typeof BarChart3> = {
   leads: Users,
   roas: TrendingUp,
 };
+
+function MetricCard({
+  metric,
+  index,
+  className = "",
+}: {
+  metric: (typeof METRICS)[number];
+  index: number;
+  className?: string;
+}) {
+  const Icon = ICON_MAP[metric.icon] ?? BarChart3;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.65, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -6 }}
+      className={`group relative overflow-hidden rounded-3xl border border-stone-200/80 bg-white p-8 shadow-[0_20px_60px_-28px_rgba(0,0,0,0.08)] transition-shadow duration-500 hover:border-[#ff6600]/25 hover:shadow-[0_28px_80px_-24px_rgba(255,102,0,0.12)] lg:p-10 ${className}`}
+    >
+      <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gradient-to-br from-[#ff6600]/10 to-transparent transition-all duration-700 group-hover:scale-110" />
+
+      <div className="relative flex items-start justify-between">
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#ff6600]/15 to-[#f27405]/10 text-[#ff6600] shadow-inner transition-transform duration-300 group-hover:scale-105">
+          <Icon size={28} />
+        </div>
+        <span className="rounded-full border border-stone-100 bg-stone-50 px-3 py-1 text-xs font-semibold text-stone-500">
+          {metric.label}
+        </span>
+      </div>
+
+      <GsapCounter
+        value={metric.value}
+        suffix={metric.suffix}
+        className="mt-6 block text-4xl font-bold tracking-tight text-stone-900 md:text-5xl lg:text-6xl"
+        duration={2}
+        format="full"
+      />
+
+      <p className="mt-4 text-sm leading-relaxed text-stone-600 lg:text-base">{metric.description}</p>
+    </motion.div>
+  );
+}
 
 export default function MetricsSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -37,18 +83,20 @@ export default function MetricsSection() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
+      const lines = headingRef.current?.querySelectorAll(".line");
+      if (!lines?.length) return;
       gsap.fromTo(
-        headingRef.current?.querySelectorAll(".line"),
-        { y: 80, opacity: 0 },
+        lines,
+        { y: 64, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.9,
-          stagger: 0.1,
+          duration: 0.85,
+          stagger: 0.08,
           ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 80%",
+            start: "top 82%",
             toggleActions: "play none none none",
           },
         }
@@ -61,136 +109,101 @@ export default function MetricsSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-white py-32 lg:py-40"
+      className="relative overflow-hidden bg-gradient-to-b from-stone-50 via-white to-[#fff9f4] py-28 lg:py-36"
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="pointer-events-none absolute right-0 top-24 h-[420px] w-[420px] rounded-full bg-[#ff6600]/10 blur-[120px]" />
+      <div className="pointer-events-none absolute -left-32 bottom-20 h-80 w-80 rounded-full bg-violet-300/20 blur-[100px]" />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.4]"
+        style={{
+          backgroundImage: "radial-gradient(rgba(255,102,0,0.06) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center">
           <h2
             ref={headingRef}
-            className="text-4xl font-bold text-black md:text-5xl lg:text-6xl"
+            className="text-4xl font-bold tracking-tight text-stone-900 md:text-5xl lg:text-6xl"
           >
             <span className="line block">Resultados que</span>
-            <span
-              className="line block font-bold"
-              style={{ color: COLORS.primary }}
-            >
+            <span className="line block bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">
               impressionam
             </span>
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-center text-lg text-gray-600">
-            Números reais gerados para nossos clientes em campanhas de
-            performance
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-stone-600">
+            Números reais gerados para nossos clientes em campanhas de performance
           </p>
         </div>
 
-        <div className="mt-24 grid gap-8 md:grid-cols-3">
-          {METRICS.map((metric, i) => {
-            const Icon = ICON_MAP[metric.icon] ?? BarChart3;
-            return (
-              <motion.div
-                key={metric.label}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{
-                  duration: 0.7,
-                  delay: i * 0.15,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                whileHover={{ y: -12, scale: 1.02 }}
-                className="group relative overflow-hidden rounded-3xl border border-gray-200/80 bg-white p-10 shadow-lg transition-shadow hover:border-[#ff6600]/40 hover:shadow-2xl"
-              >
-                <div
-                  className="absolute -right-12 -top-12 h-40 w-40 rounded-full opacity-[0.07] transition-opacity group-hover:opacity-15"
-                  style={{ backgroundColor: COLORS.primary }}
-                />
-                <div
-                  className="relative mb-6 flex h-16 w-16 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
-                  style={{ backgroundColor: `${COLORS.primary}18` }}
-                >
-                  <Icon size={32} style={{ color: COLORS.primary }} />
-                </div>
-                <GsapCounter
-                  value={metric.value}
-                  suffix={metric.suffix}
-                  className="block text-5xl font-bold text-black md:text-6xl"
-                  duration={2}
-                  format="full"
-                />
-                <h3
-                  className="mt-3 text-xl font-bold"
-                  style={{ color: COLORS.primary }}
-                >
-                  {metric.label}
-                </h3>
-                <p className="mt-4 text-gray-600">{metric.description}</p>
-              </motion.div>
-            );
-          })}
+        <div className="mt-20 grid gap-6 lg:grid-cols-2 lg:items-stretch">
+          <ImpressionsShowcaseCard />
+          <div className="grid gap-6">
+            <MetricCard metric={METRICS[1]} index={1} />
+            <MetricCard metric={METRICS[2]} index={2} />
+          </div>
         </div>
 
         <motion.div
           ref={chartRef}
-          initial={{ opacity: 0, y: 80 }}
+          initial={{ opacity: 0, y: 48 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-32 overflow-hidden rounded-3xl border border-gray-200/80 bg-gradient-to-br from-gray-50/80 to-white p-10 shadow-xl backdrop-blur-sm lg:p-14"
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-12 overflow-hidden rounded-3xl border border-stone-200/80 bg-white shadow-[0_24px_70px_-30px_rgba(0,0,0,0.1)]"
         >
-          <h3 className="text-2xl font-bold text-black">
-            Acompanhamento diário
-          </h3>
-          <p className="mt-2 text-gray-600">
-            Painel com métricas de campanhas atualizadas diariamente
-          </p>
-          <div className="mt-10 h-72 lg:h-96">
-            {isInView && (
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={CHART_DATA}>
-                  <defs>
-                    <linearGradient
-                      id="colorValue"
-                      x1="0"
-                      y1="0"
-                      x2="0"
-                      y2="1"
-                    >
-                      <stop
-                        offset="0%"
-                        stopColor={COLORS.primary}
-                        stopOpacity={0.5}
-                      />
-                      <stop
-                        offset="100%"
-                        stopColor={COLORS.primary}
-                        stopOpacity={0}
-                      />
-                    </linearGradient>
-                  </defs>
-                  <XAxis
-                    dataKey="month"
-                    stroke="#94a3b8"
-                    fontSize={13}
-                    tickLine={false}
-                    axisLine={false}
-                  />
-                  <YAxis
-                    stroke="#94a3b8"
-                    fontSize={13}
-                    tickLine={false}
-                    axisLine={false}
-                    tickFormatter={(v) => `${v}%`}
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="value"
-                    stroke={COLORS.primary}
-                    strokeWidth={3}
-                    fill="url(#colorValue)"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            )}
+          <div className="flex flex-col gap-4 border-b border-stone-100 p-8 sm:flex-row sm:items-center sm:justify-between lg:p-10">
+            <div>
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#ff6600]/10">
+                  <Activity size={22} style={{ color: COLORS.primary }} />
+                </div>
+                <h3 className="text-2xl font-bold text-stone-900">Acompanhamento diário</h3>
+              </div>
+              <p className="mt-2 text-stone-600">Painel com métricas de campanhas atualizadas diariamente</p>
+            </div>
+            <div className="flex items-center gap-2 rounded-full border border-stone-200 bg-stone-50 px-4 py-2">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-[#ff6600]" />
+              <span className="text-sm font-medium text-stone-600">Tempo real</span>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-b from-stone-50/80 to-white p-6 lg:p-10">
+            <div className="h-72 lg:h-96">
+              {isInView && (
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={CHART_DATA}>
+                    <defs>
+                      <linearGradient id="colorValueLight" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor={COLORS.primary} stopOpacity={0.35} />
+                        <stop offset="100%" stopColor={COLORS.primary} stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <XAxis dataKey="month" stroke="#a8a29e" fontSize={12} tickLine={false} axisLine={false} />
+                    <YAxis stroke="#a8a29e" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(v) => `${v}%`} />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#fff",
+                        border: "1px solid rgba(255,102,0,0.25)",
+                        borderRadius: "14px",
+                        color: "#1c1917",
+                        boxShadow: "0 12px 40px -12px rgba(0,0,0,0.15)",
+                      }}
+                      formatter={(value) => [`${Number(value ?? 0)}%`, "Performance"]}
+                      labelStyle={{ color: "#78716c" }}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="value"
+                      stroke={COLORS.primary}
+                      strokeWidth={3}
+                      fill="url(#colorValueLight)"
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              )}
+            </div>
           </div>
         </motion.div>
       </div>

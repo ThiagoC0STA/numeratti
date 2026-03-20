@@ -46,7 +46,7 @@ export default function SplitTextReveal({
         duration,
         delay,
         stagger,
-        ease: [0.22, 1, 0.36, 1],
+        ease: "power3.out",
         scrollTrigger: {
           trigger: el,
           start: triggerOffset,

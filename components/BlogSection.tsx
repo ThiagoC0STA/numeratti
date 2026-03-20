@@ -1,99 +1,76 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { BLOG_POSTS, COLORS } from "@/lib/constants";
-import { ArrowRight, Calendar } from "lucide-react";
+import BlogPostCard from "@/components/blog/BlogPostCard";
+import type { BlogPostSummary } from "@/lib/blog/types";
+import { formatPostDate } from "@/lib/blog/dates";
+import { COLORS } from "@/lib/constants";
+import { ArrowRight } from "lucide-react";
 
-export default function BlogSection() {
+export default function BlogSection({ posts }: { posts: BlogPostSummary[] }) {
+  if (!posts.length) return null;
+
+  const [featured, ...rest] = posts;
+  /** Uniform grid below — avoids 5-col layout gaps / collapsed cells with ScrollReveal + Image */
+  const more = rest.slice(0, 6);
+
   return (
     <section
       id="blog"
-      className="relative overflow-hidden bg-white py-24 lg:py-32"
+      className="relative overflow-hidden bg-gradient-to-b from-stone-50 via-white to-[#fff7f0] py-28 lg:py-36"
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="pointer-events-none absolute left-1/3 top-0 h-[420px] w-[420px] rounded-full bg-[#ff6600]/8 blur-[130px]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff6600]/20 to-transparent" />
+
+      <div className="relative mx-auto max-w-[90rem] px-6 lg:px-10">
         <ScrollReveal>
-          <h2 className="text-center text-3xl font-bold text-black md:text-4xl lg:text-5xl">
-            <span style={{ color: COLORS.primary }}>Blog</span>
+          <p className="text-center text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+            Conteúdo
+          </p>
+          <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-stone-900 md:text-4xl lg:text-5xl">
+            <span className="bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">Blog</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-center text-gray-600">
-            Conteúdo sobre marketing digital e performance
+          <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600">
+            Artigos completos na v2 — clique e leia sem sair do site
           </p>
         </ScrollReveal>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {BLOG_POSTS.map((post, i) => (
-            <ScrollReveal key={post.title} delay={i * 0.1}>
-              <motion.article
-                whileHover={{ y: -8 }}
-                className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-xl"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    unoptimized
-                  />
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
-                    style={{ mixBlendMode: "multiply" }}
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <Calendar size={14} />
-                    {post.date}
-                  </div>
-                  <h3 className="mt-2 line-clamp-2 text-lg font-bold text-black group-hover:text-[#ff6600]">
-                    {post.title}
-                  </h3>
-                  <p className="mt-2 line-clamp-2 text-sm text-gray-600">
-                    {post.excerpt}
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {post.categories.slice(0, 3).map((cat) => (
-                      <span
-                        key={cat}
-                        className="rounded-md px-2 py-0.5 text-xs"
-                        style={{
-                          backgroundColor: `${COLORS.primary}20`,
-                          color: COLORS.primaryDark,
-                        }}
-                      >
-                        {cat}
-                      </span>
-                    ))}
-                  </div>
-                  <a
-                    href={post.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold"
-                    style={{ color: COLORS.primary }}
-                  >
-                    Ler mais
-                    <ArrowRight size={16} />
-                  </a>
-                </div>
-              </motion.article>
-            </ScrollReveal>
-          ))}
+        <div className="mt-20 space-y-6">
+          <div className="w-full min-w-0">
+            <BlogPostCard
+              post={featured}
+              dateLabel={formatPostDate(featured.date)}
+              featured
+              delay={0}
+            />
+          </div>
+
+          {more.length > 0 && (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {more.map((post, i) => (
+                <BlogPostCard
+                  key={post.slug}
+                  post={post}
+                  dateLabel={formatPostDate(post.date)}
+                  delay={0.05 + i * 0.04}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
-        <ScrollReveal delay={0.3}>
-          <div className="mt-12 text-center">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 font-semibold transition-colors hover:opacity-80"
-              style={{ color: COLORS.primary }}
-            >
-              Ver todos os artigos
-              <ArrowRight size={20} />
+        <ScrollReveal delay={0.2}>
+          <div className="mt-14 text-center">
+            <Link href="/blog">
+              <motion.span
+                whileHover={{ scale: 1.02 }}
+                className="group inline-flex items-center gap-2 rounded-full border border-[#ff6600]/35 bg-white px-7 py-3.5 text-sm font-bold text-[#ff6600] shadow-md transition-all hover:bg-[#ff6600] hover:text-white"
+              >
+                Ver todos os artigos
+                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+              </motion.span>
             </Link>
           </div>
         </ScrollReveal>

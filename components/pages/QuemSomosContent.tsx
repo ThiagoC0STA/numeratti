@@ -97,13 +97,14 @@ export default function QuemSomosContent() {
                   whileHover={{ y: -4 }}
                   className="rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm"
                 >
-                  <AnimatedCounter
-                    value={stat.value}
-                    suffix={stat.suffix}
-                    decimals={stat.value === 1.9 ? 1 : 0}
-                    className="text-4xl font-bold"
-                    style={{ color: COLORS.primary }}
-                  />
+                  <span style={{ color: COLORS.primary }}>
+                    <AnimatedCounter
+                      value={stat.value}
+                      suffix={stat.suffix}
+                      decimals={stat.value === 1.9 ? 1 : 0}
+                      className="text-4xl font-bold"
+                    />
+                  </span>
                   <p className="mt-2 text-sm text-gray-600">{stat.label}</p>
                 </motion.div>
               ))}

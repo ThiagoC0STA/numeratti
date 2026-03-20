@@ -18,14 +18,14 @@ export default function PageHero({
   backgroundImage,
 }: PageHeroProps) {
   return (
-    <section className="relative min-h-[50vh] overflow-hidden bg-black lg:min-h-[60vh]">
+    <section className="relative min-h-[48vh] overflow-hidden lg:min-h-[52vh]">
       {backgroundImage && (
         <div className="absolute inset-0">
           <Image
             src={backgroundImage}
             alt=""
             fill
-            className="object-cover opacity-50"
+            className="object-cover opacity-40"
             priority
             unoptimized
           />
@@ -33,28 +33,43 @@ export default function PageHero({
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.85) 100%)",
+                "linear-gradient(135deg, rgba(250,248,245,0.92) 0%, rgba(255,247,240,0.95) 50%, rgba(255,255,255,0.98) 100%)",
             }}
           />
         </div>
       )}
       {!backgroundImage && (
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255,102,0,0.15), transparent)",
-          }}
-        />
+        <>
+          <div
+            className="pointer-events-none absolute -left-32 top-0 h-80 w-80 rounded-full bg-[#ff6600]/20 blur-[100px]"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-violet-400/25 blur-[90px]"
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 bg-gradient-to-br from-[#faf8f5] via-white to-[#fff5eb]"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.35]"
+            style={{
+              backgroundImage: `radial-gradient(rgba(255,102,0,0.12) 1px, transparent 1px)`,
+              backgroundSize: "24px 24px",
+            }}
+            aria-hidden
+          />
+        </>
       )}
-      <div className="relative mx-auto flex min-h-[50vh] max-w-7xl flex-col justify-center px-6 py-32 lg:min-h-[60vh] lg:px-8">
+      <div className="relative mx-auto flex min-h-[48vh] max-w-7xl flex-col justify-center px-6 py-24 lg:min-h-[52vh] lg:px-8 lg:py-28">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl"
         >
-          <h1 className="text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+          <h1 className="text-4xl font-bold leading-tight tracking-tight text-stone-900 md:text-5xl lg:text-6xl">
             {title.split(" ").map((word, i) =>
               word.toLowerCase() === (highlight?.toLowerCase() ?? "") ? (
                 <span key={i} style={{ color: COLORS.primary }}>
@@ -66,18 +81,18 @@ export default function PageHero({
             )}
           </h1>
           {subtitle && (
-            <p className="mt-6 text-lg text-gray-300 md:text-xl">{subtitle}</p>
+            <p className="mt-6 text-lg leading-relaxed text-stone-600 md:text-xl">{subtitle}</p>
           )}
           <motion.a
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.5 }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="mt-8 inline-flex rounded-full px-6 py-4 font-semibold text-white"
+            className="mt-10 inline-flex rounded-full px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/25"
             style={{ backgroundColor: COLORS.primary }}
           >
             Falar com um especialista

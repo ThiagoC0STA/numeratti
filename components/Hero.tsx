@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { WHATSAPP_URL, HERO_SLIDES, COLORS } from "@/lib/constants";
+import HeroCharts from "@/components/HeroCharts";
 
 export default function Hero() {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -18,29 +19,17 @@ export default function Hero() {
   }, []);
 
   const renderLine = (line: (typeof HERO_SLIDES)[number]["lines"][number]) => {
-    if ("parts" in line) {
-      return (
-        <h2 className="font-[family-name:var(--font-plus-jakarta)] text-4xl font-extrabold leading-[1.1] tracking-tight text-white md:text-5xl lg:text-6xl xl:text-7xl">
-          {line.parts.map((p, j) =>
-            p.highlight ? (
-              <span key={j} className="bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">
-                {p.text}
-              </span>
-            ) : (
-              <span key={j}>{p.text}</span>
-            )
-          )}
-        </h2>
-      );
-    }
+    if (!("parts" in line)) return null;
     return (
-      <h2 className="font-[family-name:var(--font-plus-jakarta)] text-4xl font-extrabold leading-[1.1] tracking-tight text-white md:text-5xl lg:text-6xl xl:text-7xl">
-        {line.highlight ? (
-          <span className="bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">
-            {line.text}
-          </span>
-        ) : (
-          line.text
+      <h2 className="font-[family-name:var(--font-plus-jakarta)] text-3xl font-extrabold leading-[1.4] tracking-tight text-white md:text-4xl lg:text-5xl xl:text-6xl">
+        {line.parts.map((p, j) =>
+          p.highlight ? (
+            <span key={j} className="bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">
+              {p.text}
+            </span>
+          ) : (
+            <span key={j}>{p.text}</span>
+          )
         )}
       </h2>
     );
@@ -63,6 +52,11 @@ export default function Hero() {
         }}
       />
 
+      {/* Recharts - animated, different per slide, more visible */}
+      <div className="opacity-90">
+        <HeroCharts slideIndex={slideIndex} />
+      </div>
+
       <div className="relative mx-auto max-w-[1320px] px-6 py-28 lg:px-10 lg:py-36">
         <div className="relative">
           <AnimatePresence mode="wait">
@@ -72,24 +66,10 @@ export default function Hero() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20"
+              className="grid min-h-[480px] items-center gap-14 lg:min-h-[520px] lg:grid-cols-2 lg:gap-20"
             >
               {/* Left: Text content */}
               <div className="order-2 flex flex-col items-center lg:order-1 lg:items-start lg:text-left">
-                <motion.div
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="mb-6 flex items-center gap-3 lg:mb-8"
-                >
-                  <div
-                    className="h-px w-12"
-                    style={{ backgroundColor: COLORS.primary }}
-                  />
-                  <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#ff6600] opacity-90">
-                    Performance que converte
-                  </span>
-                </motion.div>
                 <div className="space-y-2 text-center lg:text-left">
                   <AnimatePresence mode="wait">
                     {slide.lines.map((line, i) => (
@@ -115,18 +95,15 @@ export default function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
-                    className="mt-10 flex justify-center lg:justify-start"
+                    className="mt-8 flex justify-center lg:justify-start"
                   >
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-                      <Image
-                        src={slide.smallImage}
-                        alt=""
-                        width={198}
-                        height={99}
-                        className="h-20 w-auto object-contain brightness-0 invert opacity-90 md:h-24"
-                        unoptimized
-                      />
-                    </div>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={slide.smallImage}
+                      alt=""
+                      className="h-12 w-auto max-w-[120px] object-contain object-left md:h-14"
+                      crossOrigin="anonymous"
+                    />
                   </motion.div>
                 )}
 
@@ -155,14 +132,11 @@ export default function Hero() {
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="order-1 lg:order-2 flex justify-center"
               >
-                <div className="relative flex justify-center items-center w-full">
-                  {/* Orange glow - no box, bleeds freely into dark bg */}
+                <div className="relative flex min-h-[420px] lg:min-h-[520px] justify-center items-center w-full">
+                  {/* Circular image - same size for all slides for consistent height */}
                   <div
-                    className="pointer-events-none absolute inset-0 -m-32 min-w-[140%] min-h-[140%] rounded-full bg-[#ff6600]/35 blur-[100px]"
-                    aria-hidden
-                  />
-                  {/* Circular image - no square container */}
-                  <div className="relative aspect-square w-[min(90%,440px)] overflow-hidden rounded-full">
+                    className="relative aspect-square w-[min(95%,580px)] overflow-hidden rounded-full"
+                  >
                     <div
                       className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                       style={{ backgroundImage: `url('${slide.image}')` }}
