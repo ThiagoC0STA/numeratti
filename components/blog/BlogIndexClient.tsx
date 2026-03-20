@@ -6,6 +6,7 @@ import BlogPostCard from "@/components/blog/BlogPostCard";
 import type { BlogPostSummary } from "@/lib/blog/types";
 import { formatPostDate } from "@/lib/blog/dates";
 import ScrollReveal, { staggerItemVariants } from "@/components/ui/ScrollReveal";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 function uniqueSortedCategories(posts: BlogPostSummary[]): string[] {
   const set = new Set<string>();
   posts.forEach((p) => p.categoryNames.forEach((c) => set.add(c)));
@@ -14,6 +15,7 @@ function uniqueSortedCategories(posts: BlogPostSummary[]): string[] {
 
 export default function BlogIndexClient({ posts }: { posts: BlogPostSummary[] }) {
   const [active, setActive] = useState<string | null>(null);
+  const simplified = useSimplifiedMotion();
   const categories = useMemo(() => uniqueSortedCategories(posts), [posts]);
 
   const filtered = useMemo(() => {
@@ -27,44 +29,74 @@ export default function BlogIndexClient({ posts }: { posts: BlogPostSummary[] })
         <ScrollReveal>
           <p className="text-center text-sm font-bold uppercase tracking-widest text-stone-500">Categorias</p>
         </ScrollReveal>
-        <motion.div
-          className="mx-auto mt-6 flex max-w-5xl flex-wrap justify-center gap-2"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25, margin: "0px 0px -8% 0px" }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.05, delayChildren: 0.06 } },
-          }}
-        >
-          <motion.button
-            type="button"
-            variants={staggerItemVariants}
-            onClick={() => setActive(null)}
-            className={`rounded-full border px-4 py-2 text-sm font-semibold transition-all ${
-              active === null
-                ? "border-[#ff6600] bg-[#ff6600] text-white shadow-md"
-                : "border-stone-200 bg-white text-stone-700 hover:border-[#ff6600]/40"
-            }`}
-          >
-            Todos
-          </motion.button>
-          {categories.map((cat) => (
-            <motion.button
-              key={cat}
+        {simplified ? (
+          <div className="mx-auto mt-6 flex max-w-5xl flex-wrap justify-center gap-2">
+            <button
               type="button"
-              variants={staggerItemVariants}
-              onClick={() => setActive(cat)}
-              className={`rounded-full border px-4 py-2 text-sm font-medium transition-all ${
-                active === cat
+              onClick={() => setActive(null)}
+              className={`rounded-full border px-4 py-2 text-sm font-semibold transition-all ${
+                active === null
                   ? "border-[#ff6600] bg-[#ff6600] text-white shadow-md"
-                  : "border-stone-200 bg-white text-stone-600 hover:border-[#ff6600]/40 hover:text-[#ff6600]"
+                  : "border-stone-200 bg-white text-stone-700 hover:border-[#ff6600]/40"
               }`}
             >
-              {cat}
+              Todos
+            </button>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setActive(cat)}
+                className={`rounded-full border px-4 py-2 text-sm font-medium transition-all ${
+                  active === cat
+                    ? "border-[#ff6600] bg-[#ff6600] text-white shadow-md"
+                    : "border-stone-200 bg-white text-stone-600 hover:border-[#ff6600]/40 hover:text-[#ff6600]"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <motion.div
+            className="mx-auto mt-6 flex max-w-5xl flex-wrap justify-center gap-2"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25, margin: "0px 0px -8% 0px" }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.05, delayChildren: 0.06 } },
+            }}
+          >
+            <motion.button
+              type="button"
+              variants={staggerItemVariants}
+              onClick={() => setActive(null)}
+              className={`rounded-full border px-4 py-2 text-sm font-semibold transition-all ${
+                active === null
+                  ? "border-[#ff6600] bg-[#ff6600] text-white shadow-md"
+                  : "border-stone-200 bg-white text-stone-700 hover:border-[#ff6600]/40"
+              }`}
+            >
+              Todos
             </motion.button>
-          ))}
-        </motion.div>
+            {categories.map((cat) => (
+              <motion.button
+                key={cat}
+                type="button"
+                variants={staggerItemVariants}
+                onClick={() => setActive(cat)}
+                className={`rounded-full border px-4 py-2 text-sm font-medium transition-all ${
+                  active === cat
+                    ? "border-[#ff6600] bg-[#ff6600] text-white shadow-md"
+                    : "border-stone-200 bg-white text-stone-600 hover:border-[#ff6600]/40 hover:text-[#ff6600]"
+                }`}
+              >
+                {cat}
+              </motion.button>
+            ))}
+          </motion.div>
+        )}
 
         <ScrollReveal delay={0.06}>
           <p className="mt-10 text-center text-sm text-stone-500">

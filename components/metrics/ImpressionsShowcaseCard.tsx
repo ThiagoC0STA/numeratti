@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { BarChart3 } from "lucide-react";
 import GsapCounter from "@/components/animations/GsapCounter";
 import { COLORS, METRICS } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 const metric = METRICS[0];
 
@@ -18,13 +19,16 @@ const REACH_MIX = [
 ] as const;
 
 export default function ImpressionsShowcaseCard() {
+  const simplified = useSimplifiedMotion();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -6 }}
+      initial={simplified ? false : { opacity: 0, y: 40 }}
+      whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
+      animate={simplified ? { opacity: 1, y: 0 } : undefined}
+      viewport={simplified ? undefined : { once: true, amount: 0.25 }}
+      transition={simplified ? { duration: 0 } : { duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={simplified ? undefined : { y: -6 }}
       className="group relative flex min-h-0 flex-col overflow-hidden rounded-3xl border border-stone-200/80 bg-white shadow-[0_20px_60px_-28px_rgba(0,0,0,0.08)] transition-shadow duration-500 hover:border-[#ff6600]/25 hover:shadow-[0_28px_80px_-24px_rgba(255,102,0,0.12)] lg:row-span-2 lg:min-h-[520px]"
     >
       <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-gradient-to-br from-[#ff6600]/12 to-transparent transition-all duration-700 group-hover:scale-110" />
@@ -69,16 +73,26 @@ export default function ImpressionsShowcaseCard() {
               <li key={row.label} className="flex items-center gap-3">
                 <span className="w-28 shrink-0 text-xs font-medium text-stone-600">{row.label}</span>
                 <div className="relative h-2 flex-1 overflow-hidden rounded-full bg-stone-100">
-                  <motion.span
-                    className="absolute inset-y-0 left-0 rounded-full"
-                    style={{
-                      background: `linear-gradient(90deg, ${COLORS.primary}, ${COLORS.primaryDark})`,
-                    }}
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${row.value}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.1, delay: 0.08 * i, ease: [0.22, 1, 0.36, 1] }}
-                  />
+                  {simplified ? (
+                    <span
+                      className="absolute inset-y-0 left-0 rounded-full"
+                      style={{
+                        width: `${row.value}%`,
+                        background: `linear-gradient(90deg, ${COLORS.primary}, ${COLORS.primaryDark})`,
+                      }}
+                    />
+                  ) : (
+                    <motion.span
+                      className="absolute inset-y-0 left-0 rounded-full"
+                      style={{
+                        background: `linear-gradient(90deg, ${COLORS.primary}, ${COLORS.primaryDark})`,
+                      }}
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${row.value}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.1, delay: 0.08 * i, ease: [0.22, 1, 0.36, 1] }}
+                    />
+                  )}
                 </div>
                 <span className="w-9 text-right text-xs tabular-nums text-stone-400">{row.value}%</span>
               </li>

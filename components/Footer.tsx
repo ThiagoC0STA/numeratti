@@ -20,6 +20,7 @@ import {
   LOGO_DESKTOP,
   SOCIAL_LINKS,
 } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 const SOCIAL_ICON_MAP = {
   facebook: Facebook,
@@ -28,6 +29,8 @@ const SOCIAL_ICON_MAP = {
 } as const;
 
 export default function Footer() {
+  const simplified = useSimplifiedMotion();
+
   return (
     <footer className="relative overflow-hidden border-t border-stone-200/80 bg-gradient-to-b from-stone-50 to-white text-stone-800">
       <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff6600]/30 to-transparent" />
@@ -35,9 +38,11 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
         <div className="grid gap-14 lg:grid-cols-4">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={simplified ? false : { opacity: 0, y: 16 }}
+            whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
+            animate={simplified ? { opacity: 1, y: 0 } : undefined}
+            viewport={simplified ? undefined : { once: true }}
+            transition={simplified ? { duration: 0 } : undefined}
             className="lg:col-span-2"
           >
             <Link href="/" className="relative block h-12 w-[160px]">
@@ -63,7 +68,7 @@ export default function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.08, y: -2 }}
+                    whileHover={simplified ? undefined : { scale: 1.08, y: -2 }}
                     className="flex h-11 w-11 items-center justify-center rounded-xl border border-stone-200 bg-white text-stone-500 shadow-sm transition-colors hover:border-[#ff6600]/40 hover:text-[#ff6600]"
                     aria-label={link.label}
                   >
@@ -78,7 +83,7 @@ export default function Footer() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.02 }}
+                whileHover={simplified ? undefined : { scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white shadow-lg shadow-orange-500/20"
                 style={{ backgroundColor: COLORS.primary }}
@@ -90,7 +95,7 @@ export default function Footer() {
                 href={WHATSAPP_SUPPORT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.02 }}
+                whileHover={simplified ? undefined : { scale: 1.02 }}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-stone-200 bg-white px-6 py-3 text-sm font-semibold text-stone-700 shadow-sm transition hover:border-[#ff6600]/30"
               >
                 <Headphones size={18} className="text-[#ff6600]" />
@@ -100,10 +105,11 @@ export default function Footer() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.05 }}
+            initial={simplified ? false : { opacity: 0, y: 16 }}
+            whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
+            animate={simplified ? { opacity: 1, y: 0 } : undefined}
+            viewport={simplified ? undefined : { once: true }}
+            transition={simplified ? { duration: 0 } : { delay: 0.05 }}
           >
             <h4 className="text-xs font-semibold uppercase tracking-widest text-stone-400">Links</h4>
             <ul className="mt-6 space-y-3">
@@ -136,10 +142,11 @@ export default function Footer() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            initial={simplified ? false : { opacity: 0, y: 16 }}
+            whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
+            animate={simplified ? { opacity: 1, y: 0 } : undefined}
+            viewport={simplified ? undefined : { once: true }}
+            transition={simplified ? { duration: 0 } : { delay: 0.1 }}
           >
             <h4 className="text-xs font-semibold uppercase tracking-widest text-stone-400">Contato</h4>
             <div className="mt-6 flex items-start gap-3">

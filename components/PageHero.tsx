@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useMemo } from "react";
 import { ArrowRight } from "lucide-react";
 import { COLORS, WHATSAPP_URL } from "@/lib/constants";
 import PageHeroVisual, { type PageHeroVisualKind } from "@/components/page-hero/PageHeroVisual";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 interface PageHeroProps {
   title: string;
@@ -28,7 +29,7 @@ export default function PageHero({
   backgroundImage,
   visual = "default",
 }: PageHeroProps) {
-  const reduceMotion = useReducedMotion();
+  const simplified = useSimplifiedMotion();
   const words = useMemo(() => title.split(" ").filter(Boolean), [title]);
 
   if (backgroundImage) {
@@ -53,10 +54,11 @@ export default function PageHero({
         </div>
         <div className="relative mx-auto flex min-h-[52vh] max-w-7xl flex-col justify-center px-6 py-24 lg:min-h-[56vh] lg:px-8 lg:py-28">
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 32 }}
-            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.7, ease }}
+            initial={simplified ? false : { opacity: 0, y: 32 }}
+            whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
+            animate={simplified ? { opacity: 1, y: 0 } : undefined}
+            viewport={simplified ? undefined : { once: true, amount: 0.4 }}
+            transition={simplified ? { duration: 0 } : { duration: 0.7, ease }}
             className="max-w-3xl"
           >
             {eyebrow ? (
@@ -85,7 +87,7 @@ export default function PageHero({
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.03 }}
+              whileHover={simplified ? undefined : { scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               className="mt-10 inline-flex rounded-full px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/25"
               style={{ backgroundColor: COLORS.primary }}
@@ -126,9 +128,9 @@ export default function PageHero({
           <div className="lg:col-span-7">
             {eyebrow ? (
               <motion.span
-                initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+                initial={simplified ? false : { opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, ease }}
+                transition={{ duration: simplified ? 0 : 0.45, ease }}
                 className="mb-5 inline-flex items-center gap-2 rounded-full border border-stone-200/90 bg-white/80 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-stone-600 shadow-sm backdrop-blur-sm"
               >
                 <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: COLORS.primary }} />
@@ -143,7 +145,7 @@ export default function PageHero({
               />
 
               <h1 className="flex flex-wrap items-baseline gap-x-2 gap-y-1 pl-0 text-4xl font-bold leading-[1.12] tracking-tight md:pl-2 md:text-5xl lg:text-[3.25rem] lg:leading-[1.1] xl:text-[3.5rem]">
-                {reduceMotion
+                {simplified
                   ? words.map((word, i) =>
                       highlight && word.toLowerCase() === highlight.toLowerCase() ? (
                         <span
@@ -181,9 +183,9 @@ export default function PageHero({
 
             {subtitle ? (
               <motion.p
-                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                initial={simplified ? false : { opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: reduceMotion ? 0 : 0.28, ease }}
+                transition={{ duration: simplified ? 0 : 0.55, delay: simplified ? 0 : 0.28, ease }}
                 className="mt-6 max-w-xl text-lg leading-relaxed text-stone-600 md:text-xl"
               >
                 {subtitle}
@@ -191,16 +193,16 @@ export default function PageHero({
             ) : null}
 
             <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+              initial={simplified ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: reduceMotion ? 0 : 0.4, ease }}
+              transition={{ duration: simplified ? 0 : 0.5, delay: simplified ? 0 : 0.4, ease }}
               className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
             >
               <motion.a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.02, y: -1 }}
+                whileHover={simplified ? undefined : { scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
                 className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-orange-500/20"
                 style={{ backgroundColor: COLORS.primary }}

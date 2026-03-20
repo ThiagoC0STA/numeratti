@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -44,13 +45,18 @@ export default function GsapCounter({
   format = "full",
 }: GsapCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
+  const simplified = useSimplifiedMotion();
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
+    if (simplified) {
+      el.textContent = prefix + formatNumber(value, decimals, format) + suffix;
+      return;
+    }
+
     const obj = { val: 0 };
-    const endFormat = formatNumber(value, decimals, format);
 
     gsap.to(obj, {
       val: value,
@@ -66,7 +72,9 @@ export default function GsapCounter({
         el.textContent = prefix + display + suffix;
       },
     });
-  }, [value, suffix, prefix, decimals, duration, format]);
+  }, [value, suffix, prefix, decimals, duration, format, simplified]);
+
+  const displayValue = simplified ? formatNumber(value, decimals, format) : formatNumber(0, decimals, format);
 
   return (
     <span
@@ -75,7 +83,7 @@ export default function GsapCounter({
       data-value={value}
     >
       {prefix}
-      {formatNumber(0, decimals, format)}
+      {displayValue}
       {suffix}
     </span>
   );

@@ -4,14 +4,38 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 import { CLIENT_LOGOS, COLORS } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
 
 type ClientsSectionVariant = "home" | "page";
 
 function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
+  const simplified = useSimplifiedMotion();
   const ordered = direction === "left" ? CLIENT_LOGOS : [...CLIENT_LOGOS].reverse();
   const loop = [...ordered, ...ordered];
+
+  if (simplified) {
+    return (
+      <div className="flex flex-wrap justify-center gap-4 py-2 md:gap-6">
+        {ordered.map((client) => (
+          <div
+            key={`${direction}-${client.name}`}
+            className="flex h-28 w-[11.5rem] shrink-0 items-center justify-center rounded-2xl border border-stone-200/90 bg-white px-4 py-3 shadow-sm md:h-32 md:w-[13rem]"
+          >
+            <Image
+              src={client.url}
+              alt={client.name}
+              width={280}
+              height={120}
+              className="h-[3.75rem] w-auto max-w-[min(100%,10rem)] object-contain md:h-[5.5rem] md:max-w-[min(100%,12rem)]"
+              unoptimized
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="relative overflow-hidden py-1">

@@ -9,6 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GsapCounter from "@/components/animations/GsapCounter";
 import ImpressionsShowcaseCard from "@/components/metrics/ImpressionsShowcaseCard";
 import { METRICS, COLORS } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,20 +34,27 @@ function MetricCard({
   metric,
   index,
   className = "",
+  simplified,
 }: {
   metric: (typeof METRICS)[number];
   index: number;
   className?: string;
+  simplified: boolean;
 }) {
   const Icon = ICON_MAP[metric.icon] ?? BarChart3;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.65, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -6 }}
+      initial={simplified ? false : { opacity: 0, y: 40 }}
+      whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
+      animate={simplified ? { opacity: 1, y: 0 } : undefined}
+      viewport={simplified ? undefined : { once: true, amount: 0.25 }}
+      transition={
+        simplified
+          ? { duration: 0 }
+          : { duration: 0.65, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }
+      }
+      whileHover={simplified ? undefined : { y: -6 }}
       className={`group relative overflow-hidden rounded-3xl border border-stone-200/80 bg-white p-8 shadow-[0_20px_60px_-28px_rgba(0,0,0,0.08)] transition-shadow duration-500 hover:border-[#ff6600]/25 hover:shadow-[0_28px_80px_-24px_rgba(255,102,0,0.12)] lg:p-10 ${className}`}
     >
       <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gradient-to-br from-[#ff6600]/10 to-transparent transition-all duration-700 group-hover:scale-110" />
@@ -78,9 +86,10 @@ export default function MetricsSection() {
   const chartRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const isInView = useInView(chartRef, { once: true, amount: 0.2 });
+  const simplified = useSimplifiedMotion();
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    if (simplified || !sectionRef.current) return;
 
     const ctx = gsap.context(() => {
       const lines = headingRef.current?.querySelectorAll(".line");
@@ -104,7 +113,7 @@ export default function MetricsSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [simplified]);
 
   return (
     <section
@@ -140,17 +149,20 @@ export default function MetricsSection() {
         <div className="mt-20 grid gap-6 lg:grid-cols-2 lg:items-stretch">
           <ImpressionsShowcaseCard />
           <div className="grid gap-6">
-            <MetricCard metric={METRICS[1]} index={1} />
-            <MetricCard metric={METRICS[2]} index={2} />
+            <MetricCard metric={METRICS[1]} index={1} simplified={simplified} />
+            <MetricCard metric={METRICS[2]} index={2} simplified={simplified} />
           </div>
         </div>
 
         <motion.div
           ref={chartRef}
-          initial={{ opacity: 0, y: 48 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+          initial={simplified ? false : { opacity: 0, y: 48 }}
+          whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
+          animate={simplified ? { opacity: 1, y: 0 } : undefined}
+          viewport={simplified ? undefined : { once: true, amount: 0.15 }}
+          transition={
+            simplified ? { duration: 0 } : { duration: 0.85, ease: [0.22, 1, 0.36, 1] }
+          }
           className="mt-12 overflow-hidden rounded-3xl border border-stone-200/80 bg-white shadow-[0_24px_70px_-30px_rgba(0,0,0,0.1)]"
         >
           <div className="flex flex-col gap-4 border-b border-stone-100 p-8 sm:flex-row sm:items-center sm:justify-between lg:p-10">
@@ -171,7 +183,7 @@ export default function MetricsSection() {
 
           <div className="bg-gradient-to-b from-stone-50/80 to-white p-6 lg:p-10">
             <div className="h-72 lg:h-96">
-              {isInView && (
+              {(simplified || isInView) && (
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={CHART_DATA}>
                     <defs>

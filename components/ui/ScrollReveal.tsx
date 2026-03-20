@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -23,9 +24,9 @@ export function ScrollReveal({
   amount = 0.14,
   margin = "0px 0px -11% 0px",
 }: ScrollRevealProps) {
-  const reduceMotion = useReducedMotion();
+  const simplified = useSimplifiedMotion();
 
-  if (reduceMotion) {
+  if (simplified) {
     return <div className={className}>{children}</div>;
   }
 
@@ -57,9 +58,9 @@ export function StaggerContainer({
   amount = 0.12,
   margin = "0px 0px -10% 0px",
 }: StaggerContainerProps) {
-  const reduceMotion = useReducedMotion();
+  const simplified = useSimplifiedMotion();
 
-  if (reduceMotion) {
+  if (simplified) {
     return <div className={className}>{children}</div>;
   }
 

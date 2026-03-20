@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 import type { BlogPostSummary } from "@/lib/blog/types";
 import { COLORS } from "@/lib/constants";
 import { ArrowRight, Calendar } from "lucide-react";
@@ -23,10 +24,12 @@ export default function BlogPostCard({
   featured?: boolean;
   delay?: number;
 }) {
+  const simplified = useSimplifiedMotion();
+
   return (
     <ScrollReveal delay={delay} className="h-full min-w-0 w-full">
       <motion.article
-        whileHover={{ y: -8 }}
+        whileHover={simplified ? undefined : { y: -8 }}
         transition={{ type: "spring", stiffness: 380, damping: 24 }}
         className="group flex h-full min-w-0 w-full flex-col overflow-hidden rounded-2xl border border-stone-200/80 bg-white shadow-[0_16px_50px_-28px_rgba(0,0,0,0.08)] transition-shadow hover:border-[#ff6600]/25 hover:shadow-[0_24px_60px_-24px_rgba(255,102,0,0.12)]"
       >
