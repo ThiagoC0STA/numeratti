@@ -7,6 +7,8 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import { CLIENT_LOGOS, COLORS } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
 
+type ClientsSectionVariant = "home" | "page";
+
 function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
   const ordered = direction === "left" ? CLIENT_LOGOS : [...CLIENT_LOGOS].reverse();
   const loop = [...ordered, ...ordered];
@@ -41,7 +43,8 @@ function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
   );
 }
 
-export default function ClientsSection() {
+export default function ClientsSection({ variant = "home" }: { variant?: ClientsSectionVariant }) {
+  const isPage = variant === "page";
   return (
     <section
       id="clients"
@@ -56,17 +59,19 @@ export default function ClientsSection() {
             className="text-center text-sm font-bold uppercase tracking-widest"
             style={{ color: COLORS.primary }}
           >
-            Nossos clientes
+            {isPage ? "Portfólio" : "Nossos clientes"}
           </p>
           <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-stone-900 md:text-4xl lg:text-5xl">
             Mais de{" "}
             <span className="bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">
               200 empresas
             </span>{" "}
-            escolheram a Numeratti
+            {isPage ? "já passaram pela Numeratti" : "escolheram a Numeratti"}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600">
-            Marcas que confiam no nosso trabalho para resultados reais
+            {isPage
+              ? "Uma amostra das marcas com as quais geramos performance e consistência"
+              : "Marcas que confiam no nosso trabalho para resultados reais"}
           </p>
         </ScrollReveal>
 
@@ -75,17 +80,19 @@ export default function ClientsSection() {
           <LogoMarquee direction="right" />
         </div>
 
-        <ScrollReveal delay={0.15}>
-          <div className="mt-14 text-center">
-            <Link
-              href="/clientes"
-              className="group inline-flex items-center gap-2 rounded-full border border-[#ff6600]/35 bg-white px-8 py-3.5 text-sm font-bold text-[#ff6600] shadow-md transition-all hover:bg-[#ff6600] hover:text-white"
-            >
-              Veja quem mais confia em nosso trabalho
-              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
-        </ScrollReveal>
+        {!isPage ? (
+          <ScrollReveal delay={0.15}>
+            <div className="mt-14 text-center">
+              <Link
+                href="/clientes"
+                className="group inline-flex items-center gap-2 rounded-full border border-[#ff6600]/35 bg-white px-8 py-3.5 text-sm font-bold text-[#ff6600] shadow-md transition-all hover:bg-[#ff6600] hover:text-white"
+              >
+                Veja quem mais confia em nosso trabalho
+                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </ScrollReveal>
+        ) : null}
       </div>
     </section>
   );

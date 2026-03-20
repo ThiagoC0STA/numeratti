@@ -12,7 +12,9 @@ export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  /** Home hero is dark; all other pages use light heroes — nav must be readable without scrolling */
   const isOnDarkBg = pathname === "/" && !isScrolled;
+  const navUseLightTheme = isScrolled || !isOnDarkBg;
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -64,8 +66,8 @@ export default function Header() {
               key={link.href}
               href={link.href}
               className={`relative text-sm font-medium transition-colors ${
-                isScrolled
-                  ? "text-gray-700 hover:text-black"
+                navUseLightTheme
+                  ? "text-stone-700 hover:text-stone-900"
                   : "text-white/90 hover:text-white"
               }`}
             >
@@ -104,9 +106,9 @@ export default function Header() {
           aria-label="Menu"
         >
           {isMobileMenuOpen ? (
-            <X size={24} className={isScrolled ? "text-black" : "text-white"} />
+            <X size={24} className={navUseLightTheme ? "text-stone-900" : "text-white"} />
           ) : (
-            <Menu size={24} className={isScrolled ? "text-black" : "text-white"} />
+            <Menu size={24} className={navUseLightTheme ? "text-stone-900" : "text-white"} />
           )}
         </motion.button>
       </nav>

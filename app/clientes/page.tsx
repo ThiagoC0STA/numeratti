@@ -1,7 +1,9 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PageShell from "@/components/layout/PageShell";
 import PageHero from "@/components/PageHero";
 import ClientsSection from "@/components/ClientsSection";
+import ClientesPageExtras from "@/components/pages/ClientesPageExtras";
 
 export const metadata = {
   title: "Clientes - Numeratti",
@@ -11,17 +13,20 @@ export const metadata = {
 
 export default function ClientesPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <PageShell>
       <Header />
       <main>
         <PageHero
+          eyebrow="Marcas"
           title="Clientes"
           subtitle="Marcas que escolheram a Numeratti para estruturar ou acelerar o crescimento. Empresas com grande reconhecimento no mercado escolheram melhorar os seus resultados conosco."
           highlight="Clientes"
+          visual="clientes"
         />
-        <ClientsSection />
+        <ClientesPageExtras />
+        <ClientsSection variant="page" />
       </main>
       <Footer />
-    </div>
+    </PageShell>
   );
 }
