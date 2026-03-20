@@ -1,6 +1,8 @@
 import { cache } from "react";
 import { pickBestImageFromWpHtml } from "@/lib/blog/html-utils";
 
+const COVER_PAGE_FETCH_TIMEOUT_MS = 10_000;
+
 function decodeHtmlEntities(s: string) {
   return s
     .replace(/&amp;/g, "&")
@@ -16,6 +18,7 @@ export const fetchCoverImageFromPublicPage = cache(async (pageUrl: string): Prom
   try {
     const res = await fetch(pageUrl, {
       next: { revalidate: 86400 },
+      signal: AbortSignal.timeout(COVER_PAGE_FETCH_TIMEOUT_MS),
       headers: {
         Accept: "text/html,application/xhtml+xml",
         "User-Agent":

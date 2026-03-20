@@ -8,12 +8,31 @@ const WP_API = "https://numeratti.com.br/wp-json/wp/v2";
 
 const FETCH_TAGS = { next: { revalidate: 3600 } } as const;
 
+/** Abort slow requests so CI/build and edge do not hang on ETIMEDOUT. */
+const WP_FETCH_TIMEOUT_MS = 12_000;
+const WP_FETCH_MAX_ATTEMPTS = 2;
+
 async function fetchJson<T>(url: string): Promise<T> {
-  const res = await fetch(url, FETCH_TAGS);
-  if (!res.ok) {
-    throw new Error(`WP API ${res.status}: ${url}`);
+  let lastError: unknown;
+  for (let attempt = 0; attempt < WP_FETCH_MAX_ATTEMPTS; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), WP_FETCH_TIMEOUT_MS);
+    try {
+      const res = await fetch(url, { ...FETCH_TAGS, signal: controller.signal });
+      clearTimeout(timer);
+      if (!res.ok) {
+        throw new Error(`WP API ${res.status}: ${url}`);
+      }
+      return (await res.json()) as T;
+    } catch (e) {
+      clearTimeout(timer);
+      lastError = e;
+      if (attempt === WP_FETCH_MAX_ATTEMPTS - 1) {
+        throw lastError;
+      }
+    }
   }
-  return res.json() as Promise<T>;
+  throw lastError;
 }
 
 export async function getCategoryIdToName(): Promise<Record<number, string>> {

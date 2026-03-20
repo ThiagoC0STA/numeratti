@@ -14,7 +14,12 @@ export const metadata = {
 };
 
 export default async function BlogPage() {
-  const posts = await getAllPostsSummaries();
+  let posts: Awaited<ReturnType<typeof getAllPostsSummaries>> = [];
+  try {
+    posts = await getAllPostsSummaries();
+  } catch {
+    // WordPress may be slow or blocked during build/deploy; avoid failing the export.
+  }
 
   return (
     <PageShell>

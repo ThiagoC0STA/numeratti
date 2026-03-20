@@ -17,7 +17,15 @@ export const dynamicParams = true;
 
 type Props = { params: Promise<{ slug: string }> };
 
+/**
+ * By default we do not prerender every post at build time: WordPress is often
+ * unreachable or slow in CI (ETIMEDOUT). Pages are still cached after the first
+ * request (revalidate). Set BLOG_STATIC_PARAMS=1 to opt into build-time slugs.
+ */
 export async function generateStaticParams() {
+  if (process.env.BLOG_STATIC_PARAMS !== "1") {
+    return [];
+  }
   try {
     const slugs = await getAllPostSlugs();
     return slugs.map((slug) => ({ slug }));
@@ -28,17 +36,21 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
-  if (!post) {
+  try {
+    const post = await getPostBySlug(slug);
+    if (!post) {
+      return { title: "Artigo | Numeratti" };
+    }
+    return {
+      title: `${post.title} | Blog Numeratti`,
+      description: post.excerptPlain.slice(0, 160),
+      openGraph: post.imageUrl
+        ? { images: [{ url: post.imageUrl }] }
+        : undefined,
+    };
+  } catch {
     return { title: "Artigo | Numeratti" };
   }
-  return {
-    title: `${post.title} | Blog Numeratti`,
-    description: post.excerptPlain.slice(0, 160),
-    openGraph: post.imageUrl
-      ? { images: [{ url: post.imageUrl }] }
-      : undefined,
-  };
 }
 
 function relatedFor(
