@@ -75,14 +75,15 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-[1320px] px-6 py-28 lg:px-10 lg:py-36">
         <div className="relative">
-          <AnimatePresence mode="wait">
+          {/* mode="wait" + exit=undefined can deadlock slide changes on mobile */}
+          <AnimatePresence mode={simplified ? "sync" : "wait"}>
             <motion.div
               key={slideIndex}
-              initial={simplified ? false : { opacity: 0 }}
+              initial={simplified ? { opacity: 1 } : { opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={simplified ? undefined : { opacity: 0 }}
+              exit={{ opacity: simplified ? 1 : 0 }}
               transition={{
-                duration: simplified ? 0.2 : 0.5,
+                duration: simplified ? 0 : 0.5,
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="grid min-h-[480px] items-center gap-14 lg:min-h-[520px] lg:grid-cols-2 lg:gap-20"
@@ -90,11 +91,13 @@ export default function Hero() {
               {/* Left: Text content */}
               <div className="order-2 flex flex-col items-center lg:order-1 lg:items-start lg:text-left">
                 <div className="space-y-2 text-center lg:text-left">
-                  <AnimatePresence mode="wait">
-                    {slide.lines.map((line, i) =>
-                      simplified ? (
-                        <div key={`${slideIndex}-${i}`}>{renderLine(line)}</div>
-                      ) : (
+                  {simplified ? (
+                    slide.lines.map((line, i) => (
+                      <div key={`${slideIndex}-${i}`}>{renderLine(line)}</div>
+                    ))
+                  ) : (
+                    <AnimatePresence mode="wait">
+                      {slide.lines.map((line, i) => (
                         <motion.div
                           key={`${slideIndex}-${i}`}
                           initial={{ opacity: 0, y: 24 }}
@@ -108,14 +111,14 @@ export default function Hero() {
                         >
                           {renderLine(line)}
                         </motion.div>
-                      )
-                    )}
-                  </AnimatePresence>
+                      ))}
+                    </AnimatePresence>
+                  )}
                 </div>
 
                 {slide.smallImage && (
                   <motion.div
-                    initial={simplified ? false : { opacity: 0 }}
+                    initial={simplified ? { opacity: 1 } : { opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: simplified ? 0 : 0.4 }}
                     className="mt-8 flex justify-center lg:justify-start"
@@ -134,7 +137,7 @@ export default function Hero() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={simplified ? false : { opacity: 0 }}
+                  initial={simplified ? { opacity: 1 } : { opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: simplified ? 0 : 0.5 }}
                   whileHover={
@@ -151,10 +154,10 @@ export default function Hero() {
 
               {/* Right: Image - circular, free, glow bleeds into background (no square) */}
               <motion.div
-                initial={simplified ? false : { opacity: 0, scale: 0.96 }}
+                initial={simplified ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={simplified ? undefined : { opacity: 0, scale: 1.02 }}
-                transition={{ duration: simplified ? 0.2 : 0.6, ease: [0.22, 1, 0.36, 1] }}
+                exit={{ opacity: simplified ? 1 : 0, scale: simplified ? 1 : 1.02 }}
+                transition={{ duration: simplified ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="order-1 lg:order-2 flex justify-center"
               >
                 <div className="relative flex min-h-[420px] lg:min-h-[520px] justify-center items-center w-full">
@@ -179,7 +182,7 @@ export default function Hero() {
 
         {/* Dots navigation */}
         <motion.div
-          initial={simplified ? false : { opacity: 0 }}
+          initial={simplified ? { opacity: 1 } : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: simplified ? 0 : 0.6 }}
           className="mt-16 flex justify-center gap-3"

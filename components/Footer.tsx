@@ -38,7 +38,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
         <div className="grid gap-14 lg:grid-cols-4">
           <motion.div
-            initial={simplified ? false : { opacity: 0, y: 16 }}
+            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
             animate={simplified ? { opacity: 1, y: 0 } : undefined}
             viewport={simplified ? undefined : { once: true }}
@@ -105,7 +105,7 @@ export default function Footer() {
           </motion.div>
 
           <motion.div
-            initial={simplified ? false : { opacity: 0, y: 16 }}
+            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
             animate={simplified ? { opacity: 1, y: 0 } : undefined}
             viewport={simplified ? undefined : { once: true }}
@@ -142,7 +142,7 @@ export default function Footer() {
           </motion.div>
 
           <motion.div
-            initial={simplified ? false : { opacity: 0, y: 16 }}
+            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
             animate={simplified ? { opacity: 1, y: 0 } : undefined}
             viewport={simplified ? undefined : { once: true }}

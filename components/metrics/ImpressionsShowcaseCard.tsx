@@ -23,7 +23,7 @@ export default function ImpressionsShowcaseCard() {
 
   return (
     <motion.div
-      initial={simplified ? false : { opacity: 0, y: 40 }}
+      initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
       animate={simplified ? { opacity: 1, y: 0 } : undefined}
       viewport={simplified ? undefined : { once: true, amount: 0.25 }}

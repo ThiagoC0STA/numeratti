@@ -54,7 +54,7 @@ export default function PageHero({
         </div>
         <div className="relative mx-auto flex min-h-[52vh] max-w-7xl flex-col justify-center px-6 py-24 lg:min-h-[56vh] lg:px-8 lg:py-28">
           <motion.div
-            initial={simplified ? false : { opacity: 0, y: 32 }}
+            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
             whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
             animate={simplified ? { opacity: 1, y: 0 } : undefined}
             viewport={simplified ? undefined : { once: true, amount: 0.4 }}
@@ -128,7 +128,7 @@ export default function PageHero({
           <div className="lg:col-span-7">
             {eyebrow ? (
               <motion.span
-                initial={simplified ? false : { opacity: 0, y: 12 }}
+                initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: simplified ? 0 : 0.45, ease }}
                 className="mb-5 inline-flex items-center gap-2 rounded-full border border-stone-200/90 bg-white/80 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-stone-600 shadow-sm backdrop-blur-sm"
@@ -183,7 +183,7 @@ export default function PageHero({
 
             {subtitle ? (
               <motion.p
-                initial={simplified ? false : { opacity: 0, y: 16 }}
+                initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: simplified ? 0 : 0.55, delay: simplified ? 0 : 0.28, ease }}
                 className="mt-6 max-w-xl text-lg leading-relaxed text-stone-600 md:text-xl"
@@ -193,7 +193,7 @@ export default function PageHero({
             ) : null}
 
             <motion.div
-              initial={simplified ? false : { opacity: 0, y: 14 }}
+              initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: simplified ? 0 : 0.5, delay: simplified ? 0 : 0.4, ease }}
               className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"

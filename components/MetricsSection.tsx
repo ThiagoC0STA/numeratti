@@ -1,15 +1,24 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { XAxis, YAxis, ResponsiveContainer, Area, AreaChart, Tooltip } from "recharts";
+import dynamic from "next/dynamic";
+import { useRef, useEffect, useLayoutEffect, useState } from "react";
 import { BarChart3, Users, TrendingUp, Activity } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GsapCounter from "@/components/animations/GsapCounter";
 import ImpressionsShowcaseCard from "@/components/metrics/ImpressionsShowcaseCard";
+import MetricsChartMobileFallback from "@/components/metrics/MetricsChartMobileFallback";
 import { METRICS, COLORS } from "@/lib/constants";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
+
+const MetricsAreaChartLazy = dynamic(
+  () => import("@/components/metrics/MetricsAreaChart"),
+  {
+    ssr: false,
+    loading: () => <div className="h-full w-full animate-pulse rounded-xl bg-stone-100/90" />,
+  }
+);
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,7 +54,7 @@ function MetricCard({
 
   return (
     <motion.div
-      initial={simplified ? false : { opacity: 0, y: 40 }}
+      initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
       animate={simplified ? { opacity: 1, y: 0 } : undefined}
       viewport={simplified ? undefined : { once: true, amount: 0.25 }}
@@ -81,12 +90,21 @@ function MetricCard({
   );
 }
 
+const MOBILE_CHART_MQ = "(max-width: 767px)";
+
 export default function MetricsSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const chartRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const isInView = useInView(chartRef, { once: true, amount: 0.2 });
   const simplified = useSimplifiedMotion();
+  /** Local only: assume mobile chart until measured so we do not import Recharts on phones on first paint. */
+  const [useLightweightChart, setUseLightweightChart] = useState(true);
+  useLayoutEffect(() => {
+    const mq = window.matchMedia(MOBILE_CHART_MQ);
+    const apply = () => setUseLightweightChart(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   useEffect(() => {
     if (simplified || !sectionRef.current) return;
@@ -155,11 +173,10 @@ export default function MetricsSection() {
         </div>
 
         <motion.div
-          ref={chartRef}
-          initial={simplified ? false : { opacity: 0, y: 48 }}
+          initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 48 }}
           whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
           animate={simplified ? { opacity: 1, y: 0 } : undefined}
-          viewport={simplified ? undefined : { once: true, amount: 0.15 }}
+          viewport={simplified ? undefined : { once: true, amount: 0.15, margin: "0px 0px -5% 0px" }}
           transition={
             simplified ? { duration: 0 } : { duration: 0.85, ease: [0.22, 1, 0.36, 1] }
           }
@@ -183,37 +200,10 @@ export default function MetricsSection() {
 
           <div className="bg-gradient-to-b from-stone-50/80 to-white p-6 lg:p-10">
             <div className="h-72 lg:h-96">
-              {(simplified || isInView) && (
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={CHART_DATA}>
-                    <defs>
-                      <linearGradient id="colorValueLight" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor={COLORS.primary} stopOpacity={0.35} />
-                        <stop offset="100%" stopColor={COLORS.primary} stopOpacity={0} />
-                      </linearGradient>
-                    </defs>
-                    <XAxis dataKey="month" stroke="#a8a29e" fontSize={12} tickLine={false} axisLine={false} />
-                    <YAxis stroke="#a8a29e" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(v) => `${v}%`} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: "#fff",
-                        border: "1px solid rgba(255,102,0,0.25)",
-                        borderRadius: "14px",
-                        color: "#1c1917",
-                        boxShadow: "0 12px 40px -12px rgba(0,0,0,0.15)",
-                      }}
-                      formatter={(value) => [`${Number(value ?? 0)}%`, "Performance"]}
-                      labelStyle={{ color: "#78716c" }}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="value"
-                      stroke={COLORS.primary}
-                      strokeWidth={3}
-                      fill="url(#colorValueLight)"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
+              {useLightweightChart ? (
+                <MetricsChartMobileFallback />
+              ) : (
+                <MetricsAreaChartLazy data={CHART_DATA} />
               )}
             </div>
           </div>

@@ -77,6 +77,12 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${geistSans.variable} ${plusJakarta.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+        <link rel="preconnect" href="https://numeratti.com.br" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://numeratti.com.br" />
+      </head>
       <body className="min-h-full flex flex-col font-[family-name:var(--font-plus-jakarta)]">
         {children}
         <CookieConsent />
