@@ -24,6 +24,38 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
+/*
+  DevTools "mobile" still uses the desktop browser engine and GPU. Real phones (especially
+  iOS Safari) spend a lot of time compositing backdrop-filter and large filter blurs, which
+  feels like the whole page freezes during scroll. Strip those effects on narrow viewports.
+*/
+@media (max-width: 767px) {
+  .backdrop-blur-none,
+  .backdrop-blur-sm,
+  .backdrop-blur,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-3xl {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  [class*="backdrop-blur-\["] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /*
+    Decorative gradient orbs use arbitrary blur (e.g. blur-[120px]). Disable filter blur on
+    small screens; keep opacity so the wash of color remains.
+  */
+  [class*="blur-\["] {
+    filter: none !important;
+  }
+}
+
 /* WordPress post HTML (injected) */
 .blog-prose {
   font-size: 1.125rem;
