@@ -7,7 +7,7 @@ export const ALL_POSTS_QUERY = groq`
     "date": publishedAt,
     "excerptPlain": coalesce(excerpt, ""),
     "imageUrl": mainImage.asset->url,
-    "categoryNames": categories[]->title
+    "categoryNames": coalesce(categories[]->title, [])
   }
 `;
 
@@ -22,7 +22,7 @@ export const POST_BY_SLUG_QUERY = groq`
     "date": publishedAt,
     "excerptPlain": coalesce(excerpt, ""),
     "imageUrl": mainImage.asset->url,
-    "categoryNames": categories[]->title,
+    "categoryNames": coalesce(categories[]->title, []),
     body[] {
       ...,
       _type == "image" => {

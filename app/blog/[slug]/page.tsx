@@ -9,18 +9,19 @@ import BlogPostBody from "@/components/blog/BlogPostBody";
 import BlogPostCard from "@/components/blog/BlogPostCard";
 import { getAllPostSlugs, getAllPostsSummaries, getPostBySlug } from "@/lib/blog/wp";
 import { formatPostDate } from "@/lib/blog/dates";
-import { COLORS } from "@/lib/constants";
+import { COLORS, SITE_URL } from "@/lib/constants";
 import { ArrowLeft, Calendar } from "lucide-react";
+import { BlogPostJsonLd } from "@/components/seo/JsonLd";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 export const dynamicParams = true;
 
 type Props = { params: Promise<{ slug: string }> };
 
 /**
- * By default we do not prerender every post at build time: WordPress is often
- * unreachable or slow in CI (ETIMEDOUT). Pages are still cached after the first
- * request (revalidate). Set BLOG_STATIC_PARAMS=1 to opt into build-time slugs.
+ * By default we do not prerender every post at build time (Sanity may be slow in CI).
+ * Pages are still cached after the first request (revalidate).
+ * Set BLOG_STATIC_PARAMS=1 to opt into build-time slugs.
  */
 export async function generateStaticParams() {
   if (process.env.BLOG_STATIC_PARAMS !== "1") {
@@ -41,12 +42,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     if (!post) {
       return { title: "Artigo | Numeratti" };
     }
+    const canonical = `${SITE_URL}/blog/${post.slug}`;
+    const desc = post.excerptPlain.slice(0, 160);
     return {
       title: `${post.title} | Blog Numeratti`,
-      description: post.excerptPlain.slice(0, 160),
-      openGraph: post.imageUrl
-        ? { images: [{ url: post.imageUrl }] }
-        : undefined,
+      description: desc,
+      alternates: { canonical },
+      openGraph: {
+        type: "article",
+        locale: "pt_BR",
+        url: canonical,
+        title: post.title,
+        description: desc,
+        publishedTime: post.date,
+        images: post.imageUrl ? [{ url: post.imageUrl }] : undefined,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: post.title,
+        description: desc,
+        images: post.imageUrl ? [post.imageUrl] : undefined,
+      },
     };
   } catch {
     return { title: "Artigo | Numeratti" };
@@ -98,6 +114,13 @@ export default async function BlogArticlePage({ params }: Props) {
 
   return (
     <PageShell>
+      <BlogPostJsonLd
+        title={post.title}
+        description={post.excerptPlain.slice(0, 160)}
+        url={`${SITE_URL}/blog/${post.slug}`}
+        imageUrl={post.imageUrl}
+        datePublished={post.date}
+      />
       <Header />
       <main>
         <article>
@@ -144,7 +167,7 @@ export default async function BlogArticlePage({ params }: Props) {
                   className="object-cover"
                   sizes="(max-width: 1152px) 100vw, 1152px"
                   priority
-                  unoptimized
+                  quality={80}
                 />
               </figure>
             </div>

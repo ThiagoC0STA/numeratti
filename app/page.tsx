@@ -1,17 +1,20 @@
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import MetricsSection from "@/components/MetricsSection";
-import AboutSection from "@/components/AboutSection";
-import ServicesSection from "@/components/ServicesSection";
-import ClientsSection from "@/components/ClientsSection";
-import CasesSection from "@/components/CasesSection";
-import BlogSection from "@/components/BlogSection";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
 import { getAllPostsSummaries } from "@/lib/blog/wp";
 
-export const revalidate = 3600;
+const MetricsSection = dynamic(() => import("@/components/MetricsSection"));
+const AboutSection = dynamic(() => import("@/components/AboutSection"));
+const ServicesSection = dynamic(() => import("@/components/ServicesSection"));
+const ClientsSection = dynamic(() => import("@/components/ClientsSection"));
+const CasesSection = dynamic(() => import("@/components/CasesSection"));
+const BlogSection = dynamic(() => import("@/components/BlogSection"));
+const ContactSection = dynamic(() => import("@/components/ContactSection"));
+const Footer = dynamic(() => import("@/components/Footer"));
+const FloatingWhatsApp = dynamic(() => import("@/components/FloatingWhatsApp"));
+
+export const revalidate = 60;
 
 export default async function Home() {
   let blogPreview: Awaited<ReturnType<typeof getAllPostsSummaries>> = [];
@@ -24,6 +27,8 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-stone-50">
+      <OrganizationJsonLd />
+      <WebSiteJsonLd />
       <Header />
       <main>
         <Hero />

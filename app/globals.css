@@ -24,8 +24,10 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* WordPress post HTML (injected) — narrow measure for readability */

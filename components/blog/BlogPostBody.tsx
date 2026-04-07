@@ -25,7 +25,7 @@ const components: Partial<PortableTextReactComponents> = {
             width={1200}
             height={675}
             className="rounded-xl"
-            unoptimized
+            quality={80}
           />
           {value.caption && (
             <figcaption className="mt-2 text-center text-sm text-stone-500">

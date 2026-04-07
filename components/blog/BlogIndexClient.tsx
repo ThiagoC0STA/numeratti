@@ -9,7 +9,7 @@ import ScrollReveal, { staggerItemVariants } from "@/components/ui/ScrollReveal"
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 function uniqueSortedCategories(posts: BlogPostSummary[]): string[] {
   const set = new Set<string>();
-  posts.forEach((p) => p.categoryNames.forEach((c) => set.add(c)));
+  posts.forEach((p) => (p.categoryNames ?? []).forEach((c) => set.add(c)));
   return [...set].sort((a, b) => a.localeCompare(b, "pt-BR"));
 }
 
@@ -20,7 +20,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPostSummary[] })
 
   const filtered = useMemo(() => {
     if (!active) return posts;
-    return posts.filter((p) => p.categoryNames.includes(active));
+    return posts.filter((p) => (p.categoryNames ?? []).includes(active));
   }, [posts, active]);
 
   return (

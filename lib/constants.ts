@@ -361,3 +361,6 @@ export const HERO_SLIDES = [
     image: "https://numeratti.com.br/wp-content/uploads/2022/05/IMAGEM-BANNER-3.png",
   },
 ] as const;
+
+/** Default share image (first hero slide) for Open Graph / Twitter. */
+export const DEFAULT_OG_IMAGE_URL = HERO_SLIDES[0].image;

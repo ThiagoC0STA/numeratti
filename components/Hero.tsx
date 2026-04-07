@@ -1,22 +1,36 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { WHATSAPP_URL, HERO_SLIDES, COLORS } from "@/lib/constants";
-import HeroCharts from "@/components/HeroCharts";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
+
+const HeroCharts = dynamic(() => import("@/components/HeroCharts"), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function Hero() {
   const [slideIndex, setSlideIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
   const slide = HERO_SLIDES[slideIndex];
   const simplified = useSimplifiedMotion();
 
   useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
     const interval = setInterval(() => {
       setSlideIndex((i) => (i + 1) % HERO_SLIDES.length);
     }, 5500);
-    return () => clearInterval(interval);
+    return () => {
+      mq.removeEventListener("change", update);
+      clearInterval(interval);
+    };
   }, []);
 
   const renderLine = (line: (typeof HERO_SLIDES)[number]["lines"][number]) => {
@@ -53,10 +67,11 @@ export default function Hero() {
         }}
       />
 
-      {/* Recharts - animated, different per slide, more visible */}
-      <div className="opacity-90">
-        <HeroCharts slideIndex={slideIndex} />
-      </div>
+      {isDesktop && (
+        <div className="opacity-90">
+          <HeroCharts slideIndex={slideIndex} />
+        </div>
+      )}
 
       <div className="relative mx-auto max-w-[1320px] px-6 py-28 lg:px-10 lg:py-36">
         <div className="relative">
@@ -144,12 +159,16 @@ export default function Hero() {
               >
                 <div className="relative flex min-h-[420px] lg:min-h-[520px] justify-center items-center w-full">
                   {/* Circular image - same size for all slides for consistent height */}
-                  <div
-                    className="relative aspect-square w-[min(95%,580px)] overflow-hidden rounded-full"
-                  >
-                    <div
-                      className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                      style={{ backgroundImage: `url('${slide.image}')` }}
+                  <div className="relative aspect-square w-[min(95%,580px)] overflow-hidden rounded-full">
+                    <Image
+                      src={slide.image}
+                      alt=""
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 768px) 95vw, 580px"
+                      priority={slideIndex === 0}
+                      quality={85}
+                      fetchPriority={slideIndex === 0 ? "high" : "low"}
                     />
                   </div>
                 </div>

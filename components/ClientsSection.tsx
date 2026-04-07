@@ -29,7 +29,8 @@ function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
               width={280}
               height={120}
               className="h-[3.75rem] w-auto max-w-[min(100%,10rem)] object-contain md:h-[5.5rem] md:max-w-[min(100%,12rem)]"
-              unoptimized
+              quality={70}
+              loading="lazy"
             />
           </div>
         ))}
@@ -58,7 +59,8 @@ function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
               width={280}
               height={120}
               className="h-[4.5rem] w-auto max-w-[min(100%,11rem)] object-contain md:h-[6.75rem] md:max-w-[min(100%,13rem)]"
-              unoptimized
+              quality={70}
+              loading="lazy"
             />
           </div>
         ))}
