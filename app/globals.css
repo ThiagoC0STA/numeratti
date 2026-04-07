@@ -18,6 +18,11 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -30,38 +35,20 @@ body {
   }
 }
 
-/*
- * Mobile safety net: if framer-motion whileInView never fires (iOS Safari IO bugs),
- * force elements to become visible after 2.5s via CSS animation.
- * The .scroll-reveal class is added by ScrollReveal and motion containers.
- */
-@media (max-width: 767px) {
-  @keyframes forceVisible {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  .scroll-reveal {
-    animation: forceVisible 0s 2.5s both;
-  }
-}
-
-/*
- * Safety net for mobile: if framer-motion whileInView never fires
- * (iOS Safari IO bugs, WebView quirks), force elements visible after 2.5s.
- * Desktop is unaffected because IO works reliably there.
- */
-@media (max-width: 767px) {
-  .scroll-reveal {
-    animation: forceVisible 0s 2.5s forwards;
-  }
-}
-
 @keyframes forceVisible {
   to {
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+/*
+ * Mobile safety net: if framer-motion whileInView never fires
+ * (iOS Safari IO bugs, WebView quirks), force elements visible after 3s.
+ */
+@media (max-width: 767px) {
+  .scroll-reveal {
+    animation: forceVisible 0s 3s both;
   }
 }
 
