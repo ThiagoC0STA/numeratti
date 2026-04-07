@@ -64,7 +64,7 @@ export default function GsapCounter({
       ease: "power2.out",
       scrollTrigger: {
         trigger: el,
-        start: "top 85%",
+        start: "top 95%",
         once: true,
       },
       onUpdate: () => {
@@ -73,7 +73,10 @@ export default function GsapCounter({
       },
     });
 
+    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 500);
+
     return () => {
+      clearTimeout(refreshTimer);
       tween.kill();
     };
   }, [value, suffix, prefix, decimals, duration, format, simplified]);

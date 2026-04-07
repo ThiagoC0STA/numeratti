@@ -126,14 +126,19 @@ export default function MetricsSection() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 82%",
+            start: "top 90%",
             toggleActions: "play none none none",
           },
         }
       );
     }, sectionRef);
 
-    return () => ctx.revert();
+    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 500);
+
+    return () => {
+      clearTimeout(refreshTimer);
+      ctx.revert();
+    };
   }, [simplified]);
 
   return (
