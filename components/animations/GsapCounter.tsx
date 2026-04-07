@@ -4,7 +4,6 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
-import { useIsMobile } from "@/lib/hooks/useIsMobile";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,7 +46,6 @@ export default function GsapCounter({
 }: GsapCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const simplified = useSimplifiedMotion();
-  const mobile = useIsMobile();
 
   useEffect(() => {
     const el = ref.current;
@@ -59,15 +57,14 @@ export default function GsapCounter({
     }
 
     const obj = { val: 0 };
-    const mobileDuration = Math.min(duration, 1.2);
 
     const tween = gsap.to(obj, {
       val: value,
-      duration: mobile ? mobileDuration : duration,
+      duration,
       ease: "power2.out",
       scrollTrigger: {
         trigger: el,
-        start: mobile ? "top 95%" : "top 85%",
+        start: "top 85%",
         once: true,
       },
       onUpdate: () => {
@@ -76,22 +73,10 @@ export default function GsapCounter({
       },
     });
 
-    // Mobile fallback: if ScrollTrigger didn't fire after 2s, force the animation
-    let fallbackTimer: ReturnType<typeof setTimeout> | undefined;
-    if (mobile) {
-      fallbackTimer = setTimeout(() => {
-        if (obj.val === 0) {
-          tween.kill();
-          el.textContent = prefix + formatNumber(value, decimals, format) + suffix;
-        }
-      }, 2500);
-    }
-
     return () => {
-      if (fallbackTimer) clearTimeout(fallbackTimer);
       tween.kill();
     };
-  }, [value, suffix, prefix, decimals, duration, format, simplified, mobile]);
+  }, [value, suffix, prefix, decimals, duration, format, simplified]);
 
   const displayValue = simplified ? formatNumber(value, decimals, format) : formatNumber(0, decimals, format);
 

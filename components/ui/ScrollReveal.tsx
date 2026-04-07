@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
-import { useIsMobile } from "@/lib/hooks/useIsMobile";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -25,24 +24,18 @@ export function ScrollReveal({
   margin = "0px 0px -11% 0px",
 }: ScrollRevealProps) {
   const simplified = useSimplifiedMotion();
-  const mobile = useIsMobile();
 
   if (simplified) {
     return <div className={className}>{children}</div>;
   }
 
-  const mY = mobile ? 28 : 56;
-  const mDuration = mobile ? 0.45 : 0.72;
-  const mAmount = mobile ? 0.01 : amount;
-  const mMargin = mobile ? "0px 0px 15% 0px" : margin;
-
   return (
     <motion.div
-      className={`scroll-reveal ${className}`}
-      initial={{ opacity: 0, y: mY }}
+      className={className}
+      initial={{ opacity: 0, y: 56 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: mDuration, delay: mobile ? Math.min(delay, 0.05) : delay, ease }}
-      viewport={{ once, amount: mAmount, margin: mMargin }}
+      transition={{ duration: 0.72, delay, ease }}
+      viewport={{ once, amount, margin }}
     >
       {children}
     </motion.div>
@@ -65,27 +58,22 @@ export function StaggerContainer({
   margin = "0px 0px -10% 0px",
 }: StaggerContainerProps) {
   const simplified = useSimplifiedMotion();
-  const mobile = useIsMobile();
 
   if (simplified) {
     return <div className={className}>{children}</div>;
   }
 
-  const mAmount = mobile ? 0.01 : amount;
-  const mMargin = mobile ? "0px 0px 15% 0px" : margin;
-  const mStagger = mobile ? Math.min(staggerDelay, 0.04) : staggerDelay;
-
   return (
     <motion.div
-      className={`scroll-reveal ${className}`}
+      className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: mAmount, margin: mMargin }}
+      viewport={{ once: true, amount, margin }}
       variants={{
         hidden: {},
         visible: {
           transition: {
-            staggerChildren: mStagger,
+            staggerChildren: staggerDelay,
             delayChildren: 0.02,
           },
         },

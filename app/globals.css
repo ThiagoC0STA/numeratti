@@ -35,24 +35,7 @@ body {
   }
 }
 
-@keyframes forceVisible {
-  to {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-}
-
-/*
- * Mobile safety net: if framer-motion whileInView never fires
- * (iOS Safari IO bugs, WebView quirks), force elements visible after 3s.
- */
-@media (max-width: 767px) {
-  .scroll-reveal {
-    animation: forceVisible 0s 3s both;
-  }
-}
-
-/* WordPress post HTML (injected) — narrow measure for readability */
+/* WordPress post HTML (injected) */
 .blog-prose {
   font-size: 1.125rem;
   line-height: 1.8;

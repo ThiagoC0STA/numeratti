@@ -5,7 +5,6 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 /**
  * Props for motion blocks that use whileInView fade-up.
  * When simplified (prefers-reduced-motion), content is immediately visible.
- * When mobile, uses lighter parameters to avoid stuck elements.
  */
 export function fadeUpWhileInView(
   simplified: boolean,
@@ -13,13 +12,11 @@ export function fadeUpWhileInView(
     hiddenY?: number;
     duration?: number;
     viewportAmount?: number;
-    mobile?: boolean;
   }
 ) {
-  const mobile = options?.mobile ?? false;
-  const hiddenY = mobile ? 20 : (options?.hiddenY ?? 40);
-  const duration = mobile ? 0.4 : (options?.duration ?? 0.65);
-  const amount = mobile ? 0.01 : (options?.viewportAmount ?? 0.25);
+  const hiddenY = options?.hiddenY ?? 40;
+  const duration = options?.duration ?? 0.65;
+  const amount = options?.viewportAmount ?? 0.25;
 
   if (simplified) {
     return {
@@ -34,7 +31,7 @@ export function fadeUpWhileInView(
     initial: { opacity: 0, y: hiddenY },
     whileInView: { opacity: 1, y: 0 },
     animate: undefined as undefined,
-    viewport: { once: true, amount, margin: mobile ? "0px 0px 15% 0px" : undefined },
+    viewport: { once: true, amount },
     transition: { duration, ease: EASE },
   };
 }
@@ -46,11 +43,10 @@ type StaggerHidden = { opacity: number; y?: number; scale?: number };
  */
 export function staggerContainerProps(
   simplified: boolean,
-  options?: { stagger?: number; amount?: number; mobile?: boolean }
+  options?: { stagger?: number; amount?: number }
 ) {
-  const mobile = options?.mobile ?? false;
-  const stagger = mobile ? 0.02 : (options?.stagger ?? 0.04);
-  const amount = mobile ? 0.01 : (options?.amount ?? 0.2);
+  const stagger = options?.stagger ?? 0.04;
+  const amount = options?.amount ?? 0.2;
 
   if (simplified) {
     return {
@@ -67,7 +63,7 @@ export function staggerContainerProps(
   return {
     initial: "hidden" as const,
     whileInView: "visible" as const,
-    viewport: { once: true, amount, margin: mobile ? "0px 0px 15% 0px" : undefined },
+    viewport: { once: true, amount },
     variants: {
       hidden: {},
       visible: { transition: { staggerChildren: stagger } },

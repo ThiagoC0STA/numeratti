@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { WHATSAPP_URL, HERO_SLIDES, COLORS } from "@/lib/constants";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
-import { useIsMobile } from "@/lib/hooks/useIsMobile";
 
 const HeroCharts = dynamic(() => import("@/components/HeroCharts"), {
   ssr: false,
@@ -19,7 +18,6 @@ export default function Hero() {
   const [isDesktop, setIsDesktop] = useState(false);
   const slide = HERO_SLIDES[slideIndex];
   const simplified = useSimplifiedMotion();
-  const mobile = useIsMobile();
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1024px)");
@@ -52,8 +50,6 @@ export default function Hero() {
     );
   };
 
-  const dur = mobile ? 0.35 : 0.5;
-
   return (
     <section className="relative min-h-[92vh] overflow-hidden bg-[#050505]">
       <div className="pointer-events-none absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-[#ff6600]/25 blur-[140px] max-md:opacity-60 max-md:blur-[100px]" />
@@ -77,13 +73,16 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-[1320px] px-6 py-28 lg:px-10 lg:py-36">
         <div className="relative">
-          <AnimatePresence mode={simplified ? "sync" : "wait"}>
+          <AnimatePresence mode="wait">
             <motion.div
               key={slideIndex}
-              initial={simplified ? { opacity: 1 } : { opacity: 0 }}
+              initial={simplified ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: simplified ? 1 : 0 }}
-              transition={{ duration: simplified ? 0 : dur, ease: [0.22, 1, 0.36, 1] }}
+              exit={simplified ? undefined : { opacity: 0 }}
+              transition={{
+                duration: simplified ? 0.2 : 0.5,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="grid min-h-[480px] items-center gap-14 lg:min-h-[520px] lg:grid-cols-2 lg:gap-20"
             >
               <div className="order-2 flex flex-col items-center lg:order-1 lg:items-start lg:text-left">
@@ -97,12 +96,12 @@ export default function Hero() {
                       {slide.lines.map((line, i) => (
                         <motion.div
                           key={`${slideIndex}-${i}`}
-                          initial={{ opacity: 0, y: mobile ? 14 : 24 }}
+                          initial={{ opacity: 0, y: 24 }}
                           animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -8 }}
+                          exit={{ opacity: 0, y: -12 }}
                           transition={{
-                            duration: dur,
-                            delay: i * (mobile ? 0.05 : 0.1),
+                            duration: 0.5,
+                            delay: i * 0.1,
                             ease: [0.22, 1, 0.36, 1],
                           }}
                         >
@@ -115,9 +114,9 @@ export default function Hero() {
 
                 {slide.smallImage && (
                   <motion.div
-                    initial={simplified ? { opacity: 1 } : { opacity: 0 }}
+                    initial={simplified ? false : { opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: simplified ? 0 : (mobile ? 0.2 : 0.4) }}
+                    transition={{ delay: simplified ? 0 : 0.4 }}
                     className="mt-8 flex justify-center lg:justify-start"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -134,13 +133,13 @@ export default function Hero() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={simplified ? { opacity: 1 } : { opacity: 0 }}
+                  initial={simplified ? false : { opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: simplified ? 0 : (mobile ? 0.25 : 0.5) }}
+                  transition={{ delay: simplified ? 0 : 0.5 }}
                   whileHover={
                     simplified ? undefined : { scale: 1.03, boxShadow: "0 0 40px rgba(255, 102, 0, 0.4)" }
                   }
-                  whileTap={simplified ? undefined : { scale: 0.98 }}
+                  whileTap={{ scale: 0.98 }}
                   className="mt-12 inline-flex items-center gap-2 rounded-full px-10 py-5 text-base font-bold text-white shadow-[0_0_30px_rgba(255,102,0,0.25)] transition-shadow"
                   style={{ backgroundColor: COLORS.primary }}
                 >
@@ -150,10 +149,10 @@ export default function Hero() {
               </div>
 
               <motion.div
-                initial={simplified ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
+                initial={simplified ? false : { opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: simplified ? 1 : 0, scale: simplified ? 1 : 1.02 }}
-                transition={{ duration: simplified ? 0 : (mobile ? 0.4 : 0.6), ease: [0.22, 1, 0.36, 1] }}
+                exit={simplified ? undefined : { opacity: 0, scale: 1.02 }}
+                transition={{ duration: simplified ? 0.2 : 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="order-1 lg:order-2 flex justify-center"
               >
                 <div className="relative flex min-h-[420px] lg:min-h-[520px] justify-center items-center w-full">
@@ -176,9 +175,9 @@ export default function Hero() {
         </div>
 
         <motion.div
-          initial={simplified ? { opacity: 1 } : { opacity: 0 }}
+          initial={simplified ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: simplified ? 0 : (mobile ? 0.3 : 0.6) }}
+          transition={{ delay: simplified ? 0 : 0.6 }}
           className="mt-16 flex justify-center gap-3"
         >
           {HERO_SLIDES.map((_, i) => (

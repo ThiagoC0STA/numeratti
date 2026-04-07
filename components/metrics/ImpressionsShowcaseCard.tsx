@@ -5,7 +5,6 @@ import { BarChart3 } from "lucide-react";
 import GsapCounter from "@/components/animations/GsapCounter";
 import { COLORS, METRICS } from "@/lib/constants";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
-import { useIsMobile } from "@/lib/hooks/useIsMobile";
 
 const metric = METRICS[0];
 
@@ -20,19 +19,16 @@ const REACH_MIX = [
 
 export default function ImpressionsShowcaseCard() {
   const simplified = useSimplifiedMotion();
-  const mobile = useIsMobile();
-  const y = mobile ? 20 : 40;
-  const dur = mobile ? 0.45 : 0.65;
 
   return (
     <motion.div
-      className="scroll-reveal group relative flex min-h-0 flex-col overflow-hidden rounded-3xl border border-stone-200/80 bg-white shadow-[0_20px_60px_-28px_rgba(0,0,0,0.08)] transition-shadow duration-500 hover:border-[#ff6600]/25 hover:shadow-[0_28px_80px_-24px_rgba(255,102,0,0.12)] lg:row-span-2 lg:min-h-[520px]"
-      initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y }}
+      initial={simplified ? false : { opacity: 0, y: 40 }}
       whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
       animate={simplified ? { opacity: 1, y: 0 } : undefined}
-      viewport={simplified ? undefined : { once: true, amount: mobile ? 0.01 : 0.25, margin: mobile ? "0px 0px 15% 0px" : undefined }}
-      transition={simplified ? { duration: 0 } : { duration: dur, ease: [0.22, 1, 0.36, 1] }}
+      viewport={simplified ? undefined : { once: true, amount: 0.25 }}
+      transition={simplified ? { duration: 0 } : { duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
       whileHover={simplified ? undefined : { y: -6 }}
+      className="group relative flex min-h-0 flex-col overflow-hidden rounded-3xl border border-stone-200/80 bg-white shadow-[0_20px_60px_-28px_rgba(0,0,0,0.08)] transition-shadow duration-500 hover:border-[#ff6600]/25 hover:shadow-[0_28px_80px_-24px_rgba(255,102,0,0.12)] lg:row-span-2 lg:min-h-[520px]"
     >
       <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-gradient-to-br from-[#ff6600]/12 to-transparent transition-all duration-700 group-hover:scale-110" />
 
@@ -92,8 +88,8 @@ export default function ImpressionsShowcaseCard() {
                       }}
                       initial={{ width: 0 }}
                       whileInView={{ width: `${row.value}%` }}
-                      viewport={{ once: true, amount: mobile ? 0.01 : undefined, margin: mobile ? "0px 0px 15% 0px" : undefined }}
-                      transition={{ duration: mobile ? 0.7 : 1.1, delay: (mobile ? 0.03 : 0.08) * i, ease: [0.22, 1, 0.36, 1] }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.1, delay: 0.08 * i, ease: [0.22, 1, 0.36, 1] }}
                     />
                   )}
                 </div>

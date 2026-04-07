@@ -21,7 +21,6 @@ import {
   SOCIAL_LINKS,
 } from "@/lib/constants";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
-import { useIsMobile } from "@/lib/hooks/useIsMobile";
 
 const SOCIAL_ICON_MAP = {
   facebook: Facebook,
@@ -31,10 +30,6 @@ const SOCIAL_ICON_MAP = {
 
 export default function Footer() {
   const simplified = useSimplifiedMotion();
-  const mobile = useIsMobile();
-
-  const initY = simplified ? 0 : (mobile ? 10 : 16);
-  const dur = mobile ? 0.35 : undefined;
 
   return (
     <footer className="relative overflow-hidden border-t border-stone-200/80 bg-gradient-to-b from-stone-50 to-white text-stone-800">
@@ -43,12 +38,12 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
         <div className="grid gap-14 lg:grid-cols-4">
           <motion.div
-            className="scroll-reveal lg:col-span-2"
-            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: initY }}
+            initial={simplified ? false : { opacity: 0, y: 16 }}
             whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
             animate={simplified ? { opacity: 1, y: 0 } : undefined}
-            viewport={simplified ? undefined : { once: true, amount: mobile ? 0.01 : undefined, margin: mobile ? "0px 0px 15% 0px" : undefined }}
-            transition={simplified ? { duration: 0 } : { duration: dur }}
+            viewport={simplified ? undefined : { once: true }}
+            transition={simplified ? { duration: 0 } : undefined}
+            className="lg:col-span-2"
           >
             <Link href="/" className="relative block h-12 w-[160px]">
               <Image
@@ -89,7 +84,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={simplified ? undefined : { scale: 1.02 }}
-                whileTap={simplified ? undefined : { scale: 0.98 }}
+                whileTap={{ scale: 0.98 }}
                 className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white shadow-lg shadow-orange-500/20"
                 style={{ backgroundColor: COLORS.primary }}
               >
@@ -110,12 +105,11 @@ export default function Footer() {
           </motion.div>
 
           <motion.div
-            className="scroll-reveal"
-            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: initY }}
+            initial={simplified ? false : { opacity: 0, y: 16 }}
             whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
             animate={simplified ? { opacity: 1, y: 0 } : undefined}
-            viewport={simplified ? undefined : { once: true, amount: mobile ? 0.01 : undefined, margin: mobile ? "0px 0px 15% 0px" : undefined }}
-            transition={simplified ? { duration: 0 } : { delay: mobile ? 0 : 0.05, duration: dur }}
+            viewport={simplified ? undefined : { once: true }}
+            transition={simplified ? { duration: 0 } : { delay: 0.05 }}
           >
             <h4 className="text-xs font-semibold uppercase tracking-widest text-stone-400">Links</h4>
             <ul className="mt-6 space-y-3">
@@ -148,12 +142,11 @@ export default function Footer() {
           </motion.div>
 
           <motion.div
-            className="scroll-reveal"
-            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: initY }}
+            initial={simplified ? false : { opacity: 0, y: 16 }}
             whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
             animate={simplified ? { opacity: 1, y: 0 } : undefined}
-            viewport={simplified ? undefined : { once: true, amount: mobile ? 0.01 : undefined, margin: mobile ? "0px 0px 15% 0px" : undefined }}
-            transition={simplified ? { duration: 0 } : { delay: mobile ? 0 : 0.1, duration: dur }}
+            viewport={simplified ? undefined : { once: true }}
+            transition={simplified ? { duration: 0 } : { delay: 0.1 }}
           >
             <h4 className="text-xs font-semibold uppercase tracking-widest text-stone-400">Contato</h4>
             <div className="mt-6 flex items-start gap-3">
