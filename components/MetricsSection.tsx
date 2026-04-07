@@ -11,6 +11,7 @@ import ImpressionsShowcaseCard from "@/components/metrics/ImpressionsShowcaseCar
 import MetricsChartMobileFallback from "@/components/metrics/MetricsChartMobileFallback";
 import { METRICS, COLORS } from "@/lib/constants";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
+import { useIsMobile } from "@/lib/hooks/useIsMobile";
 
 const MetricsAreaChartLazy = dynamic(
   () => import("@/components/metrics/MetricsAreaChart"),
@@ -44,48 +45,56 @@ function MetricCard({
   index,
   className = "",
   simplified,
+  mobile,
 }: {
   metric: (typeof METRICS)[number];
   index: number;
   className?: string;
   simplified: boolean;
+  mobile: boolean;
 }) {
   const Icon = ICON_MAP[metric.icon] ?? BarChart3;
+  const y = mobile ? 20 : 40;
+  const dur = mobile ? 0.45 : 0.65;
 
   return (
     <motion.div
-      initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      className="scroll-reveal"
+      initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y }}
       whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
       animate={simplified ? { opacity: 1, y: 0 } : undefined}
-      viewport={simplified ? undefined : { once: true, amount: 0.25 }}
+      viewport={simplified ? undefined : { once: true, amount: mobile ? 0.01 : 0.25, margin: mobile ? "0px 0px 15% 0px" : undefined }}
       transition={
         simplified
           ? { duration: 0 }
-          : { duration: 0.65, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }
+          : { duration: dur, delay: mobile ? index * 0.05 : index * 0.12, ease: [0.22, 1, 0.36, 1] }
       }
       whileHover={simplified ? undefined : { y: -6 }}
-      className={`group relative overflow-hidden rounded-3xl border border-stone-200/80 bg-white p-8 shadow-[0_20px_60px_-28px_rgba(0,0,0,0.08)] transition-shadow duration-500 hover:border-[#ff6600]/25 hover:shadow-[0_28px_80px_-24px_rgba(255,102,0,0.12)] lg:p-10 ${className}`}
     >
-      <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gradient-to-br from-[#ff6600]/10 to-transparent transition-all duration-700 group-hover:scale-110" />
+      <div
+        className={`group relative overflow-hidden rounded-3xl border border-stone-200/80 bg-white p-8 shadow-[0_20px_60px_-28px_rgba(0,0,0,0.08)] transition-shadow duration-500 hover:border-[#ff6600]/25 hover:shadow-[0_28px_80px_-24px_rgba(255,102,0,0.12)] lg:p-10 ${className}`}
+      >
+        <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gradient-to-br from-[#ff6600]/10 to-transparent transition-all duration-700 group-hover:scale-110" />
 
-      <div className="relative flex items-start justify-between">
-        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#ff6600]/15 to-[#f27405]/10 text-[#ff6600] shadow-inner transition-transform duration-300 group-hover:scale-105">
-          <Icon size={28} />
+        <div className="relative flex items-start justify-between">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#ff6600]/15 to-[#f27405]/10 text-[#ff6600] shadow-inner transition-transform duration-300 group-hover:scale-105">
+            <Icon size={28} />
+          </div>
+          <span className="rounded-full border border-stone-100 bg-stone-50 px-3 py-1 text-xs font-semibold text-stone-500">
+            {metric.label}
+          </span>
         </div>
-        <span className="rounded-full border border-stone-100 bg-stone-50 px-3 py-1 text-xs font-semibold text-stone-500">
-          {metric.label}
-        </span>
+
+        <GsapCounter
+          value={metric.value}
+          suffix={metric.suffix}
+          className="mt-6 block text-4xl font-bold tracking-tight text-stone-900 md:text-5xl lg:text-6xl"
+          duration={2}
+          format="full"
+        />
+
+        <p className="mt-4 text-sm leading-relaxed text-stone-600 lg:text-base">{metric.description}</p>
       </div>
-
-      <GsapCounter
-        value={metric.value}
-        suffix={metric.suffix}
-        className="mt-6 block text-4xl font-bold tracking-tight text-stone-900 md:text-5xl lg:text-6xl"
-        duration={2}
-        format="full"
-      />
-
-      <p className="mt-4 text-sm leading-relaxed text-stone-600 lg:text-base">{metric.description}</p>
     </motion.div>
   );
 }
@@ -96,8 +105,9 @@ export default function MetricsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const simplified = useSimplifiedMotion();
-  /** Local only: assume mobile chart until measured so we do not import Recharts on phones on first paint. */
+  const mobile = useIsMobile();
   const [useLightweightChart, setUseLightweightChart] = useState(true);
+
   useLayoutEffect(() => {
     const mq = window.matchMedia(MOBILE_CHART_MQ);
     const apply = () => setUseLightweightChart(mq.matches);
@@ -114,16 +124,16 @@ export default function MetricsSection() {
       if (!lines?.length) return;
       gsap.fromTo(
         lines,
-        { y: 64, opacity: 0 },
+        { y: mobile ? 32 : 64, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.85,
+          duration: mobile ? 0.55 : 0.85,
           stagger: 0.08,
           ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 82%",
+            start: mobile ? "top 95%" : "top 82%",
             toggleActions: "play none none none",
           },
         }
@@ -131,7 +141,10 @@ export default function MetricsSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [simplified]);
+  }, [simplified, mobile]);
+
+  const chartY = mobile ? 24 : 48;
+  const chartDur = mobile ? 0.55 : 0.85;
 
   return (
     <section
@@ -167,20 +180,20 @@ export default function MetricsSection() {
         <div className="mt-20 grid gap-6 lg:grid-cols-2 lg:items-stretch">
           <ImpressionsShowcaseCard />
           <div className="grid gap-6">
-            <MetricCard metric={METRICS[1]} index={1} simplified={simplified} />
-            <MetricCard metric={METRICS[2]} index={2} simplified={simplified} />
+            <MetricCard metric={METRICS[1]} index={1} simplified={simplified} mobile={mobile} />
+            <MetricCard metric={METRICS[2]} index={2} simplified={simplified} mobile={mobile} />
           </div>
         </div>
 
         <motion.div
-          initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 48 }}
+          className="scroll-reveal mt-12 overflow-hidden rounded-3xl border border-stone-200/80 bg-white shadow-[0_24px_70px_-30px_rgba(0,0,0,0.1)]"
+          initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: chartY }}
           whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
           animate={simplified ? { opacity: 1, y: 0 } : undefined}
-          viewport={simplified ? undefined : { once: true, amount: 0.15, margin: "0px 0px -5% 0px" }}
+          viewport={simplified ? undefined : { once: true, amount: mobile ? 0.01 : 0.15, margin: mobile ? "0px 0px 15% 0px" : "0px 0px -5% 0px" }}
           transition={
-            simplified ? { duration: 0 } : { duration: 0.85, ease: [0.22, 1, 0.36, 1] }
+            simplified ? { duration: 0 } : { duration: chartDur, ease: [0.22, 1, 0.36, 1] }
           }
-          className="mt-12 overflow-hidden rounded-3xl border border-stone-200/80 bg-white shadow-[0_24px_70px_-30px_rgba(0,0,0,0.1)]"
         >
           <div className="flex flex-col gap-4 border-b border-stone-100 p-8 sm:flex-row sm:items-center sm:justify-between lg:p-10">
             <div>

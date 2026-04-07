@@ -21,6 +21,7 @@ import {
   SOCIAL_LINKS,
 } from "@/lib/constants";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
+import { useIsMobile } from "@/lib/hooks/useIsMobile";
 
 const SOCIAL_ICON_MAP = {
   facebook: Facebook,
@@ -30,6 +31,10 @@ const SOCIAL_ICON_MAP = {
 
 export default function Footer() {
   const simplified = useSimplifiedMotion();
+  const mobile = useIsMobile();
+
+  const initY = simplified ? 0 : (mobile ? 10 : 16);
+  const dur = mobile ? 0.35 : undefined;
 
   return (
     <footer className="relative overflow-hidden border-t border-stone-200/80 bg-gradient-to-b from-stone-50 to-white text-stone-800">
@@ -38,12 +43,12 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
         <div className="grid gap-14 lg:grid-cols-4">
           <motion.div
-            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            className="scroll-reveal lg:col-span-2"
+            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: initY }}
             whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
             animate={simplified ? { opacity: 1, y: 0 } : undefined}
-            viewport={simplified ? undefined : { once: true }}
-            transition={simplified ? { duration: 0 } : undefined}
-            className="lg:col-span-2"
+            viewport={simplified ? undefined : { once: true, amount: mobile ? 0.01 : undefined, margin: mobile ? "0px 0px 15% 0px" : undefined }}
+            transition={simplified ? { duration: 0 } : { duration: dur }}
           >
             <Link href="/" className="relative block h-12 w-[160px]">
               <Image
@@ -105,11 +110,12 @@ export default function Footer() {
           </motion.div>
 
           <motion.div
-            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            className="scroll-reveal"
+            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: initY }}
             whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
             animate={simplified ? { opacity: 1, y: 0 } : undefined}
-            viewport={simplified ? undefined : { once: true }}
-            transition={simplified ? { duration: 0 } : { delay: 0.05 }}
+            viewport={simplified ? undefined : { once: true, amount: mobile ? 0.01 : undefined, margin: mobile ? "0px 0px 15% 0px" : undefined }}
+            transition={simplified ? { duration: 0 } : { delay: mobile ? 0 : 0.05, duration: dur }}
           >
             <h4 className="text-xs font-semibold uppercase tracking-widest text-stone-400">Links</h4>
             <ul className="mt-6 space-y-3">
@@ -142,11 +148,12 @@ export default function Footer() {
           </motion.div>
 
           <motion.div
-            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            className="scroll-reveal"
+            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: initY }}
             whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
             animate={simplified ? { opacity: 1, y: 0 } : undefined}
-            viewport={simplified ? undefined : { once: true }}
-            transition={simplified ? { duration: 0 } : { delay: 0.1 }}
+            viewport={simplified ? undefined : { once: true, amount: mobile ? 0.01 : undefined, margin: mobile ? "0px 0px 15% 0px" : undefined }}
+            transition={simplified ? { duration: 0 } : { delay: mobile ? 0 : 0.1, duration: dur }}
           >
             <h4 className="text-xs font-semibold uppercase tracking-widest text-stone-400">Contato</h4>
             <div className="mt-6 flex items-start gap-3">
@@ -170,7 +177,7 @@ export default function Footer() {
 
         <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-stone-200/80 pt-10 sm:flex-row">
           <p className="text-center text-xs text-stone-400">
-            &copy; {new Date().getFullYear()} Numeratti — Todos os direitos reservados
+            &copy; {new Date().getFullYear()} Numeratti - Todos os direitos reservados
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <span className="rounded-full border border-stone-200 bg-white px-4 py-1.5 text-xs font-semibold text-stone-600 shadow-sm">

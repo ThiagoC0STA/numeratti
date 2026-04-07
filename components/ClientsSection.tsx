@@ -44,21 +44,21 @@ function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
       <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-[#fafaf9] to-transparent md:w-28" />
 
       <motion.div
-        className="flex w-max gap-6 md:gap-8"
+        className="flex w-max gap-4 md:gap-8"
         animate={{ x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }}
         transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
       >
         {loop.map((client, i) => (
           <div
             key={`${client.name}-${i}`}
-            className="flex h-32 w-[13rem] shrink-0 items-center justify-center rounded-2xl border border-stone-200/90 bg-white px-5 py-4 shadow-sm transition-all duration-300 hover:border-[#ff6600]/35 hover:shadow-lg md:h-36 md:w-[15.5rem] md:px-6"
+            className="flex h-24 w-[10rem] shrink-0 items-center justify-center rounded-2xl border border-stone-200/90 bg-white px-3 py-3 shadow-sm md:h-36 md:w-[15.5rem] md:px-6 md:py-4"
           >
             <Image
               src={client.url}
               alt={client.name}
               width={280}
               height={120}
-              className="h-[4.5rem] w-auto max-w-[min(100%,11rem)] object-contain md:h-[6.75rem] md:max-w-[min(100%,13rem)]"
+              className="h-[3.5rem] w-auto max-w-[min(100%,8rem)] object-contain md:h-[6.75rem] md:max-w-[min(100%,13rem)]"
               quality={70}
               loading="lazy"
             />
@@ -101,7 +101,7 @@ export default function ClientsSection({ variant = "home" }: { variant?: Clients
           </p>
         </ScrollReveal>
 
-        <div className="mt-16 space-y-8 md:mt-20 md:space-y-10">
+        <div className="mt-16 space-y-6 md:mt-20 md:space-y-10">
           <LogoMarquee direction="left" />
           <LogoMarquee direction="right" />
         </div>
