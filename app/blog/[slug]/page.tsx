@@ -150,7 +150,7 @@ export default async function BlogArticlePage({ params }: Props) {
             </div>
           ) : null}
 
-          <BlogPostBody html={post.contentHtml} />
+          <BlogPostBody body={post.body} />
 
           <section className="relative overflow-hidden border-t border-stone-200/80 bg-gradient-to-b from-stone-50/90 via-white to-[#fff7f0] py-16 lg:py-20">
             <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff6600]/15 to-transparent" />

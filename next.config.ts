@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "numeratti.com.br",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        pathname: "/**",
+      },
     ],
   },
 };
