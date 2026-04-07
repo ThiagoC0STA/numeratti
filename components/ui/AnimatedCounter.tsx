@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { startTransition, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 
 interface AnimatedCounterProps {
@@ -20,6 +20,35 @@ function easeOutQuart(t: number): number {
 
 const NARROW_QUERY = "(max-width: 767px)";
 
+function formatBr(n: number) {
+  return Math.round(n)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+function formatAnimatedSegment(
+  displayValue: number,
+  decimals: number,
+  format: "full" | "compact",
+  targetValue: number
+): string {
+  if (decimals > 0) {
+    return displayValue.toFixed(decimals).replace(".", ",");
+  }
+  if (format === "full") {
+    return formatBr(displayValue);
+  }
+  if (targetValue >= 1000000) {
+    return (displayValue / 1000000).toFixed(1).replace(".", ",") + "M";
+  }
+  if (targetValue >= 1000) {
+    return (displayValue / 1000).toFixed(1).replace(".", ",") + "K";
+  }
+  return displayValue.toFixed(0);
+}
+
+type CounterPhase = "idle" | "running" | "done";
+
 function AnimatedCounter({
   value,
   duration = 2,
@@ -29,10 +58,12 @@ function AnimatedCounter({
   className = "",
   format = "full",
 }: AnimatedCounterProps) {
+  const [phase, setPhase] = useState<CounterPhase>("idle");
   const [displayValue, setDisplayValue] = useState(0);
   const [inView, setInView] = useState(false);
   const [isNarrow, setIsNarrow] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
+  const valueRef = useRef<HTMLSpanElement>(null);
   const prefersReduced = useReducedMotion() ?? false;
 
   useLayoutEffect(() => {
@@ -105,52 +136,88 @@ function AnimatedCounter({
   const effectiveDuration = isNarrow ? Math.min(1.35, duration) : duration;
 
   useEffect(() => {
-    if (!inView) return;
-
-    if (prefersReduced) {
-      setDisplayValue(value);
+    if (!inView) {
+      startTransition(() => {
+        setPhase("idle");
+        setDisplayValue(0);
+      });
       return;
     }
 
-    setDisplayValue(0);
-    const startTime = performance.now();
-    let raf = 0;
-
-    function update(currentTime: number) {
-      const elapsed = (currentTime - startTime) / 1000;
-      const progress = Math.min(elapsed / effectiveDuration, 1);
-      const eased = easeOutQuart(progress);
-      setDisplayValue(value * eased);
-
-      if (progress < 1) {
-        raf = requestAnimationFrame(update);
-      }
+    if (prefersReduced) {
+      startTransition(() => {
+        setPhase("done");
+        setDisplayValue(value);
+      });
+      return;
     }
 
-    raf = requestAnimationFrame(update);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, prefersReduced, value, effectiveDuration]);
+    let rafId = 0;
+    let cancelled = false;
 
-  const formatBr = (n: number) =>
-    Math.round(n)
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    const tick = () => {
+      if (cancelled) return;
+      const node = valueRef.current;
+      if (!node) {
+        rafId = requestAnimationFrame(tick);
+        return;
+      }
 
-  const formattedValue =
-    decimals > 0
-      ? displayValue.toFixed(decimals).replace(".", ",")
-      : format === "full"
-        ? formatBr(displayValue)
-        : value >= 1000000
-          ? (displayValue / 1000000).toFixed(1).replace(".", ",") + "M"
-          : value >= 1000
-            ? (displayValue / 1000).toFixed(1).replace(".", ",") + "K"
-            : displayValue.toFixed(0);
+      const startTime = performance.now();
+      node.textContent = formatAnimatedSegment(0, decimals, format, value);
+
+      function update(currentTime: number) {
+        if (cancelled) return;
+        const elapsed = (currentTime - startTime) / 1000;
+        const progress = Math.min(elapsed / effectiveDuration, 1);
+        const eased = easeOutQuart(progress);
+        const n = value * eased;
+        const elNode = valueRef.current;
+        if (elNode) {
+          elNode.textContent = formatAnimatedSegment(n, decimals, format, value);
+        }
+        if (progress < 1) {
+          rafId = requestAnimationFrame(update);
+        } else {
+          startTransition(() => {
+            setDisplayValue(value);
+            setPhase("done");
+          });
+        }
+      }
+
+      rafId = requestAnimationFrame(update);
+    };
+
+    // Defer setState out of the effect's synchronous body (see react-compiler / eslint guidance).
+    const beginRun = () => {
+      if (cancelled) return;
+      setPhase("running");
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(beginRun);
+
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(rafId);
+    };
+  }, [inView, prefersReduced, value, effectiveDuration, decimals, format]);
+
+  const staticSegment = formatAnimatedSegment(
+    prefersReduced ? value : displayValue,
+    decimals,
+    format,
+    value
+  );
 
   return (
     <span ref={ref} className={className}>
       {prefix}
-      {formattedValue}
+      {phase === "running" ? (
+        <span ref={valueRef} className="tabular-nums" />
+      ) : (
+        <span className="tabular-nums">{staticSegment}</span>
+      )}
       {suffix}
     </span>
   );
