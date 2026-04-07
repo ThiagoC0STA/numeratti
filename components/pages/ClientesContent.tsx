@@ -4,8 +4,11 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { CLIENT_LOGOS, COLORS, WHATSAPP_URL } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
+import { staggerContainerProps, staggerItemVariants } from "@/lib/motion/simplifiedScroll";
 
 export default function ClientesContent() {
+  const simplified = useSimplifiedMotion();
   return (
     <section className="bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -22,24 +25,13 @@ export default function ClientesContent() {
 
         <motion.div
           className="mt-16 grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            visible: {
-              transition: { staggerChildren: 0.05 },
-            },
-          }}
+          {...staggerContainerProps(simplified, { stagger: 0.05, amount: 0.15 })}
         >
           {CLIENT_LOGOS.map((client, i) => (
             <motion.div
               key={client.name}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              whileHover={{ y: -4 }}
+              {...staggerItemVariants(simplified, { opacity: 0, y: 20 })}
+              whileHover={simplified ? undefined : { y: -4 }}
               className="flex items-center justify-center rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition-shadow hover:shadow-lg"
             >
               <Image
@@ -60,7 +52,7 @@ export default function ClientesContent() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.02 }}
+              whileHover={simplified ? undefined : { scale: 1.02 }}
               className="inline-flex rounded-full px-8 py-4 font-semibold text-white"
               style={{ backgroundColor: COLORS.primary }}
             >

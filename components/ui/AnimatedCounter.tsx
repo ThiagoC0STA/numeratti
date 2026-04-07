@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 interface AnimatedCounterProps {
   value: number;
@@ -30,9 +30,14 @@ function AnimatedCounter({
 }: AnimatedCounterProps) {
   const [displayValue, setDisplayValue] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const simplified = useSimplifiedMotion();
+  const isInView = useInView(ref, { once: true, amount: 0.35, margin: "0px 0px -12% 0px" });
 
   useEffect(() => {
+    if (simplified) {
+      setDisplayValue(value);
+      return;
+    }
     if (!isInView) return;
 
     const startTime = performance.now();
@@ -51,7 +56,7 @@ function AnimatedCounter({
     }
 
     requestAnimationFrame(update);
-  }, [isInView, value, duration]);
+  }, [simplified, isInView, value, duration]);
 
   const formatBr = (n: number) =>
     Math.round(n)

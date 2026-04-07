@@ -6,8 +6,10 @@ import { Mail, MessageCircle, ArrowRight, Sparkles } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import NewsletterSignup from "@/components/contact/NewsletterSignup";
 import { COLORS, WHATSAPP_URL } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 export default function ContactSection() {
+  const simplified = useSimplifiedMotion();
   return (
     <section
       id="contact"
@@ -36,10 +38,17 @@ export default function ContactSection() {
 
             <motion.div
               className="mt-10 hidden aspect-[4/3] max-w-md overflow-hidden rounded-3xl border border-stone-200/60 bg-white/60 shadow-xl shadow-orange-500/5 backdrop-blur-md lg:block"
-              initial={{ opacity: 0, rotate: -2, y: 20 }}
-              whileInView={{ opacity: 1, rotate: 0, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              initial={
+                simplified ? { opacity: 1, rotate: 0, y: 0 } : { opacity: 0, rotate: -2, y: 20 }
+              }
+              whileInView={
+                simplified ? undefined : { opacity: 1, rotate: 0, y: 0 }
+              }
+              animate={simplified ? { opacity: 1, rotate: 0, y: 0 } : undefined}
+              viewport={simplified ? undefined : { once: true }}
+              transition={
+                simplified ? { duration: 0 } : { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
+              }
             >
               <div className="flex h-full flex-col justify-between p-8">
                 <div className="flex gap-2">
@@ -47,8 +56,10 @@ export default function ContactSection() {
                     <motion.span
                       key={i}
                       className="h-2 w-8 rounded-full bg-gradient-to-r from-[#ff6600] to-[#f27405]"
-                      animate={{ opacity: [0.4, 1, 0.4] }}
-                      transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.2 }}
+                      animate={simplified ? { opacity: 1 } : { opacity: [0.4, 1, 0.4] }}
+                      transition={
+                        simplified ? { duration: 0 } : { duration: 2.4, repeat: Infinity, delay: i * 0.2 }
+                      }
                     />
                   ))}
                 </div>
@@ -83,8 +94,8 @@ export default function ContactSection() {
                       href={WHATSAPP_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      whileHover={simplified ? undefined : { scale: 1.02 }}
+                      whileTap={simplified ? undefined : { scale: 0.98 }}
                       className="mt-4 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white shadow-md"
                       style={{ backgroundColor: COLORS.primary }}
                     >

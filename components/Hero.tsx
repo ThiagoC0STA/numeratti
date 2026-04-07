@@ -143,7 +143,7 @@ export default function Hero() {
                   whileHover={
                     simplified ? undefined : { scale: 1.03, boxShadow: "0 0 40px rgba(255, 102, 0, 0.4)" }
                   }
-                  whileTap={{ scale: 0.98 }}
+                  whileTap={simplified ? undefined : { scale: 0.98 }}
                   className="mt-12 inline-flex items-center gap-2 rounded-full px-10 py-5 text-base font-bold text-white shadow-[0_0_30px_rgba(255,102,0,0.25)] transition-shadow"
                   style={{ backgroundColor: COLORS.primary }}
                 >

@@ -88,7 +88,7 @@ export default function PageHero({
               target="_blank"
               rel="noopener noreferrer"
               whileHover={simplified ? undefined : { scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
+              whileTap={simplified ? undefined : { scale: 0.98 }}
               className="mt-10 inline-flex rounded-full px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/25"
               style={{ backgroundColor: COLORS.primary }}
             >
@@ -203,7 +203,7 @@ export default function PageHero({
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={simplified ? undefined : { scale: 1.02, y: -1 }}
-                whileTap={{ scale: 0.98 }}
+                whileTap={simplified ? undefined : { scale: 0.98 }}
                 className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-orange-500/20"
                 style={{ backgroundColor: COLORS.primary }}
               >

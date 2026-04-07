@@ -6,6 +6,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import FaqSection from "@/components/pages/shared/FaqSection";
 import { CAREER_AREAS, FAQ_CARREIRAS } from "@/lib/internal-page-content";
 import { COLORS, WHATSAPP_URL } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 import { ArrowRight, BarChart3, HeartHandshake, LineChart, Users } from "lucide-react";
 
 const PERKS = [
@@ -38,6 +39,7 @@ const STEPS = [
 ] as const;
 
 export default function TrabalheConoscoContent() {
+  const simplified = useSimplifiedMotion();
   return (
     <>
       <section className="relative overflow-hidden bg-gradient-to-b from-white via-stone-50/60 to-white py-20 lg:py-28">
@@ -66,7 +68,7 @@ export default function TrabalheConoscoContent() {
               return (
               <ScrollReveal key={perk.title} delay={i * 0.06}>
                 <motion.div
-                  whileHover={{ y: -6 }}
+                  whileHover={simplified ? undefined : { y: -6 }}
                   className="h-full rounded-2xl border border-stone-200/80 bg-white p-7 shadow-[0_16px_50px_-28px_rgba(0,0,0,0.08)] transition-shadow hover:border-[#ff6600]/20"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6600]/15 to-[#f27405]/10">
@@ -148,8 +150,8 @@ export default function TrabalheConoscoContent() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={simplified ? undefined : { scale: 1.03 }}
+                  whileTap={simplified ? undefined : { scale: 0.98 }}
                   className="relative mt-8 inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white shadow-lg shadow-orange-500/30"
                   style={{ backgroundColor: COLORS.primary }}
                 >

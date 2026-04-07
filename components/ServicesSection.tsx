@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 import { SERVICES, COLORS } from "@/lib/constants";
 import PlatformLogosGrid from "@/components/services/PlatformLogosGrid";
 import {
@@ -17,6 +18,7 @@ import {
 const SERVICE_ICONS = [BarChart3, Search, Facebook, Instagram, Youtube, Linkedin] as const;
 
 export default function ServicesSection() {
+  const simplified = useSimplifiedMotion();
   return (
     <section
       id="services"
@@ -50,7 +52,9 @@ export default function ServicesSection() {
             return (
               <ScrollReveal key={service.id} delay={i * 0.06}>
                 <motion.div
-                  whileHover={{ y: -10, rotate: i % 2 === 0 ? 0.5 : -0.5 }}
+                  whileHover={
+                    simplified ? undefined : { y: -10, rotate: i % 2 === 0 ? 0.5 : -0.5 }
+                  }
                   transition={{ type: "spring", stiffness: 320, damping: 22 }}
                   className="group relative h-full overflow-hidden rounded-2xl border border-stone-200/80 bg-white p-8 shadow-[0_16px_50px_-28px_rgba(0,0,0,0.08)] transition-shadow hover:border-[#ff6600]/20 hover:shadow-[0_24px_60px_-24px_rgba(255,102,0,0.12)]"
                 >

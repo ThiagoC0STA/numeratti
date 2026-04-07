@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { motion, AnimatePresence } from "framer-motion";
 import { COLORS } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 const BAR_DATA = [
   { x: "1", v: 65 },
@@ -60,6 +61,7 @@ const SLIDE_NUMBERS = [
 ] as const;
 
 export default function HeroCharts({ slideIndex }: { slideIndex: number }) {
+  const simplified = useSimplifiedMotion();
   const nums = SLIDE_NUMBERS[slideIndex];
 
   return (
@@ -68,26 +70,26 @@ export default function HeroCharts({ slideIndex }: { slideIndex: number }) {
       <AnimatePresence mode="wait">
         <motion.div
           key={slideIndex}
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={simplified ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.98 }}
-          transition={{ duration: 0.4 }}
+          exit={simplified ? undefined : { opacity: 0, scale: 0.98 }}
+          transition={{ duration: simplified ? 0 : 0.4 }}
           className="pointer-events-none absolute bottom-4 right-6 hidden lg:block xl:right-12 xl:bottom-6"
         >
           <div className="mb-2 flex flex-col items-end">
             <motion.span
-              initial={{ opacity: 0, y: 4 }}
+              initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: simplified ? 0 : 0.2 }}
               className="text-2xl font-bold tabular-nums xl:text-3xl"
               style={{ color: COLORS.primary }}
             >
               {nums.right.value}
             </motion.span>
             <motion.span
-              initial={{ opacity: 0 }}
+              initial={simplified ? { opacity: 1 } : { opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: simplified ? 0 : 0.3 }}
               className="text-xs font-medium uppercase tracking-wider text-white/60"
             >
               {nums.right.label}
@@ -109,7 +111,7 @@ export default function HeroCharts({ slideIndex }: { slideIndex: number }) {
                   dataKey="v"
                   fill="url(#heroBarGrad)"
                   radius={[4, 4, 0, 0]}
-                  isAnimationActive
+                  isAnimationActive={!simplified}
                   animationDuration={1200}
                   animationEasing="ease-out"
                 />
@@ -133,7 +135,7 @@ export default function HeroCharts({ slideIndex }: { slideIndex: number }) {
                   stroke={COLORS.primary}
                   strokeWidth={2.5}
                   fill="url(#heroAreaGrad)"
-                  isAnimationActive
+                  isAnimationActive={!simplified}
                   animationDuration={1200}
                   animationEasing="ease-out"
                 />
@@ -152,7 +154,7 @@ export default function HeroCharts({ slideIndex }: { slideIndex: number }) {
                   strokeWidth={2.5}
                   dot={{ fill: COLORS.primary, r: 3 }}
                   activeDot={{ r: 5, fill: COLORS.primary }}
-                  isAnimationActive
+                  isAnimationActive={!simplified}
                   animationDuration={1200}
                   animationEasing="ease-out"
                 />
@@ -167,10 +169,10 @@ export default function HeroCharts({ slideIndex }: { slideIndex: number }) {
       <AnimatePresence mode="wait">
         <motion.div
           key={`left-${slideIndex}`}
-          initial={{ opacity: 0, x: -10 }}
+          initial={simplified ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
+          exit={simplified ? undefined : { opacity: 0 }}
+          transition={{ duration: simplified ? 0 : 0.4, delay: simplified ? 0 : 0.1 }}
           className="pointer-events-none absolute left-6 top-[12%] hidden lg:block xl:left-12 xl:top-[10%]"
         >
           <div className="mb-1.5 flex flex-col">
@@ -202,7 +204,7 @@ export default function HeroCharts({ slideIndex }: { slideIndex: number }) {
                   stroke={COLORS.primary}
                   strokeWidth={2}
                   fill="url(#heroLeftArea)"
-                  isAnimationActive
+                  isAnimationActive={!simplified}
                   animationDuration={1000}
                   animationEasing="ease-out"
                 />
@@ -219,7 +221,7 @@ export default function HeroCharts({ slideIndex }: { slideIndex: number }) {
                   fill={COLORS.primary}
                   fillOpacity={0.6}
                   radius={[3, 3, 0, 0]}
-                  isAnimationActive
+                  isAnimationActive={!simplified}
                   animationDuration={1000}
                   animationEasing="ease-out"
                 />
@@ -237,7 +239,7 @@ export default function HeroCharts({ slideIndex }: { slideIndex: number }) {
                   stroke={COLORS.primary}
                   strokeWidth={2}
                   dot={false}
-                  isAnimationActive
+                  isAnimationActive={!simplified}
                   animationDuration={1000}
                   animationEasing="ease-out"
                 />

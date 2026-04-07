@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Send, Loader2, CheckCircle2 } from "lucide-react";
 import { COLORS, PRIVACY_URL } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -13,6 +14,7 @@ interface NewsletterSignupProps {
 }
 
 export default function NewsletterSignup({ variant = "dark", className = "" }: NewsletterSignupProps) {
+  const simplified = useSimplifiedMotion();
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -62,7 +64,7 @@ export default function NewsletterSignup({ variant = "dark", className = "" }: N
         {status === "success" ? (
           <motion.div
             key="ok"
-            initial={{ opacity: 0, y: 8 }}
+            initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             className={`flex items-center justify-center gap-3 rounded-2xl border px-6 py-5 ${
               isDark
@@ -76,9 +78,9 @@ export default function NewsletterSignup({ variant = "dark", className = "" }: N
         ) : (
           <motion.form
             key="form"
-            initial={{ opacity: 0 }}
+            initial={simplified ? { opacity: 1 } : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={simplified ? undefined : { opacity: 0 }}
             onSubmit={handleSubmit}
             className="flex flex-col gap-4"
           >
@@ -100,8 +102,8 @@ export default function NewsletterSignup({ variant = "dark", className = "" }: N
               <motion.button
                 type="submit"
                 disabled={status === "submitting"}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={simplified ? undefined : { scale: 1.02 }}
+                whileTap={simplified ? undefined : { scale: 0.98 }}
                 className="flex items-center justify-center gap-2 rounded-full px-8 py-3.5 font-semibold text-white shadow-lg transition disabled:opacity-70"
                 style={{ backgroundColor: COLORS.primary }}
               >

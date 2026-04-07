@@ -4,10 +4,12 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Loader2, CheckCircle2, Sparkles } from "lucide-react";
 import { COLORS, PRIVACY_URL } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 export default function ContactForm() {
+  const simplified = useSimplifiedMotion();
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -57,9 +59,11 @@ export default function ContactForm() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={
+        simplified ? { duration: 0 } : { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+      }
       className="relative overflow-hidden rounded-[2rem] border border-stone-200/60 bg-white/90 p-8 shadow-[0_24px_80px_-24px_rgba(255,102,0,0.15)] backdrop-blur-md md:p-10"
     >
       <div
@@ -94,15 +98,19 @@ export default function ContactForm() {
         {status === "success" ? (
           <motion.div
             key="ok"
-            initial={{ opacity: 0, scale: 0.96 }}
+            initial={simplified ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
+            exit={simplified ? undefined : { opacity: 0 }}
             className="relative mt-10 flex flex-col items-center rounded-2xl border border-emerald-200/80 bg-emerald-50/80 px-8 py-14 text-center"
           >
             <motion.div
-              initial={{ scale: 0 }}
+              initial={simplified ? { scale: 1 } : { scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 220, damping: 14, delay: 0.05 }}
+              transition={
+                simplified
+                  ? { duration: 0 }
+                  : { type: "spring", stiffness: 220, damping: 14, delay: 0.05 }
+              }
             >
               <CheckCircle2 className="text-emerald-600" size={56} strokeWidth={1.5} />
             </motion.div>
@@ -122,9 +130,9 @@ export default function ContactForm() {
         ) : (
           <motion.form
             key="form"
-            initial={{ opacity: 0 }}
+            initial={simplified ? { opacity: 1 } : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={simplified ? undefined : { opacity: 0 }}
             onSubmit={handleSubmit}
             className="relative mt-10 space-y-5"
           >
@@ -215,9 +223,9 @@ export default function ContactForm() {
             <AnimatePresence>
               {status === "error" && errorMsg && (
                 <motion.p
-                  initial={{ opacity: 0, y: -6 }}
+                  initial={simplified ? { opacity: 1, y: 0 } : { opacity: 0, y: -6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
+                  exit={simplified ? undefined : { opacity: 0 }}
                   className="text-sm font-medium text-red-600"
                   role="alert"
                 >
@@ -229,8 +237,12 @@ export default function ContactForm() {
             <motion.button
               type="submit"
               disabled={status === "submitting"}
-              whileHover={{ scale: status === "submitting" ? 1 : 1.02 }}
-              whileTap={{ scale: status === "submitting" ? 1 : 0.98 }}
+              whileHover={
+                simplified || status === "submitting" ? undefined : { scale: 1.02 }
+              }
+              whileTap={
+                simplified || status === "submitting" ? undefined : { scale: 0.98 }
+              }
               className="inline-flex w-full items-center justify-center gap-2 rounded-full py-4 text-base font-bold text-white shadow-[0_12px_40px_-8px_rgba(255,102,0,0.45)] transition disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto sm:min-w-[200px] sm:px-10"
               style={{ backgroundColor: COLORS.primary }}
             >

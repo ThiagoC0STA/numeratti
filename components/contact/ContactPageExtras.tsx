@@ -6,9 +6,11 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import FaqSection from "@/components/pages/shared/FaqSection";
 import { COLORS, PRIVACY_URL, WHATSAPP_URL, WHATSAPP_SUPPORT_URL } from "@/lib/constants";
 import { CONTACT_PAGE_EXTRA, FAQ_CONTATO } from "@/lib/internal-page-content";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 import { Clock, MapPin, MessageCircle, Shield } from "lucide-react";
 
 export default function ContactPageExtras() {
+  const simplified = useSimplifiedMotion();
   return (
     <>
       <section className="relative overflow-hidden border-t border-stone-100 bg-gradient-to-b from-white to-stone-50/80 py-16 lg:py-20">
@@ -74,7 +76,7 @@ export default function ContactPageExtras() {
                 href={WHATSAPP_SUPPORT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.02 }}
+                whileHover={simplified ? undefined : { scale: 1.02 }}
                 className="text-sm font-semibold text-stone-700 underline-offset-2 hover:underline"
               >
                 Suporte via WhatsApp

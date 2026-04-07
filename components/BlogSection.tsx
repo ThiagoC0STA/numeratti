@@ -7,9 +7,11 @@ import BlogPostCard from "@/components/blog/BlogPostCard";
 import type { BlogPostSummary } from "@/lib/blog/types";
 import { formatPostDate } from "@/lib/blog/dates";
 import { COLORS } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 import { ArrowRight } from "lucide-react";
 
 export default function BlogSection({ posts }: { posts: BlogPostSummary[] }) {
+  const simplified = useSimplifiedMotion();
   if (!posts.length) return null;
 
   const [featured, ...rest] = posts;
@@ -65,7 +67,7 @@ export default function BlogSection({ posts }: { posts: BlogPostSummary[] }) {
           <div className="mt-14 text-center">
             <Link href="/blog">
               <motion.span
-                whileHover={{ scale: 1.02 }}
+                whileHover={simplified ? undefined : { scale: 1.02 }}
                 className="group inline-flex items-center gap-2 rounded-full border border-[#ff6600]/35 bg-white px-7 py-3.5 text-sm font-bold text-[#ff6600] shadow-md transition-all hover:bg-[#ff6600] hover:text-white"
               >
                 Ver todos os artigos

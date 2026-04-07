@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { COLORS } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 import type { LucideIcon } from "lucide-react";
 
 export default function ValuePillarsGrid({
@@ -16,6 +17,7 @@ export default function ValuePillarsGrid({
   items: readonly { title: string; text: string }[];
   icons: readonly LucideIcon[];
 }) {
+  const simplified = useSimplifiedMotion();
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-stone-50 to-white py-20 lg:py-28">
       <div className="pointer-events-none absolute -right-20 top-1/4 h-72 w-72 rounded-full bg-[#ff6600]/6 blur-[90px]" />
@@ -38,7 +40,7 @@ export default function ValuePillarsGrid({
             return (
               <ScrollReveal key={item.title} delay={i * 0.06}>
                 <motion.div
-                  whileHover={{ y: -4 }}
+                  whileHover={simplified ? undefined : { y: -4 }}
                   className="h-full rounded-2xl border border-stone-200/80 bg-white p-7 shadow-sm transition-shadow hover:border-[#ff6600]/20 hover:shadow-md"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6600]/15 to-[#f27405]/10">

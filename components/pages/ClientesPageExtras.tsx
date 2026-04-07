@@ -8,8 +8,10 @@ import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { ABOUT_STATS, COLORS, WHATSAPP_URL } from "@/lib/constants";
 import { CLIENT_SEGMENTS, FAQ_CLIENTES } from "@/lib/internal-page-content";
 import { ArrowRight, Building2 } from "lucide-react";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 export default function ClientesPageExtras() {
+  const simplified = useSimplifiedMotion();
   return (
     <>
       <section className="relative overflow-hidden bg-gradient-to-b from-white via-stone-50/60 to-white py-16 lg:py-24">
@@ -60,7 +62,7 @@ export default function ClientesPageExtras() {
             {CLIENT_SEGMENTS.map((seg, i) => (
               <ScrollReveal key={seg.title} delay={i * 0.07}>
                 <motion.div
-                  whileHover={{ y: -4 }}
+                  whileHover={simplified ? undefined : { y: -4 }}
                   className="h-full rounded-2xl border border-stone-200/80 bg-stone-50/50 p-8"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white shadow-sm ring-1 ring-stone-200/80">
@@ -109,7 +111,7 @@ export default function ClientesPageExtras() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.03 }}
+                whileHover={simplified ? undefined : { scale: 1.03 }}
                 className="mt-8 inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white"
                 style={{ backgroundColor: COLORS.primary }}
               >

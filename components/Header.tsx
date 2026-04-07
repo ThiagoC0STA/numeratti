@@ -7,8 +7,10 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS, WHATSAPP_URL, COLORS, LOGO_DESKTOP, LOGO_MOBILE } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 export default function Header() {
+  const simplified = useSimplifiedMotion();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -25,9 +27,11 @@ export default function Header() {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
+      initial={simplified ? { y: 0 } : { y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
+      transition={
+        simplified ? { duration: 0 } : { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }
+      }
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent"
       }`}
@@ -77,7 +81,7 @@ export default function Header() {
                   className="absolute -bottom-1 left-0 h-px"
                   style={{ backgroundColor: COLORS.primary }}
                   initial={{ width: 0 }}
-                  whileHover={{ width: "100%" }}
+                  whileHover={simplified ? undefined : { width: "100%" }}
                   transition={{ duration: 0.2 }}
                 />
               </span>
@@ -90,8 +94,8 @@ export default function Header() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={simplified ? undefined : { scale: 1.02 }}
+            whileTap={simplified ? undefined : { scale: 0.98 }}
             className="rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all"
             style={{ backgroundColor: COLORS.primary }}
           >
@@ -102,7 +106,7 @@ export default function Header() {
         <motion.button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="relative z-10 flex p-2 lg:hidden"
-          whileTap={{ scale: 0.95 }}
+          whileTap={simplified ? undefined : { scale: 0.95 }}
           aria-label="Menu"
         >
           {isMobileMenuOpen ? (
@@ -116,19 +120,24 @@ export default function Header() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={simplified ? { opacity: 1 } : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={simplified ? undefined : { opacity: 0 }}
+            transition={{ duration: simplified ? 0 : 0.2 }}
             className="fixed inset-0 top-0 bg-black/40 backdrop-blur-sm lg:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           />
         )}
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: "100%" }}
+            initial={simplified ? { opacity: 1, x: 0 } : { opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            exit={simplified ? undefined : { opacity: 0, x: "100%" }}
+            transition={
+              simplified
+                ? { duration: 0 }
+                : { type: "spring", damping: 25, stiffness: 200 }
+            }
             className="fixed right-0 top-0 bottom-0 z-40 w-80 max-w-[85vw] bg-white p-8 shadow-2xl lg:hidden"
           >
             <div className="mt-20 flex flex-col gap-6">

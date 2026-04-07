@@ -24,10 +24,12 @@ import {
   QUEM_SOMOS_MISSION_BLOCK,
 } from "@/lib/internal-page-content";
 import { ArrowRight, Award, Sparkles, BarChart3, Target, Handshake, TrendingUp } from "lucide-react";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 const VALUE_ICONS = [BarChart3, Target, Handshake, TrendingUp] as const;
 
 export default function QuemSomosContent() {
+  const simplified = useSimplifiedMotion();
   return (
     <>
       <section className="relative overflow-hidden bg-gradient-to-b from-white via-stone-50/40 to-white py-20 lg:py-28">
@@ -72,7 +74,7 @@ export default function QuemSomosContent() {
                         href="https://www.rdstation.com/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ x: 4 }}
+                        whileHover={simplified ? undefined : { x: 4 }}
                         className="mt-5 inline-flex items-center gap-1 text-sm font-bold"
                         style={{ color: COLORS.primary }}
                       >
@@ -146,7 +148,7 @@ export default function QuemSomosContent() {
             {ABOUT_STATS.map((stat, i) => (
               <ScrollReveal key={stat.label} delay={0.06 + i * 0.06}>
                 <motion.div
-                  whileHover={{ y: -6 }}
+                  whileHover={simplified ? undefined : { y: -6 }}
                   transition={{ type: "spring", stiffness: 400, damping: 22 }}
                   className="rounded-2xl border border-stone-200/80 bg-white/95 p-8 text-center shadow-[0_16px_50px_-28px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-shadow hover:border-[#ff6600]/25 hover:shadow-[0_24px_60px_-24px_rgba(255,102,0,0.12)]"
                 >
@@ -200,7 +202,7 @@ export default function QuemSomosContent() {
             {CLIENT_LOGOS.map((client) => (
               <ScrollReveal key={client.name}>
                 <motion.div
-                  whileHover={{ scale: 1.03, y: -4 }}
+                  whileHover={simplified ? undefined : { scale: 1.03, y: -4 }}
                   className="flex h-36 items-center justify-center rounded-2xl border border-stone-200/90 bg-white px-4 py-5 shadow-sm transition-shadow hover:border-[#ff6600]/30 hover:shadow-lg"
                 >
                   <Image
@@ -222,8 +224,8 @@ export default function QuemSomosContent() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={simplified ? undefined : { scale: 1.03 }}
+                whileTap={simplified ? undefined : { scale: 0.98 }}
                 className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white shadow-lg shadow-orange-500/25"
                 style={{ backgroundColor: COLORS.primary }}
               >

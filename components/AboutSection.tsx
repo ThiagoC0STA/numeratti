@@ -2,12 +2,14 @@
 
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { ABOUT_STATS, COLORS } from "@/lib/constants";
 import Link from "next/link";
 import { ArrowRight, Zap } from "lucide-react";
 
 export default function AboutSection() {
+  const simplified = useSimplifiedMotion();
   return (
     <section
       id="about"
@@ -66,7 +68,11 @@ export default function AboutSection() {
             {ABOUT_STATS.map((stat, i) => (
               <ScrollReveal key={stat.label} delay={0.12 + i * 0.06}>
                 <motion.div
-                  whileHover={{ x: 6, boxShadow: "0 20px 50px -20px rgba(255,102,0,0.2)" }}
+                  whileHover={
+                    simplified
+                      ? undefined
+                      : { x: 6, boxShadow: "0 20px 50px -20px rgba(255,102,0,0.2)" }
+                  }
                   className="group flex items-center justify-between rounded-2xl border border-stone-200/80 bg-white/90 p-7 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-[#ff6600]/25"
                 >
                   <div>

@@ -4,11 +4,13 @@ import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { METRICS, COLORS } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 import { BarChart3, Users, TrendingUp } from "lucide-react";
 
 const ICONS = [BarChart3, Users, TrendingUp] as const;
 
 export default function MetricsTeaserGrid() {
+  const simplified = useSimplifiedMotion();
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#fff7f0] via-white to-stone-50 py-20 lg:py-28">
       <div className="pointer-events-none absolute right-1/4 top-0 h-px w-1/2 bg-gradient-to-r from-transparent via-[#ff6600]/20 to-transparent" />
@@ -31,7 +33,7 @@ export default function MetricsTeaserGrid() {
             return (
               <ScrollReveal key={metric.label} delay={i * 0.08}>
                 <motion.div
-                  whileHover={{ y: -6 }}
+                  whileHover={simplified ? undefined : { y: -6 }}
                   className="h-full rounded-2xl border border-stone-200/80 bg-white p-8 shadow-[0_16px_50px_-28px_rgba(0,0,0,0.06)]"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6600]/15 to-[#f27405]/10">

@@ -8,6 +8,8 @@ import MetricsTeaserGrid from "@/components/pages/shared/MetricsTeaserGrid";
 import FaqSection from "@/components/pages/shared/FaqSection";
 import { METHODOLOGY_PHASES, FAQ_SOLUCOES } from "@/lib/internal-page-content";
 import { SOLUCOES, SERVICES, COLORS, WHATSAPP_URL } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
+import { fadeUpWhileInView } from "@/lib/motion/simplifiedScroll";
 import {
   BarChart3,
   Search,
@@ -25,6 +27,7 @@ const SECTION_ICONS = [BarChart3, Target, Zap, Lightbulb] as const;
 const SERVICE_ICONS = [BarChart3, Search, Facebook, Instagram, Youtube, Linkedin] as const;
 
 export default function SolucoesContent() {
+  const simplified = useSimplifiedMotion();
   return (
     <>
       <section className="relative overflow-hidden bg-gradient-to-b from-white via-stone-50/50 to-white py-20 lg:py-28">
@@ -63,10 +66,18 @@ export default function SolucoesContent() {
                       </div>
                     </div>
                     <motion.div
-                      initial={{ opacity: 0, scale: 0.98 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true, amount: 0.3 }}
-                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                      {...(simplified
+                        ? fadeUpWhileInView(true, {
+                            hiddenY: 12,
+                            duration: 0.5,
+                            viewportAmount: 0.3,
+                          })
+                        : {
+                            initial: { opacity: 0, scale: 0.98 },
+                            whileInView: { opacity: 1, scale: 1 },
+                            viewport: { once: true, amount: 0.3 },
+                            transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+                          })}
                       className="relative min-h-[200px] overflow-hidden rounded-[1.75rem] border border-stone-200/80 bg-gradient-to-br from-white to-stone-100/80 p-10 shadow-inner"
                     >
                       <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#ff6600]/12 blur-2xl" />
@@ -116,7 +127,7 @@ export default function SolucoesContent() {
               return (
                 <ScrollReveal key={service.id} delay={i * 0.05}>
                   <motion.div
-                    whileHover={{ y: -8 }}
+                    whileHover={simplified ? undefined : { y: -8 }}
                     transition={{ type: "spring", stiffness: 380, damping: 22 }}
                     className="group relative h-full overflow-hidden rounded-2xl border border-stone-200/80 bg-white p-8 shadow-[0_16px_50px_-28px_rgba(0,0,0,0.08)] transition-shadow hover:border-[#ff6600]/20 hover:shadow-[0_24px_60px_-24px_rgba(255,102,0,0.12)]"
                   >
@@ -166,8 +177,8 @@ export default function SolucoesContent() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={simplified ? undefined : { scale: 1.03 }}
+                whileTap={simplified ? undefined : { scale: 0.98 }}
                 className="relative mt-10 inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white shadow-lg shadow-orange-500/30"
                 style={{ backgroundColor: COLORS.primary }}
               >

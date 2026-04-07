@@ -7,9 +7,11 @@ import FaqSection from "@/components/pages/shared/FaqSection";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { CASES, COLORS, WHATSAPP_URL, ABOUT_STATS } from "@/lib/constants";
 import { CASES_PAGE_INTRO, FAQ_CASES } from "@/lib/internal-page-content";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 import { ArrowRight, CheckCircle2, TrendingUp, ExternalLink } from "lucide-react";
 
 export default function CasesContent() {
+  const simplified = useSimplifiedMotion();
   return (
     <>
       <section className="relative overflow-hidden bg-gradient-to-b from-white via-[#fff8f3] to-white py-16 lg:py-22">
@@ -80,7 +82,7 @@ export default function CasesContent() {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ y: -10 }}
+                  whileHover={simplified ? undefined : { y: -10 }}
                   transition={{ type: "spring", stiffness: 400, damping: 22 }}
                   className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-stone-200/80 bg-white p-8 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.08)] transition-shadow hover:border-[#ff6600]/25 hover:shadow-[0_28px_70px_-28px_rgba(255,102,0,0.15)]"
                 >
@@ -128,8 +130,8 @@ export default function CasesContent() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={simplified ? undefined : { scale: 1.03 }}
+                whileTap={simplified ? undefined : { scale: 0.98 }}
                 className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white shadow-lg shadow-orange-500/25"
                 style={{ backgroundColor: COLORS.primary }}
               >

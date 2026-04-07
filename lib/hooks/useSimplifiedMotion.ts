@@ -6,8 +6,10 @@ import { useReducedMotion } from "framer-motion";
 const NARROW_QUERY = "(max-width: 767px)";
 
 /**
- * True on small viewports or when the user prefers reduced motion.
- * Skips heavy scroll-driven and staggered animations to keep mobile smooth.
+ * True on small viewports (max-width: 767px) or when the user prefers reduced motion.
+ * Use this to skip scroll-driven animations, hover parallax, and heavy stagger on mobile.
+ *
+ * Helpers: `lib/motion/simplifiedScroll.ts` (`fadeUpWhileInView`, `staggerContainerProps`).
  */
 export function useSimplifiedMotion(): boolean {
   const prefersReduced = useReducedMotion() ?? false;

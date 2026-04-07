@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { PRIVACY_URL } from "@/lib/constants";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 const STORAGE_KEY = "numeratti_cookie_consent_v1";
 
 export default function CookieConsent() {
+  const simplified = useSimplifiedMotion();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -33,10 +35,12 @@ export default function CookieConsent() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          initial={{ y: 120, opacity: 0 }}
+          initial={simplified ? { y: 0, opacity: 1 } : { y: 120, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 120, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 28 }}
+          exit={simplified ? undefined : { y: 120, opacity: 0 }}
+          transition={
+            simplified ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 28 }
+          }
           className="fixed bottom-0 left-0 right-0 z-[100] p-4 sm:p-6"
           role="dialog"
           aria-label="Consentimento de cookies"
@@ -67,8 +71,8 @@ export default function CookieConsent() {
               <motion.button
                 type="button"
                 onClick={accept}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={simplified ? undefined : { scale: 1.03 }}
+                whileTap={simplified ? undefined : { scale: 0.97 }}
                 className="rounded-full bg-[#ff6600] px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-orange-500/25"
               >
                 Aceitar
