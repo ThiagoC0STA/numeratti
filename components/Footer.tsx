@@ -56,7 +56,7 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-6 max-w-md text-sm font-medium uppercase tracking-wider text-stone-500">
-              Seu negócio com resultados reais e mensuráveis através dos números.
+              Performance digital orientada por dados.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -154,9 +154,9 @@ export default function Footer() {
                 <MapPin size={16} style={{ color: COLORS.primary }} />
               </div>
               <div className="text-sm text-stone-600">
-                <p className="font-medium text-stone-800">Rua Dr. Hermes Lima, 45</p>
-                <p>Edson Queiroz, Fortaleza/CE</p>
-                <p>60811-570</p>
+                <p className="font-medium text-stone-800">R. Visc. de Maua, 3111</p>
+                <p>Dionísio Torres, Fortaleza - CE</p>
+                <p>60120-335</p>
                 <p className="mt-2 text-stone-500">Atendemos em todo o Brasil</p>
               </div>
             </div>

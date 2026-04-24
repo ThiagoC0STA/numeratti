@@ -50,7 +50,7 @@ export const METRICS = [
     value: 10000000,
     label: "Impressões",
     description:
-      "Total de vezes que anúncios de nossos clientes foram exibidos para suas personas.",
+      "10 milhões de impressões entregues em campanhas ativas dos nossos clientes.",
     suffix: "",
     icon: "impressoes" as const,
   },
@@ -58,7 +58,7 @@ export const METRICS = [
     value: 35000,
     label: "Leads",
     description:
-      "Contatos gerados através de campanhas em diversas plataformas para nossos clientes.",
+      "35 mil leads gerados por campanhas gerenciadas pela Numeratti em diversas plataformas.",
     suffix: "",
     icon: "leads" as const,
   },
@@ -66,7 +66,7 @@ export const METRICS = [
     value: 17,
     label: "ROAS",
     description:
-      "O valor do Retorno sobre Gastos com anúncios indica quanto o investimento em mídia patrocinada está promovendo vendas.",
+      "Melhor ROAS registrado entre nossos clientes — R$ 17 de retorno para cada R$ 1 investido em mídia paga.",
     suffix: "x",
     icon: "roas" as const,
   },
@@ -83,32 +83,37 @@ export const SERVICES = [
     id: "01",
     title: "Consultoria de Tráfego Pago",
     description:
-      "Diagnóstico e planejamento de ações para o seu negócio no digital",
+      "Auditoria, diagnóstico e plano de ação personalizado para escalar sua operação de tráfego pago.",
   },
   {
     id: "02",
     title: "Google Ads",
-    description: "Anúncios de Rede de Pesquisa, Display, Shopping, Vídeo e mais.",
+    description:
+      "Campanhas em Search, Display, Shopping, Performance Max e YouTube Ads — com foco em intenção de compra e ROAS.",
   },
   {
     id: "03",
     title: "Facebook Ads",
-    description: "Anúncios Dark Post, Carrossel, Dinâmico, Stories e mais.",
+    description:
+      "Campanhas de conversão, geração de leads e remarketing no feed, stories e Reels — com catálogo dinâmico e segmentação avançada.",
   },
   {
     id: "04",
     title: "Instagram Ads",
-    description: "Anúncios Dark Post, Carrossel, Dinâmico, Stories e mais.",
+    description:
+      "Anúncios nativos que performam em Reels, Stories e Explore — formatos visuais otimizados para engajamento e conversão.",
   },
   {
     id: "05",
     title: "YouTube Ads",
-    description: "Anúncios In Stream, Discovery, For Action e mais.",
+    description:
+      "Campanhas em In-Stream, In-Feed e Shorts — ideais para branding com escala e Video Action Campaigns focadas em conversão.",
   },
   {
     id: "06",
     title: "LinkedIn Ads",
-    description: "Anúncios Dark Post, Texto, inMail, Vídeo e mais.",
+    description:
+      "Campanhas B2B com segmentação por cargo, empresa e setor — em formatos de Sponsored Content, InMail e Lead Gen Forms.",
   },
 ] as const;
 
@@ -282,42 +287,44 @@ export const WHATSAPP_SUPPORT_URL = "https://api.whatsapp.com/send?phone=5585988
 
 export const QUEM_SOMOS = {
   intro:
-    "Somos uma empresa de consultoria de performance especializada. Combinamos técnica, estratégias personalizadas e uma abordagem baseada em dados para o sucesso do seu negócio.",
+    "Somos uma consultoria de performance digital que transforma investimento em mídia paga em resultado mensurável. Unimos inteligência analítica, gestão de tráfego multicanal e estratégia sob medida — tudo guiado por dados, não por achismo. Com sede em Fortaleza e atuação em todo o Brasil, somos o parceiro estratégico que o seu negócio precisa para crescer com previsibilidade — não com promessa.",
   headline: "A Performance e a Estratégia se encontram aqui!",
   paragraphs: [
-    "A Numeratti nasceu com um foco definido: gerar resultados reais e mensuráveis para nossos clientes por meio de análises e dados concretos. No mercado de marketing digital, muitas promessas são feitas, mas poucas são cumpridas integralmente. Quantas vezes você já ficou esperando por informações concretas para tomar decisões importantes?",
-    "É exatamente isso que oferecemos: dados, análises e números que você pode confiar, além de um comprometimento absoluto com os resultados. Embora não possamos prever o futuro, acreditamos que o sucesso pode ser construído por meio do trabalho correto. Com nosso foco em performance digital e um investimento estratégico, sua empresa pode alcançar patamares ainda mais altos, especialmente quando conduzido por especialistas com o know-how necessário.",
-    "Desde o nosso início, já trazemos uma bagagem sólida. A Numeratti tem o prazer de abrir as portas para você, trazendo consigo uma vasta experiência com grandes players do mercado varejista, comprovada por meio de cases reais e números que evidenciam nossa eficiência. Contamos com uma equipe de especialistas prontos para atender às necessidades do seu e-commerce, impulsionar a performance de suas redes sociais e promover seu crescimento contínuo.",
+    "A Numeratti nasceu com um foco: gerar resultados reais e mensuráveis por meio de dados concretos. Enquanto o mercado de marketing digital faz promessas, nós entregamos informações que você pode usar para tomar decisões — e um comprometimento absoluto com o que funciona.",
+    "Com foco em performance digital e experiência comprovada com grandes players do varejo cearense, nossa equipe está pronta para estruturar seu e-commerce, escalar suas campanhas e impulsionar seu crescimento de forma consistente.",
+    "Nascemos em Fortaleza, no coração do Ceará, e crescemos pelo Brasil. Hoje atendemos empresas de ponta a ponta do país que buscam mais do que uma agência de marketing — buscam um parceiro que entenda de negócio, de dados e de escala.",
   ],
   founder: {
     name: "Lucas Mendes",
     role: "Sócio fundador da Numeratti",
-    bio: "Lidera uma equipe dedicada a oferecer soluções estratégicas e resultados concretos para os clientes. Atua há 14 anos com marketing digital especializado em performance. Publicitário de formação, empreendedor, palestrante e consultor, contribuiu para o crescimento de grandes marcas varejistas, incluindo Ibyte, San Paolo e Rio Mar.",
+    bio: "Publicitário com 14 anos de experiência em marketing digital de performance. Empreendedor, palestrante e consultor, contribuiu para o crescimento de marcas como Ibyte, San Paolo e RioMar.",
+    credentials:
+      "Google Partner Premier | Palestrante de marketing digital | +14 anos em mídia paga para marcas de alto ticket em Fortaleza e Brasil",
     image: "https://numeratti.com.br/wp-content/uploads/2022/04/logo-1.png",
   },
   award:
-    "Fomos considerados uma das melhores agências de marketing digital do Brasil pela RD Station na categoria Especialistas em Vendas, recebendo o troféu de 3° Lugar do Prêmio Limitless RD Station em 2022, sendo reconhecidos como a agência que entrega os melhores resultados para os seus clientes entre mais de 3000 concorrentes.",
+    "3º lugar no Prêmio Limitless RD Station 2022 — categoria Especialistas em Vendas, entre mais de 3.000 agências concorrentes no Brasil.",
 } as const;
 
 export const SOLUCOES = {
   intro:
-    "O seu negócio com resultados reais e mensuráveis, a partir de consultoria, estratégias e operação de um time com alta inteligência de mercado.",
+    "Consultoria, estratégia e operação de mídia paga para empresas que querem escalar com previsibilidade. Gerenciamos suas campanhas em +17 plataformas com foco em métricas que importam: custo por lead, ROAS e receita atribuída.",
   sections: [
     {
-      title: "Consultoria Estratégica para a sua Equipe Interna",
-      text: "Aprenda conosco e obtenha uma compreensão profunda da estratégia de mídia paga e marketing digital. Nossa consultoria está pronta para guiá-lo, oferecendo orientações sobre as melhores práticas e caminhos para alcançar os verdadeiros objetivos da sua empresa.",
+      title: "Consultoria Estratégica para Equipe Interna",
+      text: "Seu time interno já opera campanhas, mas precisa de direção estratégica? Entramos como mentores: auditamos a operação atual, identificamos gargalos e entregamos um plano de ação com prioridades claras — de estrutura de conta a estratégia de lances. Ideal para equipes que querem evoluir sem terceirizar a operação.",
     },
     {
-      title: "Resultados tangíveis",
-      text: "Não acreditamos em promessas vazias! Oferecemos resultados reais, respaldados por estratégias sólidas e eficazes. Nossos anúncios não ficam no escuro: são testados e analisados semanalmente para garantir que estão gerando o impacto desejado. Com a utilização de Business Intelligence (BI), monitoramos o desempenho em tempo real. Isso nos permite tomar decisões baseadas em dados para ajustar as estratégias conforme necessário, garantindo que você esteja sempre no caminho certo para o sucesso.",
+      title: "Gestão Completa de Mídia Paga",
+      text: "Assumimos a operação das suas campanhas de ponta a ponta: do planejamento à otimização semanal. Cada anúncio é testado, cada métrica é monitorada com BI em tempo real, e cada decisão é baseada em dados — não em intuição. O resultado: campanhas que performam e investimento que se justifica.",
     },
     {
-      title: "Performance total",
-      text: "Seja comércio eletrônico, captação de leads ou qualquer outra estratégia, nossa equipe tem tudo o que você precisa para ser visto e lembrado no mundo digital. Pare de fazer só posts e atinja o potencial máximo da sua empresa!",
+      title: "Estratégia Digital Integrada",
+      text: "Quando o desafio vai além da mídia paga — e envolve posicionamento, jornada do cliente e integração entre canais — montamos uma estratégia digital completa. Combinamos tráfego pago, análise de dados e inteligência de mercado para criar um ecossistema de performance sob medida.",
     },
     {
-      title: "Alta inteligência de mercado",
-      text: "Se você ainda não sabe o caminho que quer seguir, não precisa se desesperar, podemos ajudar você a traçar o melhor tipo de estratégia dentro do marketing digital para alcançar os seus clientes.",
+      title: "Diagnóstico e Planejamento Digital",
+      text: "Para empresas que estão começando no digital ou reestruturando sua presença online, oferecemos um diagnóstico completo: mapeamos concorrência, oportunidades e o melhor mix de canais para o seu modelo de negócio. Você recebe um plano claro antes de investir o primeiro real em mídia.",
     },
   ],
 } as const;
@@ -327,9 +334,9 @@ export const HERO_SLIDES = [
     lines: [
       {
         parts: [
-          { text: "SEU NEGÓCIO COM RESULTADOS ", highlight: false },
-          { text: "REAIS E MENSURÁVEIS", highlight: true },
-          { text: " ATRAVÉS DOS NÚMEROS.", highlight: false },
+          { text: "Seu negócio com resultados ", highlight: false },
+          { text: "reais e mensuráveis", highlight: true },
+          { text: " através dos números.", highlight: false },
         ],
       },
     ],
@@ -340,8 +347,8 @@ export const HERO_SLIDES = [
     lines: [
       {
         parts: [
-          { text: "Qualidade e desempenho ", highlight: true },
-          { text: "nos seus anúncios.", highlight: false },
+          { text: "Performance digital ", highlight: true },
+          { text: "orientada por dados.", highlight: false },
         ],
       },
     ],
@@ -352,8 +359,8 @@ export const HERO_SLIDES = [
     lines: [
       {
         parts: [
-          { text: "Impulsionando marcas a gerar ", highlight: false },
-          { text: "resultados para seu negócio.", highlight: true },
+          { text: "Menos promessa vazia, ", highlight: false },
+          { text: "mais número na mesa.", highlight: true },
         ],
       },
     ],

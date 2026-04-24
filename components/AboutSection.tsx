@@ -29,22 +29,20 @@ export default function AboutSection() {
         <div className="mt-10 grid gap-16 lg:grid-cols-2 lg:gap-24">
           <ScrollReveal>
             <h2 className="text-3xl font-bold leading-tight tracking-tight text-stone-900 md:text-4xl lg:text-5xl">
-              Empresa de Consultoria de Performance{" "}
+              Consultoria de Performance Digital{" "}
               <span className="bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">
-                orientada a resultados
+                orientada por dados
               </span>
             </h2>
             <p className="mt-8 text-lg leading-relaxed text-stone-600">
-              A Numeratti nasceu com um foco definido: gerar por meio dos números,{" "}
-              <strong className="text-stone-900">resultados reais e mensuráveis</strong> para os nossos clientes. Hoje, no
-              mercado de marketing digital, vemos várias promessas, mas poucas são cumpridas integralmente.
+              Transformamos investimento em mídia paga em{" "}
+              <strong className="text-stone-900">resultado mensurável</strong>. Enquanto o mercado faz promessas, nós entregamos dados que você pode usar para tomar decisões — e um comprometimento absoluto com o que funciona.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-stone-600">
-              Quantas vezes você já ficou esperando dados concretos para tomada de decisão? É isso que oferecemos:{" "}
+              Com sede em Fortaleza e atuação em todo o Brasil, somos o parceiro estratégico que o seu negócio precisa para{" "}
               <strong className="text-stone-900">
-                dados, análises, números e comprometimento com o resultado.
-              </strong>{" "}
-              Talvez não seja possível prever o futuro, mas é possível construir o sucesso por meio do trabalho correto.
+                crescer com previsibilidade — não com promessa.
+              </strong>
             </p>
             <Link
               href="/quem-somos"

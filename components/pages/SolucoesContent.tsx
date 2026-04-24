@@ -117,7 +117,7 @@ export default function SolucoesContent() {
               </span>
             </h3>
             <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600">
-              Consultoria e operação em diversas plataformas de mídia paga
+              Consultoria e operação em +17 plataformas de mídia paga — com foco em métricas que importam
             </p>
           </ScrollReveal>
 
