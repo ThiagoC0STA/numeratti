@@ -4,61 +4,37 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
+
 import { CLIENT_LOGOS, COLORS } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
 
 type ClientsSectionVariant = "home" | "page";
 
 function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
-  const simplified = useSimplifiedMotion();
   const ordered = direction === "left" ? CLIENT_LOGOS : [...CLIENT_LOGOS].reverse();
   const loop = [...ordered, ...ordered];
 
-  if (simplified) {
-    return (
-      <div className="flex flex-wrap justify-center gap-4 py-2 md:gap-6">
-        {ordered.map((client) => (
-          <div
-            key={`${direction}-${client.name}`}
-            className="flex h-28 w-[11.5rem] shrink-0 items-center justify-center rounded-2xl border border-stone-200/90 bg-white px-4 py-3 shadow-sm md:h-32 md:w-[13rem]"
-          >
-            <Image
-              src={client.url}
-              alt={client.name}
-              width={280}
-              height={120}
-              className="h-[3.75rem] w-auto max-w-[min(100%,10rem)] object-contain md:h-[5.5rem] md:max-w-[min(100%,12rem)]"
-              quality={70}
-              loading="lazy"
-            />
-          </div>
-        ))}
-      </div>
-    );
-  }
-
   return (
     <div className="relative overflow-hidden py-1">
-      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-[#fafaf9] to-transparent md:w-28" />
-      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-[#fafaf9] to-transparent md:w-28" />
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-[#fafaf9] to-transparent md:w-24" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-[#fafaf9] to-transparent md:w-24" />
 
       <motion.div
-        className="flex w-max gap-4 md:gap-8"
+        className="flex w-max gap-3 md:gap-5"
         animate={{ x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }}
-        transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
       >
         {loop.map((client, i) => (
           <div
             key={`${client.name}-${i}`}
-            className="flex h-24 w-[10rem] shrink-0 items-center justify-center rounded-2xl border border-stone-200/90 bg-white px-3 py-3 shadow-sm md:h-36 md:w-[15.5rem] md:px-6 md:py-4"
+            className="flex h-20 w-[9rem] shrink-0 items-center justify-center rounded-xl border border-stone-200/90 bg-white px-3 py-2 shadow-sm md:h-28 md:w-[13rem] md:px-5 md:py-3"
           >
             <Image
               src={client.url}
               alt={client.name}
-              width={280}
-              height={120}
-              className="h-[3.5rem] w-auto max-w-[min(100%,8rem)] object-contain md:h-[6.75rem] md:max-w-[min(100%,13rem)]"
+              width={240}
+              height={100}
+              className="h-[2.75rem] w-auto max-w-[min(100%,7rem)] object-contain md:h-[4.5rem] md:max-w-[min(100%,11rem)]"
               quality={70}
               loading="lazy"
             />
@@ -74,7 +50,7 @@ export default function ClientsSection({ variant = "home" }: { variant?: Clients
   return (
     <section
       id="clients"
-      className="relative overflow-hidden bg-[#fafaf9] py-28 lg:py-36"
+      className="relative overflow-hidden bg-[#fafaf9] py-14 lg:py-20"
     >
       <div className="pointer-events-none absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-[#ff6600]/8 blur-[120px]" />
       <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff6600]/20 to-transparent" />
@@ -101,10 +77,39 @@ export default function ClientsSection({ variant = "home" }: { variant?: Clients
           </p>
         </ScrollReveal>
 
-        <div className="mt-16 space-y-6 md:mt-20 md:space-y-10">
-          <LogoMarquee direction="left" />
-          <LogoMarquee direction="right" />
-        </div>
+        {isPage ? (
+          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:mt-12 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+            {CLIENT_LOGOS.map((client, idx) => {
+              // 1-indexed positions the user marked as "increase"
+              const largerIdxs = new Set([0,1,2,3,4,5,6,7,8,9,10,13,15,16,17,18,19,23,31,32,33,34,36,37,38,39]);
+              const coverIdxs = new Set([16, 18, 33]);
+              const isLarger = largerIdxs.has(idx);
+              const isCover = coverIdxs.has(idx);
+              return (
+              <div
+                key={client.name}
+                className={`flex h-28 items-center justify-center rounded-xl border border-stone-200/90 bg-white shadow-sm ${isLarger ? "p-2" : "p-5"}`}
+              >
+                <div className={`relative ${isLarger ? "h-full w-full" : "h-[75%] w-[90%]"}`}>
+                  <Image
+                    src={client.url}
+                    alt={client.name}
+                    fill
+                    className={isCover ? "object-cover" : "object-contain"}
+                    quality={80}
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="mt-10 space-y-4 md:mt-12 md:space-y-6">
+            <LogoMarquee direction="left" />
+            <LogoMarquee direction="right" />
+          </div>
+        )}
 
         {!isPage ? (
           <ScrollReveal delay={0.15}>

@@ -8,7 +8,7 @@ import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { CASES, COLORS, WHATSAPP_URL, ABOUT_STATS } from "@/lib/constants";
 import { CASES_PAGE_INTRO, FAQ_CASES } from "@/lib/internal-page-content";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
-import { ArrowRight, CheckCircle2, TrendingUp, ExternalLink } from "lucide-react";
+import { ArrowRight, CheckCircle2, TrendingUp } from "lucide-react";
 
 export default function CasesContent() {
   const simplified = useSimplifiedMotion();
@@ -78,13 +78,9 @@ export default function CasesContent() {
           <div className="mt-16 grid gap-8 md:grid-cols-3">
             {CASES.map((item, i) => (
               <ScrollReveal key={item.title} delay={i * 0.08}>
-                <motion.a
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={simplified ? undefined : { y: -10 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 22 }}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-stone-200/80 bg-white p-8 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.08)] transition-shadow hover:border-[#ff6600]/25 hover:shadow-[0_28px_70px_-28px_rgba(255,102,0,0.15)]"
+                <Link
+                  href={`/cases/${item.slug}`}
+                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-stone-200/80 bg-white p-8 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.08)] transition-all hover:border-[#ff6600]/25 hover:shadow-[0_28px_70px_-28px_rgba(255,102,0,0.15)] hover:-translate-y-2"
                 >
                   <div className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full bg-gradient-to-br from-[#ff6600]/10 to-transparent transition-all duration-500 group-hover:scale-125" />
 
@@ -104,9 +100,9 @@ export default function CasesContent() {
 
                   <span className="relative mt-8 inline-flex items-center gap-2 text-sm font-bold text-[#ff6600] transition-transform group-hover:translate-x-1">
                     Saiba mais
-                    <ExternalLink size={16} />
+                    <ArrowRight size={16} />
                   </span>
-                </motion.a>
+                </Link>
               </ScrollReveal>
             ))}
           </div>

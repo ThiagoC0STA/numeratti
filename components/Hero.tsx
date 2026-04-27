@@ -71,7 +71,7 @@ export default function Hero() {
         </div>
       )}
 
-      <div className="relative mx-auto max-w-[1320px] px-6 py-28 lg:px-10 lg:py-36">
+      <div className="relative mx-auto max-w-[1320px] px-6 py-16 lg:px-10 lg:py-24">
         <div className="relative">
           <AnimatePresence mode="wait">
             <motion.div
