@@ -14,8 +14,9 @@ export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  /** Home hero is dark; all other pages use light heroes — nav must be readable without scrolling */
-  const isOnDarkBg = pathname === "/" && !isScrolled;
+  /** Home and case detail pages have dark heroes; listing/other pages use light heroes */
+  const hasDarkHero = pathname === "/" || (pathname.startsWith("/cases/") && pathname.split("/").length === 3);
+  const isOnDarkBg = hasDarkHero && !isScrolled;
   const navUseLightTheme = isScrolled || !isOnDarkBg;
 
   useEffect(() => {
