@@ -124,11 +124,11 @@ export default async function BlogArticlePage({ params }: Props) {
       <Header />
       <main>
         <article>
-          <header className="border-b border-stone-100 bg-gradient-to-b from-[#faf8f5] to-white">
+          <header className="border-b border-stone-100 dark:border-stone-800 bg-gradient-to-b from-[#faf8f5] dark:from-neutral-950 to-white dark:to-neutral-950">
             <div className="mx-auto w-full max-w-6xl px-6 pb-10 pt-28 lg:px-10 lg:pt-32">
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-stone-600 transition hover:text-[#ff6600]"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-stone-600 dark:text-stone-400 transition hover:text-[#ff6600]"
               >
                 <ArrowLeft size={16} />
                 Voltar ao blog
@@ -139,7 +139,7 @@ export default async function BlogArticlePage({ params }: Props) {
                   {dateLabel}
                 </span>
               </div>
-              <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-stone-900 md:text-4xl lg:text-5xl">
+              <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-stone-900 dark:text-stone-100 md:text-4xl lg:text-5xl">
                 {post.title}
               </h1>
               {post.categoryNames.length > 0 && (
@@ -159,7 +159,7 @@ export default async function BlogArticlePage({ params }: Props) {
 
           {post.imageUrl ? (
             <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
-              <figure className="relative -mt-2 mb-10 aspect-[21/9] overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-100 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.12)] md:mb-12">
+              <figure className="relative -mt-2 mb-10 aspect-[21/9] overflow-hidden rounded-2xl border border-stone-200/90 dark:border-stone-800/90 bg-stone-100 dark:bg-neutral-900 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.12)] md:mb-12">
                 <Image
                   src={post.imageUrl}
                   alt={post.title}
@@ -175,11 +175,11 @@ export default async function BlogArticlePage({ params }: Props) {
 
           <BlogPostBody body={post.body} />
 
-          <section className="relative overflow-hidden border-t border-stone-200/80 bg-gradient-to-b from-stone-50/90 via-white to-[#fff7f0] py-16 lg:py-20">
+          <section className="relative overflow-hidden border-t border-stone-200/80 dark:border-stone-800/80 bg-gradient-to-b from-stone-50/90 dark:from-neutral-950/90 via-white dark:via-neutral-950 to-[#fff7f0] dark:to-neutral-950 py-16 lg:py-20">
             <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff6600]/15 to-transparent" />
             <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-              <h2 className="text-center text-2xl font-bold text-stone-900 md:text-3xl">Continue lendo</h2>
-              <p className="mx-auto mt-2 max-w-xl text-center text-stone-600">
+              <h2 className="text-center text-2xl font-bold text-stone-900 dark:text-stone-100 md:text-3xl">Continue lendo</h2>
+              <p className="mx-auto mt-2 max-w-xl text-center text-stone-600 dark:text-stone-400">
                 Outros artigos que podem interessar você
               </p>
               <div className="mt-12 grid gap-8 md:grid-cols-3">

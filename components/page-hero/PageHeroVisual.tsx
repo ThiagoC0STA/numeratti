@@ -1,7 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
 import { CASES, CLIENT_LOGOS, COLORS, ABOUT_STATS } from "@/lib/constants";
 import { MessageCircle, Newspaper, Users, Briefcase, TrendingUp } from "lucide-react";
 import InnerHeroArtwork from "@/components/page-hero/InnerHeroArtwork";
@@ -16,29 +16,28 @@ export type PageHeroVisualKind =
   | "quem-somos"
   | "carreiras";
 
-const ease = [0.22, 1, 0.36, 1] as const;
-
 const BAR_HEIGHTS = [45, 72, 58, 88, 65, 92, 78];
 
 function HeroSolucoesCharts() {
-  const reduce = useReducedMotion();
   return (
     <div className="relative mx-auto w-full max-w-md lg:max-w-none" aria-hidden>
-      <div className="relative rounded-2xl border border-stone-200/90 bg-white p-5 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.1)]">
+      <div className="relative rounded-2xl border border-stone-200/90 dark:border-stone-800/90 bg-white dark:bg-neutral-950 p-5 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.1)]">
         <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400">Performance · mídia paga</p>
-        <p className="mt-1 text-lg font-bold text-stone-900">Resultados semanais</p>
+        <p className="mt-1 text-lg font-bold text-stone-900 dark:text-stone-100">Resultados semanais</p>
         <div className="mt-4 flex h-[7.5rem] items-end justify-between gap-1.5 px-1">
           {BAR_HEIGHTS.map((h, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={reduce ? false : { height: 0 }}
-              animate={{ height: `${Math.round((h / 100) * 118)}px` }}
-              transition={{ duration: 0.7, delay: reduce ? 0 : 0.06 + i * 0.05, ease }}
-              className="w-full max-w-[2.25rem] rounded-t-md bg-gradient-to-t from-[#ff6600] to-[#f27405]"
+              style={{
+                height: `${Math.round((h / 100) * 118)}px`,
+                animation: `heroBarRise 700ms ${60 + i * 50}ms cubic-bezier(0.22,1,0.36,1) backwards`,
+                transformOrigin: "bottom",
+              }}
+              className="w-full max-w-[2.25rem] rounded-t-md bg-gradient-to-t from-[#ff6600] to-[#f27405] motion-reduce:animate-none"
             />
           ))}
         </div>
-        <div className="mt-5 flex items-center justify-between border-t border-stone-100 pt-4">
+        <div className="mt-5 flex items-center justify-between border-t border-stone-100 dark:border-stone-800 pt-4">
           <div>
             <p className="text-[10px] font-semibold uppercase text-stone-500">Tendência</p>
             <p className="text-sm font-bold text-[#ff6600]">+127% conversões</p>
@@ -54,27 +53,27 @@ function HeroSolucoesCharts() {
               d="M0,32 L20,28 L40,18 L55,22 L70,8 L85,12 L100,4 L120,6 L120,40 L0,40 Z"
               fill="url(#heroLineGrad)"
             />
-            <motion.path
+            <path
               d="M0,32 L20,28 L40,18 L55,22 L70,8 L85,12 L100,4 L120,6"
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
-              initial={reduce ? false : { pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 1.2, delay: 0.3, ease }}
+              pathLength={1}
+              strokeDasharray={1}
+              strokeDashoffset={1}
+              style={{ animation: "heroPathDraw 1200ms 300ms cubic-bezier(0.22,1,0.36,1) forwards" }}
+              className="motion-reduce:[stroke-dashoffset:0] motion-reduce:animate-none"
             />
           </svg>
         </div>
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.45, duration: 0.5, ease }}
-        className="absolute -bottom-3 -left-2 rounded-xl border border-stone-200 bg-white px-3 py-2 text-xs font-semibold shadow-lg sm:-left-4"
+      <div
+        style={{ animation: "heroSlideUp 500ms 450ms cubic-bezier(0.22,1,0.36,1) backwards" }}
+        className="absolute -bottom-3 -left-2 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-neutral-950 px-3 py-2 text-xs font-semibold shadow-lg sm:-left-4 motion-reduce:animate-none"
       >
         <span style={{ color: COLORS.primary }}>ROAS</span>
-        <span className="ml-1.5 text-stone-800">17x</span>
-      </motion.div>
+        <span className="ml-1.5 text-stone-800 dark:text-stone-200">17x</span>
+      </div>
     </div>
   );
 }
@@ -83,20 +82,18 @@ function HeroClientesLogos() {
   const slice = CLIENT_LOGOS.slice(0, 6);
   return (
     <div className="relative mx-auto w-full max-w-md lg:max-w-none" aria-hidden>
-      <div className="rounded-2xl border border-stone-200/90 bg-white/95 p-5 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.1)]">
+      <div className="rounded-2xl border border-stone-200/90 dark:border-stone-800/90 bg-white/95 dark:bg-neutral-950/95 p-5 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.1)]">
         <div className="flex items-center gap-2">
           <Users size={18} className="text-[#ff6600]" style={{ color: COLORS.primary }} />
-          <p className="text-sm font-bold text-stone-900">Marcas que confiam na Numeratti</p>
+          <p className="text-sm font-bold text-stone-900 dark:text-stone-100">Marcas que confiam na Numeratti</p>
         </div>
         <p className="mt-1 text-xs text-stone-500">Amostra do portfólio — mais de 200 empresas atendidas</p>
         <div className="mt-5 grid grid-cols-3 gap-3">
           {slice.map((client, i) => (
-            <motion.div
+            <div
               key={client.name}
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.05 * i, duration: 0.45, ease }}
-              className="flex aspect-[5/3] items-center justify-center rounded-xl border border-stone-100 bg-stone-50/80 px-2 py-2"
+              style={{ animation: `scaleUpFade 450ms ${i * 50}ms cubic-bezier(0.22,1,0.36,1) backwards` }}
+              className="flex aspect-[5/3] items-center justify-center rounded-xl border border-stone-100 dark:border-stone-800 bg-stone-50/80 dark:bg-neutral-950/80 px-2 py-2 motion-reduce:animate-none"
             >
               <Image
                 src={client.url}
@@ -106,7 +103,7 @@ function HeroClientesLogos() {
                 className="h-9 w-auto max-w-full object-contain"
                 unoptimized
               />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -115,53 +112,65 @@ function HeroClientesLogos() {
 }
 
 function HeroCasesStack() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % CASES.length);
+    }, 4200);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const current = CASES[index];
+
   return (
-    <div className="relative mx-auto w-full max-w-md lg:max-w-none" aria-hidden>
-      <div className="overflow-hidden rounded-2xl border border-stone-200/90 bg-white shadow-[0_20px_50px_-28px_rgba(0,0,0,0.1)] ring-1 ring-stone-100/90">
-        <div className="flex items-center gap-3 border-b border-stone-100 bg-gradient-to-r from-[#fff8f3] to-white px-5 py-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6600]/18 to-[#f27405]/10">
-            <TrendingUp size={20} style={{ color: COLORS.primary }} />
+    <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+      <div className="overflow-hidden rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 shadow-[0_18px_44px_-22px_rgba(0,0,0,0.12)]">
+        <div className="flex items-center justify-between border-b border-stone-100 dark:border-stone-800 px-5 py-3">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#ff6600]/18 to-[#f27405]/10">
+              <TrendingUp size={14} style={{ color: COLORS.primary }} />
+            </div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-stone-500">Cases reais</p>
           </div>
-          <div className="min-w-0">
-            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-stone-500">Cases reais</p>
-            <p className="text-sm font-bold leading-snug text-stone-900">Resultados com marca e contexto</p>
+          <span className="font-mono text-[10px] font-bold text-stone-400 tabular-nums">
+            {String(index + 1).padStart(2, "0")} / {String(CASES.length).padStart(2, "0")}
+          </span>
+        </div>
+
+        <div key={current.title} className="relative min-h-[180px] px-5 py-5 motion-safe:animate-fade-in">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-stone-400">
+            {current.title}
+          </p>
+          <p className="mt-2 line-clamp-2 text-sm font-medium leading-snug text-stone-700 dark:text-stone-300">
+            {current.excerpt}
+          </p>
+          <div className="mt-4 flex items-baseline gap-2">
+            <p className="text-3xl font-extrabold tabular-nums leading-none" style={{ color: COLORS.primary }}>
+              {current.metric}
+            </p>
+            <p className="max-w-[12rem] text-[10px] font-medium uppercase leading-tight tracking-wide text-stone-400">
+              {current.metricLabel}
+            </p>
           </div>
         </div>
 
-        <ul className="divide-y divide-stone-100">
-          {CASES.map((item, i) => (
-            <motion.li
-              key={item.title}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.07 + i * 0.06, duration: 0.45, ease }}
-              className={`flex items-center gap-4 px-4 py-3.5 sm:px-5 ${
-                i === 0 ? "bg-[#fffaf7]/80" : ""
-              }`}
-            >
-              <div className="grid min-w-0 flex-1 grid-cols-[auto_1fr] items-start gap-3">
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-stone-100 text-[11px] font-bold text-stone-500">
-                  {i + 1}
-                </span>
-                <div className="min-w-0">
-                  <p className="text-sm font-semibold leading-snug text-stone-900">{item.title}</p>
-                  <p className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-stone-500">{item.excerpt}</p>
-                </div>
-              </div>
-              <div className="shrink-0 text-right">
-                <p className="text-lg font-bold leading-none tabular-nums text-[#ff6600]" style={{ color: COLORS.primary }}>
-                  {item.metric}
-                </p>
-                <p className="mt-1 max-w-[6.5rem] text-[9px] font-medium uppercase leading-tight tracking-wide text-stone-400 sm:max-w-[7.5rem]">
-                  {item.metricLabel}
-                </p>
-              </div>
-            </motion.li>
-          ))}
-        </ul>
-
-        <div className="border-t border-stone-100 bg-stone-50/60 px-4 py-2.5 text-center text-[10px] font-medium text-stone-500">
-          Histórias completas na página de cases abaixo
+        <div className="flex items-center justify-center gap-1.5 border-t border-stone-100 dark:border-stone-800 px-4 py-3">
+          {CASES.map((_, i) => {
+            const active = i === index;
+            return (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setIndex(i)}
+                aria-label={`Ver case ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-500 ease-out ${
+                  active ? "w-6" : "w-1.5 bg-stone-300 dark:bg-stone-700"
+                }`}
+                style={active ? { backgroundColor: COLORS.primary } : undefined}
+              />
+            );
+          })}
         </div>
       </div>
     </div>
@@ -171,25 +180,25 @@ function HeroCasesStack() {
 function HeroContatoMock() {
   return (
     <div className="relative mx-auto w-full max-w-md lg:max-w-none" aria-hidden>
-      <div className="rounded-2xl border border-stone-200/90 bg-white p-5 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.1)]">
-        <div className="flex items-center gap-2 border-b border-stone-100 pb-3">
+      <div className="rounded-2xl border border-stone-200/90 dark:border-stone-800/90 bg-white dark:bg-neutral-950 p-5 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.1)]">
+        <div className="flex items-center gap-2 border-b border-stone-100 dark:border-stone-800 pb-3">
           <MessageCircle className="text-[#25d366]" size={22} />
           <div>
-            <p className="text-sm font-bold text-stone-900">Fale com a Numeratti</p>
+            <p className="text-sm font-bold text-stone-900 dark:text-stone-100">Fale com a Numeratti</p>
             <p className="text-xs text-stone-500">WhatsApp + formulário</p>
           </div>
         </div>
         <div className="mt-4 space-y-3">
-          <div className="rounded-lg rounded-tl-sm bg-stone-100 px-3 py-2.5 text-xs text-stone-700">
+          <div className="rounded-lg rounded-tl-sm bg-stone-100 px-3 py-2.5 text-xs text-stone-700 dark:text-stone-300">
             Olá! Quero entender como vocês podem ajudar nossa operação de mídia.
           </div>
-          <div className="ml-6 rounded-lg rounded-tr-sm border border-[#ff6600]/20 bg-[#fff7f0] px-3 py-2.5 text-xs text-stone-800">
+          <div className="ml-6 rounded-lg rounded-tr-sm border border-[#ff6600]/20 bg-[#fff7f0] dark:bg-neutral-950 px-3 py-2.5 text-xs text-stone-800 dark:text-stone-200">
             Vamos alinhar objetivos e próximos passos — resposta em horário comercial.
           </div>
           <div className="space-y-2 pt-2">
             <div className="h-2.5 w-full rounded bg-stone-100" />
             <div className="h-2.5 w-[80%] rounded bg-stone-100" />
-            <div className="h-8 w-full rounded-lg border border-dashed border-stone-200 bg-stone-50/80" />
+            <div className="h-8 w-full rounded-lg border border-dashed border-stone-200 dark:border-stone-800 bg-stone-50/80 dark:bg-neutral-950/80" />
           </div>
         </div>
       </div>
@@ -197,40 +206,62 @@ function HeroContatoMock() {
   );
 }
 
+const BLOG_TOPICS: { label: string; weight: "lg" | "md" | "sm" }[] = [
+  { label: "Mídia paga", weight: "lg" },
+  { label: "Performance", weight: "lg" },
+  { label: "Google Ads", weight: "md" },
+  { label: "Meta Ads", weight: "md" },
+  { label: "ROAS", weight: "sm" },
+  { label: "Funil", weight: "sm" },
+  { label: "Conversão", weight: "md" },
+  { label: "Analytics", weight: "sm" },
+  { label: "SEO técnico", weight: "sm" },
+  { label: "E-commerce", weight: "md" },
+  { label: "B2B", weight: "sm" },
+  { label: "Atribuição", weight: "sm" },
+];
+
+const TOPIC_STYLES: Record<"lg" | "md" | "sm", string> = {
+  lg: "text-sm font-bold px-3.5 py-1.5 border-[#ff6600]/30 bg-[#ff6600]/10 text-[#ff6600]",
+  md: "text-xs font-semibold px-3 py-1.5 border-stone-200 dark:border-stone-700 bg-white dark:bg-neutral-900 text-stone-700 dark:text-stone-200",
+  sm: "text-[11px] font-medium px-2.5 py-1 border-stone-200/80 dark:border-stone-800 bg-stone-50 dark:bg-neutral-900/60 text-stone-500 dark:text-stone-400",
+};
+
 function HeroBlogMock() {
   return (
     <div className="relative mx-auto w-full max-w-md lg:max-w-none" aria-hidden>
-      <div className="rounded-2xl border border-stone-200/90 bg-white p-5 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.1)]">
-        <div className="flex items-center gap-2">
-          <Newspaper size={18} className="text-[#ff6600]" style={{ color: COLORS.primary }} />
-          <p className="text-sm font-bold text-stone-900">Conteúdo em performance</p>
+      <div className="overflow-hidden rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 shadow-[0_18px_44px_-22px_rgba(0,0,0,0.12)]">
+        <div className="flex items-center justify-between border-b border-stone-100 dark:border-stone-800 px-5 py-3">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#ff6600]/18 to-[#f27405]/10">
+              <Newspaper size={14} style={{ color: COLORS.primary }} />
+            </div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-stone-500">
+              Tópicos do blog
+            </p>
+          </div>
+          <span className="font-mono text-[10px] font-bold text-stone-400 tabular-nums">
+            {BLOG_TOPICS.length}+
+          </span>
         </div>
-        <div className="mt-4 space-y-3">
-          {[1, 2, 3].map((n) => (
-            <motion.div
-              key={n}
-              initial={{ opacity: 0, x: 8 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.08 * n, duration: 0.45, ease }}
-              className="rounded-xl border border-stone-100 bg-stone-50/60 p-3"
-            >
-              <div className="flex gap-2">
-                <div className="h-12 w-16 shrink-0 rounded-lg bg-stone-200/80" />
-                <div className="min-w-0 flex-1 space-y-2">
-                  <div className="h-2 w-[90%] rounded bg-stone-200/90" />
-                  <div className="h-2 w-[60%] rounded bg-stone-100" />
-                  <div className="flex gap-1.5">
-                    <span className="rounded-full bg-[#ff6600]/10 px-2 py-0.5 text-[9px] font-semibold text-[#ff6600]">
-                      Mídia paga
-                    </span>
-                    <span className="rounded-full bg-stone-200/60 px-2 py-0.5 text-[9px] font-medium text-stone-600">
-                      SEO
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+
+        <div className="relative px-5 py-6">
+          <div className="flex flex-wrap items-center justify-center gap-1.5">
+            {BLOG_TOPICS.map((topic, i) => (
+              <span
+                key={topic.label}
+                style={{ animation: `scaleUpFade 400ms ${60 + i * 40}ms cubic-bezier(0.22,1,0.36,1) backwards` }}
+                className={`inline-flex items-center rounded-full border motion-reduce:animate-none ${TOPIC_STYLES[topic.weight]}`}
+              >
+                {topic.label}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between border-t border-stone-100 dark:border-stone-800 bg-stone-50/60 dark:bg-neutral-950/60 px-5 py-2.5 text-[10px] font-medium text-stone-500">
+          <span>Atualizações semanais</span>
+          <span className="text-[#ff6600]">Acessar blog →</span>
         </div>
       </div>
     </div>
@@ -238,7 +269,7 @@ function HeroBlogMock() {
 }
 
 function formatAboutStatLine(s: (typeof ABOUT_STATS)[number]) {
-  if (s.value === 1.9) return "1,9+";
+  if (s.value === 5.6) return "5,6+";
   if (s.value >= 1000) return `${s.value.toLocaleString("pt-BR")}+`;
   return `${s.value}${s.suffix}`;
 }
@@ -246,25 +277,23 @@ function formatAboutStatLine(s: (typeof ABOUT_STATS)[number]) {
 function HeroQuemSomosStats() {
   return (
     <div className="relative mx-auto w-full max-w-md lg:max-w-none" aria-hidden>
-      <div className="rounded-2xl border border-stone-200/90 bg-gradient-to-br from-white to-stone-50/90 p-5 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.1)]">
+      <div className="rounded-2xl border border-stone-200/90 dark:border-stone-800/90 bg-gradient-to-br from-white dark:from-neutral-950 to-stone-50/90 dark:to-neutral-950/90 p-5 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.1)]">
         <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500">Quem somos em números</p>
         <div className="mt-4 grid gap-3">
           {ABOUT_STATS.map((s, i) => (
-            <motion.div
+            <div
               key={s.label}
-              initial={{ opacity: 0, x: 12 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.08 * i, duration: 0.45, ease }}
-              className="flex items-center justify-between gap-3 rounded-xl border border-stone-100 bg-white px-4 py-3"
+              style={{ animation: `heroSlideUp 450ms ${80 * i}ms cubic-bezier(0.22,1,0.36,1) backwards` }}
+              className="flex items-center justify-between gap-3 rounded-xl border border-stone-100 dark:border-stone-800 bg-white dark:bg-neutral-950 px-4 py-3 motion-reduce:animate-none"
             >
-              <span className="min-w-0 text-xs font-medium leading-snug text-stone-600">{s.label}</span>
+              <span className="min-w-0 text-xs font-medium leading-snug text-stone-600 dark:text-stone-400">{s.label}</span>
               <span
                 className="shrink-0 text-base font-bold tabular-nums sm:text-lg"
                 style={{ color: COLORS.primary }}
               >
                 {formatAboutStatLine(s)}
               </span>
-            </motion.div>
+            </div>
           ))}
         </div>
         <p className="mt-3 text-[10px] text-stone-400">Valores agregados do time — veja a página completa para contexto.</p>
@@ -276,26 +305,24 @@ function HeroQuemSomosStats() {
 function HeroCarreirasMock() {
   return (
     <div className="relative mx-auto w-full max-w-md lg:max-w-none" aria-hidden>
-      <div className="rounded-2xl border border-stone-200/90 bg-white p-5 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.1)]">
+      <div className="rounded-2xl border border-stone-200/90 dark:border-stone-800/90 bg-white dark:bg-neutral-950 p-5 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.1)]">
         <div className="flex items-center gap-2">
           <Briefcase size={18} className="text-[#ff6600]" style={{ color: COLORS.primary }} />
-          <p className="text-sm font-bold text-stone-900">Faça parte do time</p>
+          <p className="text-sm font-bold text-stone-900 dark:text-stone-100">Faça parte do time</p>
         </div>
         <p className="mt-1 text-xs text-stone-500">Mídia paga · dados · growth · estratégia</p>
         <div className="mt-5 flex flex-wrap gap-2">
           {["Meta Ads", "Google Ads", "Analytics", "Testes A/B", "BI"].map((tag, i) => (
-            <motion.span
+            <span
               key={tag}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.05 * i, duration: 0.35, ease }}
-              className="rounded-full border border-stone-200 bg-stone-50 px-3 py-1.5 text-[11px] font-semibold text-stone-700"
+              style={{ animation: `scaleUpFade 350ms ${50 * i}ms cubic-bezier(0.22,1,0.36,1) backwards` }}
+              className="rounded-full border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-neutral-950 px-3 py-1.5 text-[11px] font-semibold text-stone-700 dark:text-stone-300 motion-reduce:animate-none"
             >
               {tag}
-            </motion.span>
+            </span>
           ))}
         </div>
-        <div className="mt-5 rounded-xl border border-dashed border-[#ff6600]/30 bg-[#fff7f0]/40 px-4 py-3 text-center text-xs font-medium text-stone-700">
+        <div className="mt-5 rounded-xl border border-dashed border-[#ff6600]/30 bg-[#fff7f0]/40 dark:bg-neutral-950/40 px-4 py-3 text-center text-xs font-medium text-stone-700 dark:text-stone-300">
           Envie CV + mensagem no WhatsApp
         </div>
       </div>

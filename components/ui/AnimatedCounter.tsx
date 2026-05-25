@@ -1,7 +1,7 @@
 "use client";
 
 import { startTransition, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 interface AnimatedCounterProps {
   value: number;
@@ -38,6 +38,9 @@ function formatAnimatedSegment(
   if (format === "full") {
     return formatBr(displayValue);
   }
+  if (targetValue >= 1000000000) {
+    return (displayValue / 1000000000).toFixed(1).replace(".", ",") + "Bi";
+  }
   if (targetValue >= 1000000) {
     return (displayValue / 1000000).toFixed(1).replace(".", ",") + "M";
   }
@@ -64,7 +67,7 @@ function AnimatedCounter({
   const [isNarrow, setIsNarrow] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   const valueRef = useRef<HTMLSpanElement>(null);
-  const prefersReduced = useReducedMotion() ?? false;
+  const prefersReduced = useSimplifiedMotion();
 
   useLayoutEffect(() => {
     const mq = window.matchMedia(NARROW_QUERY);

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Geist, Plus_Jakarta_Sans } from "next/font/google";
 import { DEFAULT_OG_IMAGE_URL, SITE_URL } from "@/lib/constants";
+import ThemeProvider from "@/components/providers/ThemeProvider";
 import "./globals.css";
 
 const CookieConsent = dynamic(() => import("@/components/CookieConsent"));
@@ -75,6 +76,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${plusJakarta.variable} h-full antialiased`}
     >
       <head>
@@ -83,9 +85,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://numeratti.com.br" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://numeratti.com.br" />
       </head>
-      <body className="min-h-full flex flex-col font-[family-name:var(--font-plus-jakarta)]">
-        {children}
-        <CookieConsent />
+      <body className="min-h-full flex flex-col bg-white font-[family-name:var(--font-plus-jakarta)] dark:bg-neutral-950">
+        <ThemeProvider>
+          {children}
+          <CookieConsent />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { COLORS, WHATSAPP_URL } from "@/lib/constants";
 import type { CaseDetail } from "@/lib/constants";
@@ -29,11 +28,11 @@ export default function CaseDetailContent({ detail }: Props) {
         />
 
         <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}>
+          <div className="animate-slide-up-fade motion-reduce:animate-none">
             {/* Breadcrumb */}
             <Link
               href="/cases"
-              className="mb-10 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-semibold text-white/60 backdrop-blur-sm transition hover:border-white/20 hover:text-white"
+              className="mb-10 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 dark:bg-neutral-950/5 px-4 py-1.5 text-sm font-semibold text-white/60 backdrop-blur-sm transition hover:border-white/20 hover:text-white"
             >
               <ArrowLeft size={14} />
               Todos os cases
@@ -45,7 +44,7 @@ export default function CaseDetailContent({ detail }: Props) {
                 {detail.sector}
               </span>
               {detail.tags.map((tag) => (
-                <span key={tag} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white/50">
+                <span key={tag} className="rounded-full border border-white/10 bg-white/5 dark:bg-neutral-950/5 px-3 py-1 text-xs font-medium text-white/50">
                   {tag}
                 </span>
               ))}
@@ -68,14 +67,11 @@ export default function CaseDetailContent({ detail }: Props) {
                 {detail.quote}
               </p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Metric strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-16 grid gap-4 sm:grid-cols-3"
+          <div
+            className="mt-16 grid gap-4 sm:grid-cols-3 animate-slide-up-fade opacity-0 [animation-delay:250ms] motion-reduce:animate-none motion-reduce:opacity-100"
           >
             {detail.results.map((r, i) => (
               <div
@@ -88,12 +84,12 @@ export default function CaseDetailContent({ detail }: Props) {
                 <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-white/40">{r.label}</p>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* ── O Desafio ── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#faf8f5] to-white py-20 lg:py-28">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#faf8f5] to-white dark:to-neutral-950 py-20 lg:py-28">
         <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff6600]/15 to-transparent" />
 
         <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
@@ -101,10 +97,10 @@ export default function CaseDetailContent({ detail }: Props) {
             <p className="mb-2 text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
               O Desafio
             </p>
-            <h2 className="text-2xl font-bold tracking-tight text-stone-900 md:text-3xl lg:text-4xl">
+            <h2 className="text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-3xl lg:text-4xl">
               O cenário antes da Numeratti
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-stone-600">{detail.challenge}</p>
+            <p className="mt-5 text-lg leading-relaxed text-stone-600 dark:text-stone-400">{detail.challenge}</p>
           </ScrollReveal>
 
           {/* Pain points */}
@@ -113,7 +109,7 @@ export default function CaseDetailContent({ detail }: Props) {
               <ScrollReveal key={i} delay={i * 0.07}>
                 <div className="flex gap-3 rounded-xl border border-red-100 bg-red-50/60 px-5 py-4">
                   <XCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-400" />
-                  <span className="text-sm leading-relaxed text-stone-700">{point}</span>
+                  <span className="text-sm leading-relaxed text-stone-700 dark:text-stone-300">{point}</span>
                 </div>
               </ScrollReveal>
             ))}
@@ -122,7 +118,7 @@ export default function CaseDetailContent({ detail }: Props) {
       </section>
 
       {/* ── A Estratégia ── */}
-      <section className="relative overflow-hidden bg-white py-20 lg:py-28">
+      <section className="relative overflow-hidden bg-white dark:bg-neutral-950 py-20 lg:py-28">
         <div className="pointer-events-none absolute -right-32 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-[#ff6600]/6 blur-[120px]" />
 
         <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
@@ -130,7 +126,7 @@ export default function CaseDetailContent({ detail }: Props) {
             <p className="mb-2 text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
               A Estratégia
             </p>
-            <h2 className="text-2xl font-bold tracking-tight text-stone-900 md:text-3xl lg:text-4xl">
+            <h2 className="text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-3xl lg:text-4xl">
               Como a Numeratti estruturou a solução
             </h2>
             <p className="mt-4 text-lg text-stone-500">
@@ -143,7 +139,7 @@ export default function CaseDetailContent({ detail }: Props) {
               const StepIcon = STEP_ICONS[i % STEP_ICONS.length];
               return (
                 <ScrollReveal key={i} delay={i * 0.07}>
-                  <div className="group flex gap-5 rounded-2xl border border-stone-100 bg-stone-50/60 p-6 transition-all hover:border-[#ff6600]/20 hover:bg-[#fff8f3]/80 hover:shadow-sm">
+                  <div className="group flex gap-5 rounded-2xl border border-stone-100 dark:border-stone-800 bg-stone-50/60 dark:bg-neutral-950/60 p-6 transition-all hover:border-[#ff6600]/20 hover:bg-[#fff8f3]/80 dark:hover:bg-neutral-950/80 hover:shadow-sm">
                     {/* Step number + icon */}
                     <div className="flex shrink-0 flex-col items-center gap-2">
                       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6600]/15 to-[#f27405]/10 transition-transform duration-300 group-hover:scale-110">
@@ -155,8 +151,8 @@ export default function CaseDetailContent({ detail }: Props) {
                     </div>
                     {/* Content */}
                     <div>
-                      <h3 className="font-bold text-stone-900">{step.title}</h3>
-                      <p className="mt-1.5 text-sm leading-relaxed text-stone-600">{step.description}</p>
+                      <h3 className="font-bold text-stone-900 dark:text-stone-100">{step.title}</h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-stone-600 dark:text-stone-400">{step.description}</p>
                     </div>
                   </div>
                 </ScrollReveal>
@@ -201,7 +197,7 @@ export default function CaseDetailContent({ detail }: Props) {
       </section>
 
       {/* ── Conclusão + CTA ── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-white via-[#fff8f3] to-white py-24 lg:py-32">
+      <section className="relative overflow-hidden bg-gradient-to-b from-white dark:from-neutral-950 via-[#fff8f3] dark:via-neutral-950 to-white dark:to-neutral-950 py-24 lg:py-32">
         <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff6600]/20 to-transparent" />
         <div className="pointer-events-none absolute -right-24 top-1/3 h-[400px] w-[400px] rounded-full bg-[#ff6600]/8 blur-[100px]" />
 
@@ -210,16 +206,16 @@ export default function CaseDetailContent({ detail }: Props) {
             <p className="mb-2 text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
               O que esse case revela
             </p>
-            <h2 className="text-2xl font-bold tracking-tight text-stone-900 md:text-3xl lg:text-4xl">
+            <h2 className="text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-3xl lg:text-4xl">
               A lição que fica
             </h2>
-            <p className="mt-6 text-lg leading-relaxed text-stone-600">{detail.conclusion}</p>
+            <p className="mt-6 text-lg leading-relaxed text-stone-600 dark:text-stone-400">{detail.conclusion}</p>
           </ScrollReveal>
 
           {/* Separator quote */}
           <ScrollReveal delay={0.1}>
             <div className="my-12 border-l-4 border-[#ff6600] pl-6">
-              <p className="text-xl font-semibold italic leading-relaxed text-stone-800">
+              <p className="text-xl font-semibold italic leading-relaxed text-stone-800 dark:text-stone-200">
                 {detail.quote}
               </p>
             </div>
@@ -227,32 +223,30 @@ export default function CaseDetailContent({ detail }: Props) {
 
           {/* CTA box */}
           <ScrollReveal delay={0.15}>
-            <div className="rounded-2xl border border-[#ff6600]/20 bg-gradient-to-br from-[#fff4ed] to-white p-8 shadow-sm">
+            <div className="rounded-2xl border border-[#ff6600]/20 bg-gradient-to-br from-[#fff4ed] dark:from-neutral-950 to-white dark:to-neutral-950 p-8 shadow-sm">
               <p className="text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
                 Pronto para o próximo passo?
               </p>
-              <h3 className="mt-3 text-2xl font-bold text-stone-900">
+              <h3 className="mt-3 text-2xl font-bold text-stone-900 dark:text-stone-100">
                 Sua empresa pode ser o próximo case.
               </h3>
-              <p className="mt-3 text-stone-600">
+              <p className="mt-3 text-stone-600 dark:text-stone-400">
                 Fale com um especialista da Numeratti, entenda onde estão as maiores oportunidades de crescimento do seu negócio e descubra como transformar investimento em resultado mensurável.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <motion.a
+                <a
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white shadow-lg shadow-orange-500/20"
+                  className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white shadow-lg shadow-orange-500/20 transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.98] motion-reduce:transform-none"
                   style={{ backgroundColor: COLORS.primary }}
                 >
                   Falar com um especialista
                   <ArrowRight size={18} />
-                </motion.a>
+                </a>
                 <Link
                   href="/cases"
-                  className="inline-flex items-center justify-center rounded-full border border-stone-300 bg-white px-8 py-4 text-sm font-bold text-stone-700 shadow-sm transition hover:border-[#ff6600]/40 hover:text-[#ff6600]"
+                  className="inline-flex items-center justify-center rounded-full border border-stone-300 bg-white dark:bg-neutral-950 px-8 py-4 text-sm font-bold text-stone-700 dark:text-stone-300 shadow-sm transition hover:border-[#ff6600]/40 hover:text-[#ff6600]"
                 >
                   Ver outros cases
                 </Link>

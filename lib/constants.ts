@@ -47,18 +47,18 @@ export const FOOTER_LINKS = [
 
 export const METRICS = [
   {
-    value: 10000000,
+    value: 1500000000,
     label: "Impressões",
     description:
-      "10 milhões de impressões entregues em campanhas ativas dos nossos clientes.",
+      "1,5 bilhão de impressões entregues em campanhas ativas dos nossos clientes.",
     suffix: "",
     icon: "impressoes" as const,
   },
   {
-    value: 35000,
+    value: 153000,
     label: "Leads",
     description:
-      "35 mil leads gerados por campanhas gerenciadas pela Numeratti em diversas plataformas.",
+      "153 mil leads gerados por campanhas gerenciadas pela Numeratti — considerando apenas contas com rastreamento ativo.",
     suffix: "",
     icon: "leads" as const,
   },
@@ -74,8 +74,8 @@ export const METRICS = [
 
 export const ABOUT_STATS = [
   { value: 110, label: "CLIENTES", suffix: "+" },
-  { value: 19400, label: "LEADS gerados em campanha", suffix: "+" },
-  { value: 1.9, label: "EM FATURAMENTO (Mi)", suffix: "+ " },
+  { value: 153000, label: "LEADS gerados em campanha", suffix: "+" },
+  { value: 5.6, label: "EM VERBA GERENCIADA (Mi)", suffix: "+ " },
 ] as const;
 
 export const SERVICES = [
@@ -83,37 +83,37 @@ export const SERVICES = [
     id: "01",
     title: "Consultoria de Tráfego Pago",
     description:
-      "Auditoria, diagnóstico e plano de ação personalizado para escalar sua operação de tráfego pago.",
+      "Auditoria, diagnóstico e plano estratégico sob medida para escalar seus resultados.",
   },
   {
     id: "02",
     title: "Google Ads",
     description:
-      "Campanhas em Search, Display, Shopping, Performance Max e YouTube Ads — com foco em intenção de compra e ROAS.",
+      "Campanhas completas focadas em intenção de compra e maximização de ROAS.",
   },
   {
     id: "03",
     title: "Facebook Ads",
     description:
-      "Campanhas de conversão, geração de leads e remarketing no feed, stories e Reels — com catálogo dinâmico e segmentação avançada.",
+      "Conversão, geração de leads e remarketing avançado com públicos de alto valor.",
   },
   {
     id: "04",
     title: "Instagram Ads",
     description:
-      "Anúncios nativos que performam em Reels, Stories e Explore — formatos visuais otimizados para engajamento e conversão.",
+      "Criativos de alto impacto e anúncios nativos otimizados para Reels e Stories.",
   },
   {
     id: "05",
     title: "YouTube Ads",
     description:
-      "Campanhas em In-Stream, In-Feed e Shorts — ideais para branding com escala e Video Action Campaigns focadas em conversão.",
+      "Campanhas de vídeo estratégicas para escala de marca e geração de conversões.",
   },
   {
     id: "06",
     title: "LinkedIn Ads",
     description:
-      "Campanhas B2B com segmentação por cargo, empresa e setor — em formatos de Sponsored Content, InMail e Lead Gen Forms.",
+      "Campanhas B2B direcionadas por cargo, setor e tamanho de empresa.",
   },
 ] as const;
 
@@ -698,7 +698,7 @@ export const HERO_SLIDES = [
       },
     ],
     smallImage: undefined,
-    image: "https://numeratti.com.br/wp-content/uploads/2022/04/Grupo-299-1.png",
+    image: "/models/model_1.png",
   },
   {
     lines: [
@@ -710,7 +710,7 @@ export const HERO_SLIDES = [
       },
     ],
     smallImage: undefined,
-    image: "https://numeratti.com.br/wp-content/uploads/2022/05/IMAGEM-BANNER-2.png",
+    image: "/models/model_2.png",
   },
   {
     lines: [
@@ -722,7 +722,7 @@ export const HERO_SLIDES = [
       },
     ],
     smallImage: undefined,
-    image: "https://numeratti.com.br/wp-content/uploads/2022/05/IMAGEM-BANNER-3.png",
+    image: "/models/model_3.png",
   },
 ] as const;
 

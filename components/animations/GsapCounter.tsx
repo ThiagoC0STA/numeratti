@@ -30,6 +30,7 @@ function formatNumber(
     return value.toFixed(decimals).replace(".", ",");
   }
   if (format === "full") return formatBr(value);
+  if (value >= 1_000_000_000) return (value / 1_000_000_000).toFixed(1).replace(".", ",") + "Bi";
   if (value >= 1_000_000) return (value / 1_000_000).toFixed(1).replace(".", ",") + "M";
   if (value >= 1_000) return (value / 1_000).toFixed(1).replace(".", ",") + "K";
   return value.toString();

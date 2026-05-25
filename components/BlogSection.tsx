@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import BlogPostCard from "@/components/blog/BlogPostCard";
 import type { BlogPostSummary } from "@/lib/blog/types";
@@ -21,20 +20,20 @@ export default function BlogSection({ posts }: { posts: BlogPostSummary[] }) {
   return (
     <section
       id="blog"
-      className="relative overflow-hidden bg-gradient-to-b from-stone-50 via-white to-[#fff7f0] py-28 lg:py-36"
+      className="relative overflow-hidden bg-gradient-to-b from-stone-50 dark:from-neutral-950 via-white dark:via-neutral-950 to-[#fff7f0] dark:to-neutral-950 py-28 lg:py-36"
     >
-      <div className="pointer-events-none absolute left-1/3 top-0 h-[420px] w-[420px] rounded-full bg-[#ff6600]/8 blur-[130px]" />
-      <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff6600]/20 to-transparent" />
+      <div className="dark:hidden pointer-events-none absolute left-1/3 top-0 h-[420px] w-[420px] rounded-full bg-[#ff6600]/8 blur-[130px]" />
+      <div className="dark:hidden pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff6600]/20 to-transparent" />
 
       <div className="relative mx-auto max-w-[90rem] px-6 lg:px-10">
         <ScrollReveal>
           <p className="text-center text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
             Conteúdo
           </p>
-          <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-stone-900 md:text-4xl lg:text-5xl">
+          <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-4xl lg:text-5xl">
             <span className="bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">Blog</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600">
+          <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600 dark:text-stone-400">
             Artigos completos na v2 — clique e leia sem sair do site
           </p>
         </ScrollReveal>
@@ -66,13 +65,12 @@ export default function BlogSection({ posts }: { posts: BlogPostSummary[] }) {
         <ScrollReveal delay={0.2}>
           <div className="mt-14 text-center">
             <Link href="/blog">
-              <motion.span
-                whileHover={simplified ? undefined : { scale: 1.02 }}
-                className="group inline-flex items-center gap-2 rounded-full border border-[#ff6600]/35 bg-white px-7 py-3.5 text-sm font-bold text-[#ff6600] shadow-md transition-all hover:bg-[#ff6600] hover:text-white"
+              <span
+                className="group inline-flex items-center gap-2 rounded-full border border-[#ff6600]/35 bg-white dark:bg-neutral-950 px-7 py-3.5 text-sm font-bold text-[#ff6600] shadow-md transition-transform duration-300 hover:scale-[1.02] hover:bg-[#ff6600] hover:text-white"
               >
                 Ver todos os artigos
                 <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-              </motion.span>
+              </span>
             </Link>
           </div>
         </ScrollReveal>
