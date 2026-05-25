@@ -58,6 +58,9 @@ export default function TrabalheConoscoContent() {
               >
                 Carreiras
               </span>
+              <h2 className="mt-6 text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-4xl">
+                Banco de talentos Numeratti
+              </h2>
               <p className="mt-8 text-lg leading-relaxed text-stone-600 dark:text-stone-400 md:text-xl">
                 Estamos sempre em busca de talentos que queiram fazer a
                 diferença no marketing digital. Se você é apaixonado por dados,
@@ -103,9 +106,9 @@ export default function TrabalheConoscoContent() {
               Perfis que costumam dialogar bem com a Numeratti
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600 dark:text-stone-400">
-              Não há vaga aberta listada aqui, use o WhatsApp para se
-              apresentar. Estas são frentes onde mais conversamos com
-              candidatos.
+              Mesmo sem uma vaga aberta publicada, recebemos apresentações para
+              futuras oportunidades. Estas são as frentes onde mais conversamos
+              com candidatos.
             </p>
           </ScrollReveal>
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -164,8 +167,8 @@ export default function TrabalheConoscoContent() {
                   Pronto para o próximo passo?
                 </h3>
                 <p className="relative mt-4 text-stone-300">
-                  Envie seu currículo pelo WhatsApp com uma breve apresentação.
-                  Retornamos o quanto antes.
+                  Envie seu currículo pelo WhatsApp com uma breve apresentação
+                  para entrar no nosso banco de talentos.
                 </p>
                 <a
                   href={WHATSAPP_URL}

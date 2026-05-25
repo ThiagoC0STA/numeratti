@@ -89,7 +89,7 @@ export default function Footer() {
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-stone-200 backdrop-blur-sm transition-all duration-300 hover:border-[#ff6600]/40 hover:bg-white/[0.06] hover:scale-[1.02]"
               >
                 <Headphones size={18} className="text-[#ff6600]" />
-                Central de suporte
+                Falar com atendimento
               </a>
             </div>
           </div>
