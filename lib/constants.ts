@@ -66,7 +66,7 @@ export const METRICS = [
     value: 17,
     label: "ROAS",
     description:
-      "Melhor ROAS registrado entre nossos clientes,  R$ 17 de retorno para cada R$ 1 investido em mídia paga.",
+      "Melhor ROAS registrado em campanhas acompanhadas, com R$ 17 de retorno para cada R$ 1 investido em mídia paga.",
     suffix: "x",
     icon: "roas" as const,
   },
@@ -132,7 +132,8 @@ export const PLATFORMS = [
   "LinkedIn Ads",
   "Google Analytics",
   "YouTube",
-  "Spotify Ads",
+  "Tinder Ads",
+  "Spotify",
   "Mídia Programática",
 ] as const;
 
@@ -163,7 +164,7 @@ export const PLATFORM_ASSETS = [
       "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-51.png",
   },
   {
-    name: "RBT House",
+    name: "RTB House",
     image:
       "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-52.png",
   },
@@ -208,7 +209,7 @@ export const PLATFORM_ASSETS = [
       "https://numeratti.com.br/wp-content/uploads/2023/09/Retangulo-108.png",
   },
   {
-    name: "Tinder",
+    name: "Tinder Ads",
     image:
       "https://numeratti.com.br/wp-content/uploads/2023/09/Retangulo-109.png",
   },
@@ -304,7 +305,7 @@ export const CASES = [
     excerpt:
       "Empresa de energia B2B integrou marketing e área comercial com precisão, transformando cada real investido em mídia paga em resultado mensurável e previsível.",
     metric: "19.636%",
-    metricLabel: "ROI em mídia digital",
+    metricLabel: "ROI em mídia digital no período analisado",
   },
   {
     slug: "orolaser",
@@ -312,7 +313,7 @@ export const CASES = [
     excerpt:
       "Complexo de estética com mais de 20 unidades no Nordeste alcançou dominância digital com modelo de Performance Multi-Canal que integra visibilidade em massa com conversão de fundo de funil.",
     metric: "16.250%",
-    metricLabel: "crescimento na geração de leads (2023–2025)",
+    metricLabel: "crescimento na geração de leads entre 2023 e 2025",
   },
   {
     slug: "kamibaa",
@@ -375,7 +376,7 @@ export const CASE_DETAILS: Record<CaseSlug, CaseDetail> = {
     eyebrow: "Case de Sucesso",
     headline:
       "19.636% de ROI: como a Sou Energy transformou mídia paga em máquina de crescimento B2B",
-    lead: "No mercado de energia B2B, cada lead vale muito,  e cada real desperdiçado em mídia paga sem estratégia tem um custo que vai além do orçamento. A Sou Energy chegou à Numeratti com um problema real: marketing e comercial operando em silos, verba sendo gasta sem rastreabilidade e um pipeline que não refletia o potencial da empresa. O resultado depois da nossa intervenção foi um ROI de 19.636%,  não por sorte, mas por sistema.",
+    lead: "No mercado de energia B2B, cada lead vale muito, e cada real desperdiçado em mídia paga sem estratégia tem um custo que vai além do orçamento. A Sou Energy chegou à Numeratti com um problema real: marketing e comercial operando em silos, verba sendo gasta sem rastreabilidade e um pipeline que não refletia o potencial da empresa. O resultado depois da nossa intervenção foi um ROI de 19.636% no período analisado, não por sorte, mas por sistema.",
     quote:
       "Performance B2B não é sobre volume de cliques. É sobre construir um sistema onde marketing e vendas falam a mesma língua,  e os números provam que funciona.",
     challenge:
@@ -416,9 +417,9 @@ export const CASE_DETAILS: Record<CaseSlug, CaseDetail> = {
     results: [
       {
         metric: "19.636%",
-        label: "ROI em mídia digital",
+        label: "ROI em mídia digital no período analisado",
         context:
-          "Cada real investido em mídia retornou mais de 196 vezes em valor gerado para o negócio.",
+          "No período analisado, cada real investido em mídia retornou mais de 196 vezes em valor gerado para o negócio.",
       },
       {
         metric: "3,2x",
@@ -434,7 +435,7 @@ export const CASE_DETAILS: Record<CaseSlug, CaseDetail> = {
       },
     ],
     conclusion:
-      "O ROI de 19.636% da Sou Energy não é um número isolado,  é a prova de que performance digital B2B é um sistema, não uma campanha. Quando você conecta os dados certos, com a estratégia certa e o time certo, o resultado vira consequência. A Numeratti não entrega tráfego: entrega crescimento com previsibilidade. Se a sua empresa ainda está desperdiçando verba sem visibilidade do retorno, esse case é o espelho do que é possível mudar.",
+      "O ROI de 19.636% da Sou Energy, dentro do período analisado, não é um número isolado: é a prova de que performance digital B2B é um sistema, não uma campanha. Quando você conecta os dados certos, com a estratégia certa e o time certo, o resultado vira consequência. A Numeratti não entrega tráfego: entrega crescimento com previsibilidade. Se a sua empresa ainda está desperdiçando verba sem visibilidade do retorno, esse case é o espelho do que é possível mudar.",
   },
   orolaser: {
     slug: "orolaser",
@@ -450,7 +451,7 @@ export const CASE_DETAILS: Record<CaseSlug, CaseDetail> = {
     eyebrow: "Case de Sucesso",
     headline:
       "16.250% de crescimento em leads: como a OROlaser dominou o digital em mais de 20 cidades do Nordeste",
-    lead: "Quando uma empresa tem mais de 20 unidades em cidades diferentes, escalar performance digital sem perder eficiência local é um dos maiores desafios do marketing. A OROlaser chegou à Numeratti com esse problema,  e saiu com uma máquina de geração de leads que multiplicou seu volume em 16.250% ao longo de dois anos. Não foi coincidência. Foi arquitetura.",
+    lead: "Quando uma empresa tem mais de 20 unidades em cidades diferentes, escalar performance digital sem perder eficiência local é um dos maiores desafios do marketing. A OROlaser chegou à Numeratti com esse problema e saiu com uma máquina de geração de leads que multiplicou seu volume em 16.250% entre 2023 e 2025. Não foi coincidência. Foi arquitetura.",
     quote:
       "Escalar 20 unidades ao mesmo tempo com eficiência local é o tipo de problema que a maioria das agências finge que sabe resolver. A Numeratti resolveu de verdade,  com dados, não com promessa.",
     challenge:
@@ -491,7 +492,7 @@ export const CASE_DETAILS: Record<CaseSlug, CaseDetail> = {
     results: [
       {
         metric: "16.250%",
-        label: "crescimento em leads (2023–2025)",
+        label: "crescimento em leads entre 2023 e 2025",
         context:
           "De campanhas pontuais a uma operação de geração de leads contínua e escalável em todo o Nordeste.",
       },
@@ -509,7 +510,7 @@ export const CASE_DETAILS: Record<CaseSlug, CaseDetail> = {
       },
     ],
     conclusion:
-      "A OROlaser prova que escala e eficiência local não precisam ser excludentes,  desde que a arquitetura de performance seja construída para isso. 16.250% de crescimento em geração de leads não acontece com campanhas genéricas: acontece quando cada unidade é tratada como um mercado único, com estratégia própria, dentro de um sistema integrado. Isso é o que a Numeratti faz. Se a sua empresa tem múltiplas unidades, franquias ou regiões,  e ainda não tem esse nível de controle,  você está deixando resultado na mesa todos os meses.",
+      "A OROlaser prova que escala e eficiência local não precisam ser excludentes, desde que a arquitetura de performance seja construída para isso. O crescimento de 16.250% em geração de leads entre 2023 e 2025 não aconteceu com campanhas genéricas: aconteceu quando cada unidade foi tratada como um mercado único, com estratégia própria, dentro de um sistema integrado. Isso é o que a Numeratti faz. Se a sua empresa tem múltiplas unidades, franquias ou regiões e ainda não tem esse nível de controle, você está deixando resultado na mesa todos os meses.",
   },
   kamibaa: {
     slug: "kamibaa",
@@ -607,7 +608,7 @@ export const CASE_DETAILS: Record<CaseSlug, CaseDetail> = {
       "Entrar no mundo da mídia paga depois de décadas operando com canais tradicionais,  indicações, relacionamento, eventos,  exige muito mais do que criar uma conta no Google Ads. Exige entender o público, mapear a jornada de compra de um produto complexo como seguro, e criar uma estrutura que respeite o posicionamento consolidado da marca enquanto gera resultados imediatos. O risco era real: uma estrutura mal montada queimaria verba e, pior, prejudicaria a imagem de uma empresa que levou 40 anos para construir.",
     painPoints: [
       "Ausência total de estrutura digital,  nenhuma campanha paga, nenhum rastreamento, nenhum lead vindo do online",
-      "Desconhecimento do público digital: quem são os potenceiros clientes que buscam seguros online e como alcançá-los",
+      "Desconhecimento do público digital: quem são os potenciais clientes que buscam seguros online e como alcançá-los",
       "Receio legítimo de entrar no digital de forma errada e comprometer o posicionamento premium da marca",
       "Time comercial acostumado com leads quentes de indicação,  sem processo de qualificação para leads digitais",
     ],

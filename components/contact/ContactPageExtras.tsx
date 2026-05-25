@@ -75,7 +75,7 @@ export default function ContactPageExtras() {
                 rel="noopener noreferrer"
                 className="text-sm font-semibold text-stone-700 dark:text-stone-300 underline-offset-2 transition-transform duration-200 ease-out hover:scale-[1.02] hover:underline motion-reduce:transform-none"
               >
-                Suporte via WhatsApp
+                Atendimento via WhatsApp
               </a>
             </div>
           </ScrollReveal>
