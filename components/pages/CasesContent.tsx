@@ -17,7 +17,10 @@ export default function CasesContent() {
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <ScrollReveal>
-            <p className="text-center text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+            <p
+              className="text-center text-sm font-bold uppercase tracking-widest"
+              style={{ color: COLORS.primary }}
+            >
               Portfólio
             </p>
             <h2 className="mx-auto mt-4 max-w-3xl text-center text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-4xl">
@@ -31,7 +34,10 @@ export default function CasesContent() {
             {CASES_PAGE_INTRO.bullets.map((b, i) => (
               <ScrollReveal key={b} delay={i * 0.05}>
                 <li className="flex gap-3 text-stone-700 dark:text-stone-300">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#ff6600]" style={{ color: COLORS.primary }} />
+                  <CheckCircle2
+                    className="mt-0.5 h-5 w-5 shrink-0 text-[#ff6600]"
+                    style={{ color: COLORS.primary }}
+                  />
                   <span>{b}</span>
                 </li>
               </ScrollReveal>
@@ -43,7 +49,9 @@ export default function CasesContent() {
       <section className="border-y border-stone-100 dark:border-stone-800 bg-white dark:bg-neutral-950 py-14 lg:py-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <ScrollReveal>
-            <p className="text-center text-sm font-semibold text-stone-500">Panorama agregado do time</p>
+            <p className="text-center text-sm font-semibold text-stone-500">
+              Panorama agregado do time
+            </p>
           </ScrollReveal>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {ABOUT_STATS.map((stat, i) => (
@@ -55,7 +63,9 @@ export default function CasesContent() {
                     decimals={stat.value === 5.6 ? 1 : 0}
                     className="text-2xl font-bold text-stone-900 dark:text-stone-100 md:text-3xl"
                   />
-                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-stone-500">{stat.label}</p>
+                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-stone-500">
+                    {stat.label}
+                  </p>
                 </div>
               </ScrollReveal>
             ))}
@@ -66,9 +76,12 @@ export default function CasesContent() {
       <section className="relative overflow-hidden bg-gradient-to-b from-white dark:from-neutral-950 via-[#fff8f3] dark:via-neutral-950 to-white dark:to-neutral-950 py-20 lg:py-28">
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <ScrollReveal>
-            <p className="text-center text-sm font-bold uppercase tracking-widest text-stone-500">Histórias</p>
+            <p className="text-center text-sm font-bold uppercase tracking-widest text-stone-500">
+              Histórias
+            </p>
             <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600 dark:text-stone-400">
-              Marcas que elevaram performance com a Numeratti — leia o case completo no site.
+              Marcas que elevaram performance com a Numeratti, leia o case
+              completo no site.
             </p>
           </ScrollReveal>
 
@@ -85,14 +98,20 @@ export default function CasesContent() {
                     <TrendingUp size={26} style={{ color: COLORS.primary }} />
                   </div>
 
-                  <h3 className="relative text-xl font-bold text-stone-900 dark:text-stone-100">{item.title}</h3>
-                  <p className="relative mt-3 flex-1 leading-relaxed text-stone-600 dark:text-stone-400">{item.excerpt}</p>
+                  <h3 className="relative text-xl font-bold text-stone-900 dark:text-stone-100">
+                    {item.title}
+                  </h3>
+                  <p className="relative mt-3 flex-1 leading-relaxed text-stone-600 dark:text-stone-400">
+                    {item.excerpt}
+                  </p>
 
                   <div className="relative mt-6">
                     <span className="text-3xl font-bold bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">
                       {item.metric}
                     </span>
-                    <p className="mt-1 text-xs font-medium uppercase tracking-wide text-stone-500">{item.metricLabel}</p>
+                    <p className="mt-1 text-xs font-medium uppercase tracking-wide text-stone-500">
+                      {item.metricLabel}
+                    </p>
                   </div>
 
                   <span className="relative mt-8 inline-flex items-center gap-2 text-sm font-bold text-[#ff6600] transition-transform group-hover:translate-x-1">
@@ -107,7 +126,10 @@ export default function CasesContent() {
           <ScrollReveal delay={0.15}>
             <p className="mt-14 text-center text-stone-600 dark:text-stone-400">
               Quer aprofundar em tendências e táticas?{" "}
-              <Link href="/blog" className="font-bold text-[#ff6600] underline-offset-2 hover:underline">
+              <Link
+                href="/blog"
+                className="font-bold text-[#ff6600] underline-offset-2 hover:underline"
+              >
                 Acesse o blog
               </Link>
               .
@@ -117,7 +139,8 @@ export default function CasesContent() {
           <ScrollReveal delay={0.2}>
             <div className="mt-10 text-center">
               <p className="mb-6 text-stone-600 dark:text-stone-400">
-                Quer fazer parte do grupo de empresas que estão acelerando os seus resultados com a Numeratti?
+                Quer fazer parte do grupo de empresas que estão acelerando os
+                seus resultados com a Numeratti?
               </p>
               <a
                 href={WHATSAPP_URL}

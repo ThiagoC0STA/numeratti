@@ -32,13 +32,12 @@ export default function ContactSection() {
               </span>
             </h2>
             <p className="mt-4 max-w-lg text-lg text-stone-600 dark:text-stone-400">
-              Dicas de performance, mídia paga e growth — direto no seu e-mail, sem spam.
+              Dicas de performance, mídia paga e growth, direto no seu e-mail,
+              sem spam.
             </p>
 
             <ScrollReveal delay={0.1}>
-              <div
-                className="mt-10 hidden aspect-[4/3] max-w-md overflow-hidden rounded-3xl border border-stone-200/60 dark:border-stone-800/60 bg-white/60 dark:bg-neutral-950/60 shadow-xl shadow-orange-500/5 backdrop-blur-md lg:block"
-              >
+              <div className="mt-10 hidden aspect-[4/3] max-w-md overflow-hidden rounded-3xl border border-stone-200/60 dark:border-stone-800/60 bg-white/60 dark:bg-neutral-950/60 shadow-xl shadow-orange-500/5 backdrop-blur-md lg:block">
                 <div className="flex h-full flex-col justify-between p-8">
                   <div className="flex gap-2">
                     {[0, 1, 2].map((i) => (
@@ -50,7 +49,8 @@ export default function ContactSection() {
                     ))}
                   </div>
                   <p className="text-2xl font-bold leading-snug text-stone-800 dark:text-stone-200">
-                    Métricas que contam histórias. Campanhas que escalam negócios.
+                    Métricas que contam histórias. Campanhas que escalam
+                    negócios.
                   </p>
                   <div className="flex items-center gap-3 text-sm font-medium text-stone-500">
                     <Mail size={18} className="text-[#ff6600]" />
@@ -63,7 +63,6 @@ export default function ContactSection() {
 
           <ScrollReveal delay={0.12}>
             <div className="rounded-[2rem] border border-stone-200/80 dark:border-stone-800/80 bg-white/80 dark:bg-neutral-950/80 p-8 shadow-[0_24px_80px_-30px_rgba(0,0,0,0.12)] backdrop-blur-md md:p-10">
-            
               <NewsletterSignup variant="light" />
 
               <div className="relative mt-10 overflow-hidden rounded-2xl border border-stone-100 dark:border-stone-800 bg-gradient-to-br from-stone-50 dark:from-neutral-950 to-white dark:to-neutral-950 p-6">
@@ -73,7 +72,9 @@ export default function ContactSection() {
                     <MessageCircle size={22} />
                   </div>
                   <div>
-                    <p className="font-semibold text-stone-900 dark:text-stone-100">Prefere falar agora?</p>
+                    <p className="font-semibold text-stone-900 dark:text-stone-100">
+                      Prefere falar agora?
+                    </p>
                     <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
                       Nosso time responde no WhatsApp com a mesma rapidez.
                     </p>

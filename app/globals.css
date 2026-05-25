@@ -149,6 +149,59 @@ body {
   animation: scaleUpFade 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.text-shimmer {
+  background-image: linear-gradient(
+    100deg,
+    #ff6600 0%,
+    #ff6600 40%,
+    #ffb380 50%,
+    #ff6600 60%,
+    #f27405 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 102, 0, 0.55), 0 0 24px rgba(255, 102, 0, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(255, 102, 0, 0), 0 0 36px rgba(255, 102, 0, 0.3);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(12px, -8px); }
+  66% { transform: translate(-8px, 10px); }
+}
+
+.animate-drift {
+  animation: drift 14s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-shimmer,
+  .animate-pulse-glow,
+  .animate-drift {
+    animation: none;
+  }
+}
+
 
 /*
   DevTools "mobile" still uses the desktop browser engine and GPU. Real phones (especially
@@ -189,6 +242,10 @@ body {
   color: #44403c;
 }
 
+.dark .blog-prose {
+  color: #d6d3d1;
+}
+
 /* Neutralize WP “full width” blocks that break out of the reading column */
 .blog-prose .alignfull,
 .blog-prose .alignwide {
@@ -212,6 +269,13 @@ body {
   font-weight: 700;
   color: #1c1917;
   line-height: 1.25;
+}
+
+.dark .blog-prose h1,
+.dark .blog-prose h2,
+.dark .blog-prose h3,
+.dark .blog-prose h4 {
+  color: #fafaf9;
 }
 
 .blog-prose h2 {
@@ -270,6 +334,10 @@ body {
   color: #57534e;
 }
 
+.dark .blog-prose blockquote {
+  color: #a8a29e;
+}
+
 .blog-prose iframe {
   max-width: 100%;
   border-radius: 0.5rem;
@@ -292,9 +360,19 @@ body {
   text-align: left;
 }
 
+.dark .blog-prose th,
+.dark .blog-prose td {
+  border-color: #292524;
+}
+
 .blog-prose th {
   background: #fafaf9;
   font-weight: 600;
+}
+
+.dark .blog-prose th {
+  background: #1c1917;
+  color: #fafaf9;
 }
 
 .blog-prose pre {
@@ -312,6 +390,11 @@ body {
   background: #f5f5f4;
   padding: 0.15em 0.4em;
   border-radius: 0.25rem;
+}
+
+.dark .blog-prose code {
+  background: #1c1917;
+  color: #fafaf9;
 }
 
 .blog-prose pre code {

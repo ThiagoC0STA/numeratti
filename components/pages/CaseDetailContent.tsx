@@ -4,7 +4,16 @@ import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { COLORS, WHATSAPP_URL } from "@/lib/constants";
 import type { CaseDetail } from "@/lib/constants";
-import { ArrowLeft, ArrowRight, CheckCircle2, XCircle, Quote, TrendingUp, BarChart3, Zap } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle2,
+  XCircle,
+  Quote,
+  TrendingUp,
+  BarChart3,
+  Zap,
+} from "lucide-react";
 
 interface Props {
   detail: CaseDetail;
@@ -44,7 +53,10 @@ export default function CaseDetailContent({ detail }: Props) {
                 {detail.sector}
               </span>
               {detail.tags.map((tag) => (
-                <span key={tag} className="rounded-full border border-white/10 bg-white/5 dark:bg-neutral-950/5 px-3 py-1 text-xs font-medium text-white/50">
+                <span
+                  key={tag}
+                  className="rounded-full border border-white/10 bg-white/5 dark:bg-neutral-950/5 px-3 py-1 text-xs font-medium text-white/50"
+                >
                   {tag}
                 </span>
               ))}
@@ -70,9 +82,7 @@ export default function CaseDetailContent({ detail }: Props) {
           </div>
 
           {/* Metric strip */}
-          <div
-            className="mt-16 grid gap-4 sm:grid-cols-3 animate-slide-up-fade opacity-0 [animation-delay:250ms] motion-reduce:animate-none motion-reduce:opacity-100"
-          >
+          <div className="mt-16 grid gap-4 sm:grid-cols-3 animate-slide-up-fade opacity-0 [animation-delay:250ms] motion-reduce:animate-none motion-reduce:opacity-100">
             {detail.results.map((r, i) => (
               <div
                 key={r.label}
@@ -81,7 +91,9 @@ export default function CaseDetailContent({ detail }: Props) {
                 <span className="bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-4xl font-black text-transparent">
                   {r.metric}
                 </span>
-                <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-white/40">{r.label}</p>
+                <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-white/40">
+                  {r.label}
+                </p>
               </div>
             ))}
           </div>
@@ -94,13 +106,18 @@ export default function CaseDetailContent({ detail }: Props) {
 
         <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
           <ScrollReveal>
-            <p className="mb-2 text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+            <p
+              className="mb-2 text-sm font-bold uppercase tracking-widest"
+              style={{ color: COLORS.primary }}
+            >
               O Desafio
             </p>
             <h2 className="text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-3xl lg:text-4xl">
               O cenário antes da Numeratti
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-stone-600 dark:text-stone-400">{detail.challenge}</p>
+            <p className="mt-5 text-lg leading-relaxed text-stone-600 dark:text-stone-400">
+              {detail.challenge}
+            </p>
           </ScrollReveal>
 
           {/* Pain points */}
@@ -109,7 +126,9 @@ export default function CaseDetailContent({ detail }: Props) {
               <ScrollReveal key={i} delay={i * 0.07}>
                 <div className="flex gap-3 rounded-xl border border-red-100 bg-red-50/60 px-5 py-4">
                   <XCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-400" />
-                  <span className="text-sm leading-relaxed text-stone-700 dark:text-stone-300">{point}</span>
+                  <span className="text-sm leading-relaxed text-stone-700 dark:text-stone-300">
+                    {point}
+                  </span>
                 </div>
               </ScrollReveal>
             ))}
@@ -123,14 +142,18 @@ export default function CaseDetailContent({ detail }: Props) {
 
         <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
           <ScrollReveal>
-            <p className="mb-2 text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+            <p
+              className="mb-2 text-sm font-bold uppercase tracking-widest"
+              style={{ color: COLORS.primary }}
+            >
               A Estratégia
             </p>
             <h2 className="text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-3xl lg:text-4xl">
               Como a Numeratti estruturou a solução
             </h2>
             <p className="mt-4 text-lg text-stone-500">
-              Cada etapa foi planejada com intenção — nada foi deixado para o acaso.
+              Cada etapa foi planejada com intenção, nada foi deixado para o
+              acaso.
             </p>
           </ScrollReveal>
 
@@ -151,8 +174,12 @@ export default function CaseDetailContent({ detail }: Props) {
                     </div>
                     {/* Content */}
                     <div>
-                      <h3 className="font-bold text-stone-900 dark:text-stone-100">{step.title}</h3>
-                      <p className="mt-1.5 text-sm leading-relaxed text-stone-600 dark:text-stone-400">{step.description}</p>
+                      <h3 className="font-bold text-stone-900 dark:text-stone-100">
+                        {step.title}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                        {step.description}
+                      </p>
                     </div>
                   </div>
                 </ScrollReveal>
@@ -169,14 +196,18 @@ export default function CaseDetailContent({ detail }: Props) {
 
         <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
           <ScrollReveal>
-            <p className="mb-2 text-center text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+            <p
+              className="mb-2 text-center text-sm font-bold uppercase tracking-widest"
+              style={{ color: COLORS.primary }}
+            >
               Resultados
             </p>
             <h2 className="text-center text-2xl font-bold tracking-tight text-white md:text-3xl lg:text-4xl">
-              O que foi conquistado — em números
+              O que foi conquistado, em números
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-white/50">
-              Números que falam por si — e que mostram o que é possível quando estratégia e execução andam juntas.
+              Números que falam por si, e que mostram o que é possível quando
+              estratégia e execução andam juntas.
             </p>
           </ScrollReveal>
 
@@ -187,8 +218,12 @@ export default function CaseDetailContent({ detail }: Props) {
                   <span className="bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-5xl font-black leading-none text-transparent">
                     {r.metric}
                   </span>
-                  <p className="mt-3 text-xs font-bold uppercase tracking-wider text-white/40">{r.label}</p>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-white/60">{r.context}</p>
+                  <p className="mt-3 text-xs font-bold uppercase tracking-wider text-white/40">
+                    {r.label}
+                  </p>
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-white/60">
+                    {r.context}
+                  </p>
                 </div>
               </ScrollReveal>
             ))}
@@ -203,13 +238,18 @@ export default function CaseDetailContent({ detail }: Props) {
 
         <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
           <ScrollReveal>
-            <p className="mb-2 text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+            <p
+              className="mb-2 text-sm font-bold uppercase tracking-widest"
+              style={{ color: COLORS.primary }}
+            >
               O que esse case revela
             </p>
             <h2 className="text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-3xl lg:text-4xl">
               A lição que fica
             </h2>
-            <p className="mt-6 text-lg leading-relaxed text-stone-600 dark:text-stone-400">{detail.conclusion}</p>
+            <p className="mt-6 text-lg leading-relaxed text-stone-600 dark:text-stone-400">
+              {detail.conclusion}
+            </p>
           </ScrollReveal>
 
           {/* Separator quote */}
@@ -224,14 +264,19 @@ export default function CaseDetailContent({ detail }: Props) {
           {/* CTA box */}
           <ScrollReveal delay={0.15}>
             <div className="rounded-2xl border border-[#ff6600]/20 bg-gradient-to-br from-[#fff4ed] dark:from-neutral-950 to-white dark:to-neutral-950 p-8 shadow-sm">
-              <p className="text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+              <p
+                className="text-sm font-bold uppercase tracking-widest"
+                style={{ color: COLORS.primary }}
+              >
                 Pronto para o próximo passo?
               </p>
               <h3 className="mt-3 text-2xl font-bold text-stone-900 dark:text-stone-100">
                 Sua empresa pode ser o próximo case.
               </h3>
               <p className="mt-3 text-stone-600 dark:text-stone-400">
-                Fale com um especialista da Numeratti, entenda onde estão as maiores oportunidades de crescimento do seu negócio e descubra como transformar investimento em resultado mensurável.
+                Fale com um especialista da Numeratti, entenda onde estão as
+                maiores oportunidades de crescimento do seu negócio e descubra
+                como transformar investimento em resultado mensurável.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <a

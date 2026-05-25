@@ -7,7 +7,7 @@ import { Menu, X, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { NAV_LINKS, WHATSAPP_URL, COLORS, LOGO_DESKTOP, LOGO_MOBILE } from "@/lib/constants";
 
-const MENU_EXIT_MS = 280;
+const MENU_EXIT_MS = 320;
 
 export default function Header() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -69,7 +69,7 @@ export default function Header() {
               alt="Numeratti"
               fill
               className="object-contain object-left"
-              style={invertLogo ? { filter: "brightness(0) invert(1)" } : undefined}
+              style={mounted && !isDark ? { filter: "brightness(0)" } : undefined}
               unoptimized
               sizes="100px"
               priority
@@ -140,31 +140,65 @@ export default function Header() {
       {menuMounted && (
         <>
           <div
-            className={`fixed inset-0 top-0 bg-black/40 backdrop-blur-sm transition-opacity duration-200 ease-out motion-reduce:transition-none lg:hidden ${
+            className={`fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ease-out motion-reduce:transition-none lg:hidden ${
               menuOpen ? "opacity-100" : "opacity-0"
             }`}
             onClick={() => setIsMobileMenuOpen(false)}
           />
-          <div
-            className={`fixed right-0 top-0 bottom-0 z-40 w-80 max-w-[85vw] bg-white p-8 shadow-2xl transition-[transform,opacity] duration-300 ease-out motion-reduce:transition-none lg:hidden dark:bg-neutral-950 ${
-              menuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+          <aside
+            className={`fixed right-0 top-0 bottom-0 z-50 flex w-80 max-w-[85vw] flex-col bg-white shadow-[0_0_60px_rgba(0,0,0,0.25)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform motion-reduce:transition-none lg:hidden dark:bg-neutral-950 ${
+              menuOpen ? "translate-x-0" : "translate-x-full"
             }`}
           >
-            <div className="mt-20 flex flex-col gap-6">
-              {NAV_LINKS.map((link) => (
+            <div className="flex items-center justify-between border-b border-stone-100 px-6 py-4 dark:border-stone-800">
+              <span className="relative h-7 w-[90px]">
+                <Image
+                  src={LOGO_MOBILE}
+                  alt="Numeratti"
+                  fill
+                  className="object-contain object-left"
+                  style={mounted && !isDark ? { filter: "brightness(0)" } : undefined}
+                  unoptimized
+                  sizes="90px"
+                />
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Fechar menu"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-stone-200 text-stone-700 transition-colors hover:bg-stone-100 dark:border-stone-700 dark:text-stone-200 dark:hover:bg-stone-800"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-4 py-6">
+              {NAV_LINKS.map((link, i) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-lg font-medium text-gray-800 transition-colors hover:text-[#ff6600] dark:text-stone-100"
+                  style={
+                    menuOpen
+                      ? { animation: `heroSlideUp 360ms ${60 + i * 40}ms cubic-bezier(0.22,1,0.36,1) backwards` }
+                      : undefined
+                  }
+                  className="group flex items-center justify-between rounded-xl px-4 py-3 text-base font-semibold text-stone-800 transition-colors hover:bg-stone-50 hover:text-[#ff6600] motion-reduce:animate-none dark:text-stone-100 dark:hover:bg-stone-900"
                 >
-                  {link.label}
+                  <span>{link.label}</span>
+                  <span
+                    aria-hidden
+                    className="h-1.5 w-1.5 rounded-full bg-stone-200 transition-all duration-200 group-hover:w-6 group-hover:bg-[#ff6600] dark:bg-stone-700"
+                  />
                 </Link>
               ))}
+            </nav>
+
+            <div className="border-t border-stone-100 px-6 py-5 dark:border-stone-800">
               <button
                 type="button"
                 onClick={() => setTheme(isDark ? "light" : "dark")}
-                className="mt-2 inline-flex items-center gap-2 rounded-full border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm font-semibold text-stone-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100"
+                className="mb-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:bg-stone-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
               >
                 {mounted && isDark ? <Sun size={16} /> : <Moon size={16} />}
                 {mounted && isDark ? "Tema claro" : "Tema escuro"}
@@ -174,13 +208,13 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="mt-2 block rounded-full px-5 py-3 text-center font-semibold text-white"
+                className="block rounded-full px-5 py-3 text-center text-sm font-bold text-white shadow-[0_10px_30px_-12px_rgba(255,102,0,0.6)] transition-transform duration-150 active:scale-[0.98] motion-reduce:transform-none"
                 style={{ backgroundColor: COLORS.primary }}
               >
                 Fale com um especialista
               </a>
             </div>
-          </div>
+          </aside>
         </>
       )}
     </header>

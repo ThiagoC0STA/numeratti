@@ -22,7 +22,15 @@ import {
   FAQ_QUEM_SOMOS,
   QUEM_SOMOS_MISSION_BLOCK,
 } from "@/lib/internal-page-content";
-import { ArrowRight, Award, Sparkles, BarChart3, Target, Handshake, TrendingUp } from "lucide-react";
+import {
+  ArrowRight,
+  Award,
+  Sparkles,
+  BarChart3,
+  Target,
+  Handshake,
+  TrendingUp,
+} from "lucide-react";
 
 const VALUE_ICONS = [BarChart3, Target, Handshake, TrendingUp] as const;
 
@@ -47,7 +55,10 @@ export default function QuemSomosContent() {
                 {QUEM_SOMOS.headline}
               </h2>
               {QUEM_SOMOS.paragraphs.map((p, i) => (
-                <p key={i} className="text-lg leading-relaxed text-stone-600 dark:text-stone-400">
+                <p
+                  key={i}
+                  className="text-lg leading-relaxed text-stone-600 dark:text-stone-400"
+                >
                   {p}
                 </p>
               ))}
@@ -65,8 +76,12 @@ export default function QuemSomosContent() {
                       <Award size={22} style={{ color: COLORS.primary }} />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100">Premiações e certificações</h3>
-                      <p className="mt-3 text-stone-600 dark:text-stone-400">{QUEM_SOMOS.award}</p>
+                      <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100">
+                        Premiações e certificações
+                      </h3>
+                      <p className="mt-3 text-stone-600 dark:text-stone-400">
+                        {QUEM_SOMOS.award}
+                      </p>
                       <a
                         href="https://www.rdstation.com/"
                         target="_blank"
@@ -89,7 +104,10 @@ export default function QuemSomosContent() {
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <ScrollReveal>
-              <p className="text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+              <p
+                className="text-sm font-bold uppercase tracking-widest"
+                style={{ color: COLORS.primary }}
+              >
                 {QUEM_SOMOS_MISSION_BLOCK.eyebrow}
               </p>
               <h2 className="mt-4 text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-4xl">
@@ -99,7 +117,9 @@ export default function QuemSomosContent() {
             <div className="mt-10 space-y-6 text-left">
               {QUEM_SOMOS_MISSION_BLOCK.paragraphs.map((p, i) => (
                 <ScrollReveal key={i} delay={i * 0.06}>
-                  <p className="text-lg leading-relaxed text-stone-600 dark:text-stone-400">{p}</p>
+                  <p className="text-lg leading-relaxed text-stone-600 dark:text-stone-400">
+                    {p}
+                  </p>
                 </ScrollReveal>
               ))}
             </div>
@@ -117,7 +137,7 @@ export default function QuemSomosContent() {
       <MethodologyPhases
         eyebrow="Do diagnóstico à escala"
         title="Como estruturamos projetos com a Numeratti"
-        subtitle="Um fluxo claro — ajustado ao seu estágio de maturidade em mídia e negócio."
+        subtitle="Um fluxo claro,  ajustado ao seu estágio de maturidade em mídia e negócio."
         phases={METHODOLOGY_PHASES}
       />
 
@@ -127,7 +147,10 @@ export default function QuemSomosContent() {
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <ScrollReveal>
             <div className="mx-auto max-w-2xl text-center">
-              <p className="text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+              <p
+                className="text-sm font-bold uppercase tracking-widest"
+                style={{ color: COLORS.primary }}
+              >
                 Resultados
               </p>
               <h3 className="mt-4 text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-4xl">
@@ -136,23 +159,25 @@ export default function QuemSomosContent() {
                   números
                 </span>
               </h3>
-              <p className="mt-3 text-lg text-stone-600 dark:text-stone-400">Acompanhe nossos números!</p>
+              <p className="mt-3 text-lg text-stone-600 dark:text-stone-400">
+                Acompanhe nossos números!
+              </p>
             </div>
           </ScrollReveal>
 
           <div className="mt-14 grid gap-5 md:grid-cols-3">
             {ABOUT_STATS.map((stat, i) => (
               <ScrollReveal key={stat.label} delay={0.06 + i * 0.06}>
-                <div
-                  className="rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-white/95 dark:bg-neutral-950/95 p-8 text-center shadow-[0_16px_50px_-28px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-[#ff6600]/25 hover:shadow-[0_24px_60px_-24px_rgba(255,102,0,0.12)] motion-reduce:transform-none"
-                >
+                <div className="rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-white/95 dark:bg-neutral-950/95 p-8 text-center shadow-[0_16px_50px_-28px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-[#ff6600]/25 hover:shadow-[0_24px_60px_-24px_rgba(255,102,0,0.12)] motion-reduce:transform-none">
                   <AnimatedCounter
                     value={stat.value}
                     suffix={stat.suffix}
                     decimals={String(stat.value).includes(".") ? 1 : 0}
                     className="text-4xl font-bold bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent"
                   />
-                  <p className="mt-2 text-sm font-medium text-stone-600 dark:text-stone-400">{stat.label}</p>
+                  <p className="mt-2 text-sm font-medium text-stone-600 dark:text-stone-400">
+                    {stat.label}
+                  </p>
                 </div>
               </ScrollReveal>
             ))}
@@ -188,16 +213,15 @@ export default function QuemSomosContent() {
               </span>
             </h3>
             <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600 dark:text-stone-400">
-              Veja alguns de nossos clientes que escolheram a Numeratti para estruturar ou acelerar o crescimento.
+              Veja alguns de nossos clientes que escolheram a Numeratti para
+              estruturar ou acelerar o crescimento.
             </p>
           </ScrollReveal>
 
           <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {CLIENT_LOGOS.map((client) => (
               <ScrollReveal key={client.name}>
-                <div
-                  className="flex h-36 items-center justify-center rounded-2xl border border-stone-200/90 bg-white px-4 py-5 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:border-[#ff6600]/30 hover:shadow-lg motion-reduce:transform-none"
-                >
+                <div className="flex h-36 items-center justify-center rounded-2xl border border-stone-200/90 bg-white px-4 py-5 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:border-[#ff6600]/30 hover:shadow-lg motion-reduce:transform-none">
                   <Image
                     src={client.url}
                     alt={client.name}

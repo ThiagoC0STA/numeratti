@@ -14,7 +14,7 @@ export default function BlogSection({ posts }: { posts: BlogPostSummary[] }) {
   if (!posts.length) return null;
 
   const [featured, ...rest] = posts;
-  /** Uniform grid below — avoids 5-col layout gaps / collapsed cells with ScrollReveal + Image */
+  /** Uniform grid below,  avoids 5-col layout gaps / collapsed cells with ScrollReveal + Image */
   const more = rest.slice(0, 6);
 
   return (
@@ -27,14 +27,19 @@ export default function BlogSection({ posts }: { posts: BlogPostSummary[] }) {
 
       <div className="relative mx-auto max-w-[90rem] px-6 lg:px-10">
         <ScrollReveal>
-          <p className="text-center text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+          <p
+            className="text-center text-sm font-bold uppercase tracking-widest"
+            style={{ color: COLORS.primary }}
+          >
             Conteúdo
           </p>
           <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-4xl lg:text-5xl">
-            <span className="bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">Blog</span>
+            <span className="bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">
+              Blog
+            </span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600 dark:text-stone-400">
-            Artigos completos na v2 — clique e leia sem sair do site
+            Artigos completos na v2, clique e leia sem sair do site
           </p>
         </ScrollReveal>
 
@@ -65,11 +70,12 @@ export default function BlogSection({ posts }: { posts: BlogPostSummary[] }) {
         <ScrollReveal delay={0.2}>
           <div className="mt-14 text-center">
             <Link href="/blog">
-              <span
-                className="group inline-flex items-center gap-2 rounded-full border border-[#ff6600]/35 bg-white dark:bg-neutral-950 px-7 py-3.5 text-sm font-bold text-[#ff6600] shadow-md transition-transform duration-300 hover:scale-[1.02] hover:bg-[#ff6600] hover:text-white"
-              >
+              <span className="group inline-flex items-center gap-2 rounded-full border border-[#ff6600]/35 bg-white dark:bg-neutral-950 px-7 py-3.5 text-sm font-bold text-[#ff6600] shadow-md transition-transform duration-300 hover:scale-[1.02] hover:bg-[#ff6600] hover:text-white">
                 Ver todos os artigos
-                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                <ArrowRight
+                  size={18}
+                  className="transition-transform group-hover:translate-x-1"
+                />
               </span>
             </Link>
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 import { COLORS, WHATSAPP_URL, CASES } from "@/lib/constants";
 import Link from "next/link";
@@ -26,7 +27,7 @@ export default function CasesSection() {
           </p>
           <h2 className="mt-4 text-center text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-4xl lg:text-5xl">
             Cases de{" "}
-            <span className="bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">
+            <span className="text-shimmer">
               sucesso
             </span>
           </h2>
@@ -38,7 +39,8 @@ export default function CasesSection() {
         <div className="mt-20 grid gap-8 md:grid-cols-3">
           {CASES.map((item, i) => (
             <ScrollReveal key={item.title} delay={i * 0.08}>
-              <Link href={`/cases/${item.slug}`} className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 p-8 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-[#ff6600]/25 hover:shadow-[0_28px_70px_-28px_rgba(255,102,0,0.15)] hover:-translate-y-1.5">
+              <SpotlightCard className="h-full rounded-2xl">
+              <Link href={`/cases/${item.slug}`} className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 p-8 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-[#ff6600]/25 hover:shadow-[0_28px_70px_-28px_rgba(255,102,0,0.18)] hover:-translate-y-1.5">
                 <div className="dark:hidden pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full bg-gradient-to-br from-[#ff6600]/10 to-transparent transition-all duration-500 group-hover:scale-125" />
 
                 <div className="relative mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6600]/15 to-[#f27405]/10 transition-transform duration-300 group-hover:scale-105">
@@ -62,6 +64,7 @@ export default function CasesSection() {
                   <ArrowRight size={16} />
                 </span>
               </Link>
+              </SpotlightCard>
             </ScrollReveal>
           ))}
         </div>

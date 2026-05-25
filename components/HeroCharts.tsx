@@ -68,7 +68,7 @@ export default function HeroCharts({ slideIndex }: { slideIndex: number }) {
       {/* Right side - main chart with metric badge */}
       <div
         key={`right-${slideIndex}`}
-        className={`pointer-events-none absolute bottom-[-2%] right-[-2%] hidden lg:flex flex-col items-end p-5 rounded-2xl bg-white/85 dark:bg-black/60 backdrop-blur-2xl border border-stone-200 dark:border-white/[0.08] shadow-[0_18px_36px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.8)] xl:right-[-6%] xl:bottom-[2%] z-30 group ${simplified ? '' : 'animate-slide-up-fade opacity-0'}`}
+        className={`pointer-events-none absolute bottom-[2%] right-[2%] hidden lg:flex flex-col items-end p-5 rounded-2xl bg-white/85 dark:bg-black/60 backdrop-blur-2xl border border-stone-200 dark:border-white/[0.08] shadow-[0_18px_36px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.8)] xl:right-[-2%] xl:bottom-[0%] 2xl:right-[-4%] z-30 group ${simplified ? '' : 'animate-slide-up-fade opacity-0'}`}
         style={{ animationDelay: '400ms' }}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-[#ff6600]/10 to-transparent rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -160,7 +160,7 @@ export default function HeroCharts({ slideIndex }: { slideIndex: number }) {
       {/* Left side - secondary chart with metric badge */}
       <div
         key={`left-${slideIndex}`}
-        className={`pointer-events-none absolute left-[3%] top-[4%] hidden lg:flex flex-col items-start p-4 rounded-2xl bg-white/85 dark:bg-black/60 backdrop-blur-2xl border border-stone-200 dark:border-white/[0.08] shadow-[0_18px_36px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.8)] xl:left-[-1%] xl:top-[8%] z-30 group ${simplified ? '' : 'animate-slide-up-fade opacity-0'}`}
+        className={`pointer-events-none absolute left-[3%] top-[4%] hidden lg:flex flex-col items-start p-4 rounded-2xl bg-white/85 dark:bg-black/60 backdrop-blur-2xl border border-stone-200 dark:border-white/[0.08] shadow-[0_18px_36px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.8)] xl:left-[0%] xl:top-[6%] 2xl:left-[-1%] 2xl:top-[8%] z-30 group ${simplified ? '' : 'animate-slide-up-fade opacity-0'}`}
         style={{ animationDelay: '500ms' }}
       >
         <div className="absolute inset-0 bg-gradient-to-tr from-[#f27405]/10 to-transparent rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

@@ -5,7 +5,13 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import FaqSection from "@/components/pages/shared/FaqSection";
 import { CAREER_AREAS, FAQ_CARREIRAS } from "@/lib/internal-page-content";
 import { COLORS, WHATSAPP_URL } from "@/lib/constants";
-import { ArrowRight, BarChart3, HeartHandshake, LineChart, Users } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  HeartHandshake,
+  LineChart,
+  Users,
+} from "lucide-react";
 
 const PERKS = [
   {
@@ -25,7 +31,7 @@ const PERKS = [
   },
   {
     title: "Parceria próxima",
-    text: "Autonomia com suporte — combinamos responsabilidade e colaboração.",
+    text: "Autonomia com suporte,  combinamos responsabilidade e colaboração.",
     Icon: HeartHandshake,
   },
 ] as const;
@@ -53,8 +59,9 @@ export default function TrabalheConoscoContent() {
                 Carreiras
               </span>
               <p className="mt-8 text-lg leading-relaxed text-stone-600 dark:text-stone-400 md:text-xl">
-                Estamos sempre em busca de talentos que queiram fazer a diferença no marketing digital. Se você é
-                apaixonado por dados, performance e resultados, queremos você no nosso time.
+                Estamos sempre em busca de talentos que queiram fazer a
+                diferença no marketing digital. Se você é apaixonado por dados,
+                performance e resultados, queremos você no nosso time.
               </p>
             </div>
           </ScrollReveal>
@@ -63,17 +70,19 @@ export default function TrabalheConoscoContent() {
             {PERKS.map((perk, i) => {
               const Icon = perk.Icon;
               return (
-              <ScrollReveal key={perk.title} delay={i * 0.06}>
-                <div
-                  className="h-full rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 p-7 shadow-[0_16px_50px_-28px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-[#ff6600]/20 motion-reduce:transform-none"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6600]/15 to-[#f27405]/10">
-                    <Icon size={22} style={{ color: COLORS.primary }} />
+                <ScrollReveal key={perk.title} delay={i * 0.06}>
+                  <div className="h-full rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 p-7 shadow-[0_16px_50px_-28px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-[#ff6600]/20 motion-reduce:transform-none">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6600]/15 to-[#f27405]/10">
+                      <Icon size={22} style={{ color: COLORS.primary }} />
+                    </div>
+                    <h3 className="mt-5 text-lg font-bold text-stone-900 dark:text-stone-100">
+                      {perk.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                      {perk.text}
+                    </p>
                   </div>
-                  <h3 className="mt-5 text-lg font-bold text-stone-900 dark:text-stone-100">{perk.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-stone-600 dark:text-stone-400">{perk.text}</p>
-                </div>
-              </ScrollReveal>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -84,23 +93,31 @@ export default function TrabalheConoscoContent() {
         <div className="dark:hidden pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff6600]/15 to-transparent" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <ScrollReveal>
-            <p className="text-center text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+            <p
+              className="text-center text-sm font-bold uppercase tracking-widest"
+              style={{ color: COLORS.primary }}
+            >
               Áreas
             </p>
             <h2 className="mx-auto mt-4 max-w-2xl text-center text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-4xl">
               Perfis que costumam dialogar bem com a Numeratti
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600 dark:text-stone-400">
-              Não há vaga aberta listada aqui — use o WhatsApp para se apresentar. Estas são frentes onde mais
-              conversamos com candidatos.
+              Não há vaga aberta listada aqui, use o WhatsApp para se
+              apresentar. Estas são frentes onde mais conversamos com
+              candidatos.
             </p>
           </ScrollReveal>
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {CAREER_AREAS.map((area, i) => (
               <ScrollReveal key={area.title} delay={i * 0.05}>
                 <div className="h-full rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-stone-50/40 dark:bg-neutral-950/40 p-6">
-                  <h3 className="text-lg font-bold text-stone-900 dark:text-stone-100">{area.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-stone-600 dark:text-stone-400">{area.text}</p>
+                  <h3 className="text-lg font-bold text-stone-900 dark:text-stone-100">
+                    {area.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                    {area.text}
+                  </p>
                 </div>
               </ScrollReveal>
             ))}
@@ -114,7 +131,10 @@ export default function TrabalheConoscoContent() {
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
             <ScrollReveal>
-              <p className="text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+              <p
+                className="text-sm font-bold uppercase tracking-widest"
+                style={{ color: COLORS.primary }}
+              >
                 Processo
               </p>
               <h2 className="mt-4 text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-4xl">
@@ -129,7 +149,9 @@ export default function TrabalheConoscoContent() {
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white dark:bg-neutral-950 text-sm font-bold text-[#ff6600] shadow-md ring-1 ring-stone-200/80">
                       {i + 1}
                     </span>
-                    <p className="pt-1.5 text-lg text-stone-700 dark:text-stone-300">{step}</p>
+                    <p className="pt-1.5 text-lg text-stone-700 dark:text-stone-300">
+                      {step}
+                    </p>
                   </li>
                 ))}
               </ol>
@@ -138,9 +160,12 @@ export default function TrabalheConoscoContent() {
             <ScrollReveal delay={0.1}>
               <div className="relative overflow-hidden rounded-[1.75rem] border border-stone-200/80 dark:border-stone-800/80 bg-stone-900 px-8 py-10 text-white shadow-[0_28px_80px_-32px_rgba(0,0,0,0.4)] md:px-10 md:py-12">
                 <div className="dark:hidden pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[#ff6600]/30 blur-3xl" />
-                <h3 className="relative text-xl font-bold md:text-2xl">Pronto para o próximo passo?</h3>
+                <h3 className="relative text-xl font-bold md:text-2xl">
+                  Pronto para o próximo passo?
+                </h3>
                 <p className="relative mt-4 text-stone-300">
-                  Envie seu currículo pelo WhatsApp com uma breve apresentação. Retornamos o quanto antes.
+                  Envie seu currículo pelo WhatsApp com uma breve apresentação.
+                  Retornamos o quanto antes.
                 </p>
                 <a
                   href={WHATSAPP_URL}
@@ -154,7 +179,10 @@ export default function TrabalheConoscoContent() {
                 </a>
                 <p className="relative mt-8 text-sm text-stone-400">
                   Quer conhecer a empresa antes?{" "}
-                  <Link href="/quem-somos" className="font-semibold text-white underline-offset-4 hover:underline">
+                  <Link
+                    href="/quem-somos"
+                    className="font-semibold text-white underline-offset-4 hover:underline"
+                  >
                     Quem somos
                   </Link>
                 </p>

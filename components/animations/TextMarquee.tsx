@@ -11,7 +11,10 @@ interface TextMarqueeProps {
   className?: string;
 }
 
-export default function TextMarquee({ lines, className = "" }: TextMarqueeProps) {
+export default function TextMarquee({
+  lines,
+  className = "",
+}: TextMarqueeProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,14 +35,11 @@ export default function TextMarquee({ lines, className = "" }: TextMarqueeProps)
     });
   }, [lines]);
 
-  const fullText = lines.join(" — ");
-  const repeated = `${fullText} — ${fullText}`;
+  const fullText = lines.join(",  ");
+  const repeated = `${fullText},  ${fullText}`;
 
   return (
-    <div
-      ref={ref}
-      className={`overflow-hidden py-12 lg:py-20 ${className}`}
-    >
+    <div ref={ref} className={`overflow-hidden py-12 lg:py-20 ${className}`}>
       <div className="marquee-text flex w-max">
         <span className="whitespace-nowrap pr-8 text-4xl font-bold tracking-tight text-gray-200 md:text-6xl lg:text-7xl">
           {repeated}

@@ -195,7 +195,7 @@ export default function Hero() {
               
               {/* Embedded Charts (Flanking the image) */}
               {isDesktop && (
-                <div className="absolute inset-[-110px] pointer-events-none z-40">
+                <div className="absolute inset-[-20px] xl:inset-[-40px] 2xl:inset-[-80px] pointer-events-none z-40">
                   <HeroCharts slideIndex={slideIndex} />
                 </div>
               )}

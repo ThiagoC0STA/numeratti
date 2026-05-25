@@ -8,8 +8,11 @@ import { ArrowRight } from "lucide-react";
 
 type ClientsSectionVariant = "home" | "page";
 
-/** Same sizing rules used by the /clientes grid — keeps brand presentation consistent. */
-const LARGER_IDXS = new Set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 15, 16, 17, 18, 19, 23, 31, 32, 33, 34, 36, 37, 38, 39]);
+/** Same sizing rules used by the /clientes grid,  keeps brand presentation consistent. */
+const LARGER_IDXS = new Set([
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 15, 16, 17, 18, 19, 23, 31, 32, 33, 34,
+  36, 37, 38, 39,
+]);
 const COVER_IDXS = new Set([16, 18, 33]);
 
 function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
@@ -40,7 +43,9 @@ function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
 
       <div
         className={`flex w-max gap-4 md:gap-8 ${
-          direction === "left" ? "animate-marquee-left" : "animate-marquee-right"
+          direction === "left"
+            ? "animate-marquee-left"
+            : "animate-marquee-right"
         }`}
       >
         {loop.map((client, i) => {
@@ -53,7 +58,9 @@ function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
                 isLarger ? "p-2" : "p-5 md:p-6"
               }`}
             >
-              <div className={`relative ${isLarger ? "h-full w-full" : "h-[75%] w-[90%]"}`}>
+              <div
+                className={`relative ${isLarger ? "h-full w-full" : "h-[75%] w-[90%]"}`}
+              >
                 <Image
                   src={client.url}
                   alt={client.name}
@@ -72,7 +79,11 @@ function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
   );
 }
 
-export default function ClientsSection({ variant = "home" }: { variant?: ClientsSectionVariant }) {
+export default function ClientsSection({
+  variant = "home",
+}: {
+  variant?: ClientsSectionVariant;
+}) {
   const isPage = variant === "page";
   return (
     <section
@@ -110,21 +121,23 @@ export default function ClientsSection({ variant = "home" }: { variant?: Clients
               const isLarger = LARGER_IDXS.has(idx);
               const isCover = COVER_IDXS.has(idx);
               return (
-              <div
-                key={client.name}
-                className={`flex h-28 items-center justify-center rounded-2xl border border-stone-200/60 bg-white shadow-[0_8px_28px_-14px_rgba(15,15,15,0.12)] ring-1 ring-stone-100/50 ${isLarger ? "p-2" : "p-5"}`}
-              >
-                <div className={`relative ${isLarger ? "h-full w-full" : "h-[75%] w-[90%]"}`}>
-                  <Image
-                    src={client.url}
-                    alt={client.name}
-                    fill
-                    className={isCover ? "object-cover" : "object-contain"}
-                    quality={80}
-                    loading="lazy"
-                  />
+                <div
+                  key={client.name}
+                  className={`flex h-28 items-center justify-center rounded-2xl border border-stone-200/60 bg-white shadow-[0_8px_28px_-14px_rgba(15,15,15,0.12)] ring-1 ring-stone-100/50 ${isLarger ? "p-2" : "p-5"}`}
+                >
+                  <div
+                    className={`relative ${isLarger ? "h-full w-full" : "h-[75%] w-[90%]"}`}
+                  >
+                    <Image
+                      src={client.url}
+                      alt={client.name}
+                      fill
+                      className={isCover ? "object-cover" : "object-contain"}
+                      quality={80}
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
-              </div>
               );
             })}
           </div>
@@ -143,7 +156,10 @@ export default function ClientsSection({ variant = "home" }: { variant?: Clients
                 className="group inline-flex items-center gap-2 rounded-full border border-[#ff6600]/35 bg-white dark:bg-neutral-950 px-8 py-3.5 text-sm font-bold text-[#ff6600] shadow-md transition-all hover:bg-[#ff6600] hover:text-white"
               >
                 Veja quem mais confia em nosso trabalho
-                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                <ArrowRight
+                  size={18}
+                  className="transition-transform group-hover:translate-x-1"
+                />
               </Link>
             </div>
           </ScrollReveal>

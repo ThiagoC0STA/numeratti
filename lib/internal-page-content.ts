@@ -7,7 +7,7 @@ export const PAGE_VALUES = [
   },
   {
     title: "Decisão guiada por dados",
-    text: "Testes, leitura de performance e ajustes contínuos — menos achismo, mais evidência para escalar com segurança.",
+    text: "Testes, leitura de performance e ajustes contínuos,  menos achismo, mais evidência para escalar com segurança.",
   },
   {
     title: "Parceria de verdade",
@@ -73,7 +73,7 @@ export const FAQ_QUEM_SOMOS = [
   },
   {
     q: "Vocês trabalham com contratos longos?",
-    a: "O formato depende do projeto. O importante é combinar expectativas, indicadores e um plano realista — conversamos isso com transparência antes de começar.",
+    a: "O formato depende do projeto. O importante é combinar expectativas, indicadores e um plano realista,  conversamos isso com transparência antes de começar.",
   },
   {
     q: "Onde vocês estão e atendem remotamente?",
@@ -88,7 +88,7 @@ export const FAQ_SOLUCOES = [
   },
   {
     q: "Quais canais e plataformas vocês atendem?",
-    a: "Trabalhamos com as principais redes de mídia paga (Meta, Google, LinkedIn, YouTube, TikTok, entre outras) e ferramentas de mensuração conforme o projeto. A escolha de canal segue objetivo, público e orçamento — não forçamos stack desnecessário.",
+    a: "Trabalhamos com as principais redes de mídia paga (Meta, Google, LinkedIn, YouTube, TikTok, entre outras) e ferramentas de mensuração conforme o projeto. A escolha de canal segue objetivo, público e orçamento,  não forçamos stack desnecessário.",
   },
   {
     q: "Vocês fazem SEO ou só mídia paga?",
@@ -96,7 +96,7 @@ export const FAQ_SOLUCOES = [
   },
   {
     q: "Vocês criam criativos e páginas?",
-    a: "Focamos em performance de mídia, mensuração e estratégia. Criativos e landings podem ser feitos em parceria com seu time ou fornecedores — ajudamos no briefing e na leitura de resultados.",
+    a: "Focamos em performance de mídia, mensuração e estratégia. Criativos e landings podem ser feitos em parceria com seu time ou fornecedores,  ajudamos no briefing e na leitura de resultados.",
   },
   {
     q: "Quanto tempo até ver resultado?",
@@ -108,7 +108,7 @@ export const FAQ_SOLUCOES = [
   },
   {
     q: "Vocês usam BI ou dashboards?",
-    a: "Sim, quando o projeto pede consolidamos dados em visões que facilitam decisão — sempre conectando mídia ao que importa para o negócio.",
+    a: "Sim, quando o projeto pede consolidamos dados em visões que facilitam decisão,  sempre conectando mídia ao que importa para o negócio.",
   },
   {
     q: "Com que frequência recebo relatórios ou reuniões?",
@@ -127,7 +127,7 @@ export const FAQ_CASES = [
   },
   {
     q: "Posso ler o case completo?",
-    a: "Sim — cada card leva ao artigo completo no site com mais contexto sobre desafio, ação e resultados.",
+    a: "Sim,  cada card leva ao artigo completo no site com mais contexto sobre desafio, ação e resultados.",
   },
   {
     q: "Os números dos cases são auditados ou estimados?",
@@ -135,7 +135,7 @@ export const FAQ_CASES = [
   },
   {
     q: "Por que aparecem poucos cases na listagem?",
-    a: "A página destaca um recorte representativo. Outras histórias podem estar em formato de artigo, depoimento ou sob confidencialidade comercial — pergunte no contato se precisa de referência do seu setor.",
+    a: "A página destaca um recorte representativo. Outras histórias podem estar em formato de artigo, depoimento ou sob confidencialidade comercial,  pergunte no contato se precisa de referência do seu setor.",
   },
   {
     q: "Os cases são de quais segmentos?",
@@ -174,7 +174,7 @@ export const FAQ_CLIENTES = [
   },
   {
     q: "Vocês exigem exclusividade com o cliente?",
-    a: "Não vendemos exclusividade de mercado por segmento como regra geral. O combinado está no contrato e no bom senso com conflito direto entre concorrentes — conversamos abertamente se houver sensibilidade.",
+    a: "Não vendemos exclusividade de mercado por segmento como regra geral. O combinado está no contrato e no bom senso com conflito direto entre concorrentes,  conversamos abertamente se houver sensibilidade.",
   },
   {
     q: "Os logos dos clientes na página são todos ativos?",
@@ -189,7 +189,7 @@ export const FAQ_CONTATO = [
   },
   {
     q: "O formulário substitui reunião?",
-    a: "É o primeiro passo para entendermos contexto e agendar uma conversa objetiva com um especialista — sem compromisso até alinharmos fit.",
+    a: "É o primeiro passo para entendermos contexto e agendar uma conversa objetiva com um especialista,  sem compromisso até alinharmos fit.",
   },
   {
     q: "Meus dados estão seguros?",
@@ -236,7 +236,7 @@ export const FAQ_CARREIRAS = [
   },
   {
     q: "Vocês contratam estagiários ou júnior?",
-    a: "Quando há vaga aberta, divulgamos requisitos e senioridade. Se você está começando, envie perfil mesmo assim — guardamos contato para oportunidades futuras quando fizer sentido.",
+    a: "Quando há vaga aberta, divulgamos requisitos e senioridade. Se você está começando, envie perfil mesmo assim,  guardamos contato para oportunidades futuras quando fizer sentido.",
   },
   {
     q: "Preciso ter certificação Meta ou Google?",
@@ -248,25 +248,24 @@ export const FAQ_CARREIRAS = [
   },
   {
     q: "Posso trabalhar de outro estado ou país?",
-    a: "Muitas funções são remotas com alinhamento de fuso para rituais com cliente e time. Restrições legais ou de acesso a dados do cliente podem influenciar — tratamos caso a caso.",
+    a: "Muitas funções são remotas com alinhamento de fuso para rituais com cliente e time. Restrições legais ou de acesso a dados do cliente podem influenciar,  tratamos caso a caso.",
   },
 ] as const;
 
 export const CONTACT_PAGE_EXTRA = {
   hours: "Segunda a sexta, horário comercial (Brasília).",
-  location: "Fortaleza (CE) — atendimento a empresas em todo o Brasil.",
+  location: "Fortaleza (CE),  atendimento a empresas em todo o Brasil.",
   channelsIntro:
     "Escolha o canal que for mais rápido para você. No WhatsApp respondemos dúvidas e alinhamos próximo passo; no formulário você detalha briefing e segmento com calma.",
 } as const;
 
 export const CASES_PAGE_INTRO = {
   title: "Resultados que dão para medir",
-  lead:
-    "Cada case resume um desafio real: mais leads, melhor ROI, expansão de canais ou estruturação de mídia. Abaixo você encontra um recorte; o artigo completo traz contexto, tática e aprendizados.",
+  lead: "Cada case resume um desafio real: mais leads, melhor ROI, expansão de canais ou estruturação de mídia. Abaixo você encontra um recorte; o artigo completo traz contexto, tática e aprendizados.",
   bullets: [
     "Metas combinadas antes de escalar investimento",
     "Acompanhamento semanal de performance e hipóteses",
-    "Relatórios conectados ao funil e ao negócio — não só cliques",
+    "Relatórios conectados ao funil e ao negócio,  não só cliques",
   ],
 } as const;
 
@@ -286,19 +285,37 @@ export const CLIENT_SEGMENTS = [
 ] as const;
 
 export const CAREER_AREAS = [
-  { title: "Mídia paga", text: "Meta Ads, Google Ads, gestão de orçamento e otimização diária." },
-  { title: "Performance & dados", text: "Análise, dashboards, atribuição e leitura crítica de métricas." },
-  { title: "Growth", text: "Experimentos, funil completo e conexão entre mídia, CRM e produto." },
-  { title: "Estratégia digital", text: "Planejamento, priorização de iniciativas e alinhamento com negócio." },
-  { title: "Conteúdo e criativo (apoio)", text: "Briefings orientados a performance e testes de mensagem." },
-  { title: "Customer success", text: "Relacionamento, rituais com cliente e clareza de entregas." },
+  {
+    title: "Mídia paga",
+    text: "Meta Ads, Google Ads, gestão de orçamento e otimização diária.",
+  },
+  {
+    title: "Performance & dados",
+    text: "Análise, dashboards, atribuição e leitura crítica de métricas.",
+  },
+  {
+    title: "Growth",
+    text: "Experimentos, funil completo e conexão entre mídia, CRM e produto.",
+  },
+  {
+    title: "Estratégia digital",
+    text: "Planejamento, priorização de iniciativas e alinhamento com negócio.",
+  },
+  {
+    title: "Conteúdo e criativo (apoio)",
+    text: "Briefings orientados a performance e testes de mensagem.",
+  },
+  {
+    title: "Customer success",
+    text: "Relacionamento, rituais com cliente e clareza de entregas.",
+  },
 ] as const;
 
 export const QUEM_SOMOS_MISSION_BLOCK = {
   eyebrow: "Por que existimos",
   title: "Menos promessa vazia, mais número na mesa",
   paragraphs: [
-    "Acreditamos que marketing de performance precisa ser legível para quem decide orçamento: CFO, founder ou diretoria. Por isso traduzimos campanhas em impacto — leads, vendas, receita ou indicadores que você define como sucesso.",
+    "Acreditamos que marketing de performance precisa ser legível para quem decide orçamento: CFO, founder ou diretoria. Por isso traduzimos campanhas em impacto,  leads, vendas, receita ou indicadores que você define como sucesso.",
     "Não trabalhamos no escuro: documentamos testes, registramos aprendizados e deixamos claro o que está sendo feito nas contas. Assim seu time cresce junto, mesmo quando a operação é nossa.",
   ],
 } as const;

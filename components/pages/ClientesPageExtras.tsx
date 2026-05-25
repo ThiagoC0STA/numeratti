@@ -14,7 +14,10 @@ export default function ClientesPageExtras() {
       <section className="relative overflow-hidden bg-gradient-to-b from-white dark:from-neutral-950 via-stone-50/60 dark:via-neutral-950/60 to-white dark:to-neutral-950 py-16 lg:py-24">
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <ScrollReveal>
-            <p className="text-center text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+            <p
+              className="text-center text-sm font-bold uppercase tracking-widest"
+              style={{ color: COLORS.primary }}
+            >
               Em números
             </p>
             <h2 className="mt-4 text-center text-2xl font-bold text-stone-900 dark:text-stone-100 md:text-3xl">
@@ -31,7 +34,9 @@ export default function ClientesPageExtras() {
                     decimals={stat.value === 5.6 ? 1 : 0}
                     className="text-3xl font-bold bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent md:text-4xl"
                   />
-                  <p className="mt-2 text-sm font-medium text-stone-600 dark:text-stone-400">{stat.label}</p>
+                  <p className="mt-2 text-sm font-medium text-stone-600 dark:text-stone-400">
+                    {stat.label}
+                  </p>
                 </div>
               </ScrollReveal>
             ))}
@@ -43,29 +48,34 @@ export default function ClientesPageExtras() {
         <div className="dark:hidden pointer-events-none absolute right-0 top-0 h-72 w-72 rounded-full bg-[#ff6600]/6 blur-[90px]" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <ScrollReveal>
-            <p className="text-center text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
+            <p
+              className="text-center text-sm font-bold uppercase tracking-widest"
+              style={{ color: COLORS.primary }}
+            >
               Segmentos
             </p>
             <h2 className="mx-auto mt-4 max-w-2xl text-center text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-4xl">
               Onde a Numeratti mais acelera resultados
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600 dark:text-stone-400">
-              Cada vertical tem dinâmica de funil, criativo e mensuração diferente — adaptamos stack e rituais ao seu
-              modelo.
+              Cada vertical tem dinâmica de funil, criativo e mensuração
+              diferente, adaptamos stack e rituais ao seu modelo.
             </p>
           </ScrollReveal>
 
           <div className="mt-14 grid gap-6 md:grid-cols-3">
             {CLIENT_SEGMENTS.map((seg, i) => (
               <ScrollReveal key={seg.title} delay={i * 0.07}>
-                <div
-                  className="h-full rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-stone-50/50 dark:bg-neutral-950/50 p-8 transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none"
-                >
+                <div className="h-full rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-stone-50/50 dark:bg-neutral-950/50 p-8 transition-transform duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white dark:bg-neutral-950 shadow-sm ring-1 ring-stone-200/80">
                     <Building2 size={22} style={{ color: COLORS.primary }} />
                   </div>
-                  <h3 className="mt-5 text-lg font-bold text-stone-900 dark:text-stone-100">{seg.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-stone-600 dark:text-stone-400">{seg.text}</p>
+                  <h3 className="mt-5 text-lg font-bold text-stone-900 dark:text-stone-100">
+                    {seg.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                    {seg.text}
+                  </p>
                 </div>
               </ScrollReveal>
             ))}
@@ -75,11 +85,17 @@ export default function ClientesPageExtras() {
             <div className="mx-auto mt-14 max-w-2xl rounded-2xl border border-dashed border-[#ff6600]/30 bg-[#fff7f0]/50 dark:bg-neutral-950/50 p-8 text-center">
               <p className="text-stone-700 dark:text-stone-300">
                 Quer ver como outras marcas evoluíram com a gente? Explore os{" "}
-                <Link href="/cases" className="font-bold text-[#ff6600] underline-offset-2 hover:underline">
+                <Link
+                  href="/cases"
+                  className="font-bold text-[#ff6600] underline-offset-2 hover:underline"
+                >
                   cases de sucesso
                 </Link>{" "}
                 e leia análises no{" "}
-                <Link href="/blog" className="font-bold text-[#ff6600] underline-offset-2 hover:underline">
+                <Link
+                  href="/blog"
+                  className="font-bold text-[#ff6600] underline-offset-2 hover:underline"
+                >
                   blog
                 </Link>
                 .
@@ -91,7 +107,7 @@ export default function ClientesPageExtras() {
 
       <FaqSection
         title="Perguntas de quem já quer ser cliente"
-        subtitle="Transparência antes de fechar — combinamos expectativas e indicadores na primeira conversa."
+        subtitle="Transparência antes de fechar,  combinamos expectativas e indicadores na primeira conversa."
         items={FAQ_CLIENTES.map((x) => ({ q: x.q, a: x.a }))}
       />
 
@@ -99,9 +115,12 @@ export default function ClientesPageExtras() {
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <ScrollReveal>
             <div className="rounded-[1.75rem] border border-stone-200/80 dark:border-stone-800/80 bg-gradient-to-br from-stone-900 to-stone-800 px-8 py-12 text-center md:px-12">
-              <h2 className="text-2xl font-bold text-white md:text-3xl">Pronto para entrar para a lista?</h2>
+              <h2 className="text-2xl font-bold text-white md:text-3xl">
+                Pronto para entrar para a lista?
+              </h2>
               <p className="mx-auto mt-4 max-w-lg text-stone-300">
-                Conte seu cenário no WhatsApp — alinhamos próximos passos e como podemos somar ao seu time.
+                Conte seu cenário no WhatsApp, alinhamos próximos passos e como
+                podemos somar ao seu time.
               </p>
               <a
                 href={WHATSAPP_URL}

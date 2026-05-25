@@ -9,6 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GsapCounter from "@/components/animations/GsapCounter";
 import ImpressionsShowcaseCard from "@/components/metrics/ImpressionsShowcaseCard";
 import MetricsChartMobileFallback from "@/components/metrics/MetricsChartMobileFallback";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 import { METRICS, COLORS } from "@/lib/constants";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
@@ -54,8 +55,8 @@ function MetricCard({
 
   return (
     <ScrollReveal delay={index * 0.12}>
-      <div
-        className={`group relative overflow-hidden rounded-3xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 p-8 shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-all duration-500 hover:border-[#ff6600]/25 hover:-translate-y-1.5 hover:shadow-[0_28px_80px_rgba(255,102,0,0.08)] lg:p-10 ${className}`}
+      <SpotlightCard
+        className={`group overflow-hidden rounded-3xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 p-8 shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-all duration-500 hover:border-[#ff6600]/25 hover:-translate-y-1.5 hover:shadow-[0_28px_80px_rgba(255,102,0,0.12)] lg:p-10 ${className}`}
       >
         <div className="dark:hidden pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gradient-to-br from-[#ff6600]/10 to-transparent transition-all duration-700 group-hover:scale-110" />
 
@@ -77,7 +78,7 @@ function MetricCard({
         />
 
         <p className="mt-4 text-sm leading-relaxed text-stone-600 dark:text-stone-400 lg:text-base">{metric.description}</p>
-      </div>
+      </SpotlightCard>
     </ScrollReveal>
   );
 }
@@ -152,7 +153,7 @@ export default function MetricsSection() {
             className="text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-5xl lg:text-6xl"
           >
             <span className="line block">Resultados que</span>
-            <span className="line block bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">
+            <span className="line block text-shimmer">
               impressionam
             </span>
           </h2>

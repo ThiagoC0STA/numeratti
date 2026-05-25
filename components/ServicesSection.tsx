@@ -14,7 +14,14 @@ import {
   MessageCircle,
 } from "lucide-react";
 
-const SERVICE_ICONS = [BarChart3, Search, Facebook, Instagram, Youtube, Linkedin] as const;
+const SERVICE_ICONS = [
+  BarChart3,
+  Search,
+  Facebook,
+  Instagram,
+  Youtube,
+  Linkedin,
+] as const;
 
 export default function ServicesSection() {
   const simplified = useSimplifiedMotion();
@@ -41,7 +48,8 @@ export default function ServicesSection() {
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600 dark:text-stone-400">
-            Consultoria e operação em +17 plataformas de mídia paga — com foco em métricas que importam
+            Consultoria e operação em +17 plataformas de mídia paga, com foco em
+            métricas que importam
           </p>
         </ScrollReveal>
 
@@ -50,20 +58,24 @@ export default function ServicesSection() {
             const Icon = SERVICE_ICONS[i] ?? MessageCircle;
             return (
               <ScrollReveal key={service.id} delay={i * 0.06}>
-                <div
-                  className="group relative h-full overflow-hidden rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 p-8 shadow-[0_16px_50px_-28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-[#ff6600]/20 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(255,102,0,0.12)]"
-                >
+                <div className="group relative h-full overflow-hidden rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 p-8 shadow-[0_16px_50px_-28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-[#ff6600]/20 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(255,102,0,0.12)]">
                   <div className="dark:hidden pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full bg-gradient-to-br from-[#ff6600]/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-                  <span className="font-mono text-sm font-bold text-[#ff6600]/70">{service.id}</span>
+                  <span className="font-mono text-sm font-bold text-[#ff6600]/70">
+                    {service.id}
+                  </span>
 
                   <div className="mt-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6600]/15 to-[#f27405]/10 transition-transform duration-300 group-hover:scale-110">
                     <Icon size={26} style={{ color: COLORS.primary }} />
                   </div>
 
-                  <h3 className="mt-5 text-xl font-bold text-stone-900 dark:text-stone-100">{service.title}</h3>
+                  <h3 className="mt-5 text-xl font-bold text-stone-900 dark:text-stone-100">
+                    {service.title}
+                  </h3>
 
-                  <p className="mt-3 leading-relaxed text-stone-600 dark:text-stone-400">{service.description}</p>
+                  <p className="mt-3 leading-relaxed text-stone-600 dark:text-stone-400">
+                    {service.description}
+                  </p>
                 </div>
               </ScrollReveal>
             );
@@ -81,7 +93,8 @@ export default function ServicesSection() {
               </strong>
             </h3>
             <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-stone-500 md:text-base">
-              Parcerias e certificações nas principais redes — mesmos ativos do site que você já conhece.
+              Parcerias e certificações nas principais redes, mesmos ativos do
+              site que você já conhece.
             </p>
             <PlatformLogosGrid />
           </div>
