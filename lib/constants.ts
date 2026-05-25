@@ -1,5 +1,5 @@
 export const SITE_URL = "https://numeratti.com.br";
-export const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=558581486404";
+export const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5585988776405";
 export const PRIVACY_URL = "https://numeratti.com.br/politica-de-privacidade";
 
 export const COLORS = {
