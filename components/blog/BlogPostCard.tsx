@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 import type { BlogPostSummary } from "@/lib/blog/types";
@@ -28,10 +27,8 @@ export default function BlogPostCard({
 
   return (
     <ScrollReveal delay={delay} className="h-full min-w-0 w-full">
-      <motion.article
-        whileHover={simplified ? undefined : { y: -8 }}
-        transition={{ type: "spring", stiffness: 380, damping: 24 }}
-        className="group flex h-full min-w-0 w-full flex-col overflow-hidden rounded-2xl border border-stone-200/80 bg-white shadow-[0_16px_50px_-28px_rgba(0,0,0,0.08)] transition-shadow hover:border-[#ff6600]/25 hover:shadow-[0_24px_60px_-24px_rgba(255,102,0,0.12)]"
+      <article
+        className="group flex h-full min-w-0 w-full flex-col overflow-hidden rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 shadow-[0_16px_50px_-28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-[#ff6600]/25 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(255,102,0,0.12)]"
       >
         <Link href={hrefForSlug(post.slug)} className="flex min-h-0 min-w-0 flex-1 flex-col">
           <div
@@ -52,7 +49,7 @@ export default function BlogPostCard({
               />
             ) : (
               <div
-                className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#fff0e6] via-white to-[#ffe8d6]"
+                className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#fff0e6] dark:from-neutral-950 via-white dark:via-neutral-950 to-[#ffe8d6] dark:to-neutral-950"
                 aria-hidden
               >
                 <span
@@ -84,14 +81,14 @@ export default function BlogPostCard({
                   <Calendar size={14} />
                   {dateLabel}
                 </div>
-                <h3 className="mt-3 line-clamp-2 text-lg font-bold text-stone-900 transition-colors group-hover:text-[#ff6600]">
+                <h3 className="mt-3 line-clamp-2 text-lg font-bold text-stone-900 dark:text-stone-100 transition-colors group-hover:text-[#ff6600]">
                   {post.title}
                 </h3>
               </>
             )}
 
             <p
-              className={`line-clamp-2 text-sm leading-relaxed text-stone-600 ${featured ? "mt-4" : "mt-2"}`}
+              className={`line-clamp-2 text-sm leading-relaxed text-stone-600 dark:text-stone-400 ${featured ? "mt-4" : "mt-2"}`}
             >
               {post.excerptPlain}
             </p>
@@ -116,7 +113,7 @@ export default function BlogPostCard({
             </span>
           </div>
         </Link>
-      </motion.article>
+      </article>
     </ScrollReveal>
   );
 }

@@ -1,9 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { COLORS } from "@/lib/constants";
-import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 import type { LucideIcon } from "lucide-react";
 
 export default function ValuePillarsGrid({
@@ -17,20 +15,19 @@ export default function ValuePillarsGrid({
   items: readonly { title: string; text: string }[];
   icons: readonly LucideIcon[];
 }) {
-  const simplified = useSimplifiedMotion();
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-stone-50 to-white py-20 lg:py-28">
-      <div className="pointer-events-none absolute -right-20 top-1/4 h-72 w-72 rounded-full bg-[#ff6600]/6 blur-[90px]" />
+    <section className="relative overflow-hidden bg-gradient-to-b from-stone-50 dark:from-neutral-950 to-white dark:to-neutral-950 py-20 lg:py-28">
+      <div className="dark:hidden pointer-events-none absolute -right-20 top-1/4 h-72 w-72 rounded-full bg-[#ff6600]/6 blur-[90px]" />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <ScrollReveal>
           <p className="text-center text-sm font-bold uppercase tracking-widest" style={{ color: COLORS.primary }}>
             Princípios
           </p>
-          <h2 className="mx-auto mt-4 max-w-3xl text-center text-3xl font-bold tracking-tight text-stone-900 md:text-4xl">
+          <h2 className="mx-auto mt-4 max-w-3xl text-center text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-4xl">
             {title}
           </h2>
           {subtitle ? (
-            <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600">{subtitle}</p>
+            <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-stone-600 dark:text-stone-400">{subtitle}</p>
           ) : null}
         </ScrollReveal>
 
@@ -39,16 +36,15 @@ export default function ValuePillarsGrid({
             const Icon = icons[i % icons.length];
             return (
               <ScrollReveal key={item.title} delay={i * 0.06}>
-                <motion.div
-                  whileHover={simplified ? undefined : { y: -4 }}
-                  className="h-full rounded-2xl border border-stone-200/80 bg-white p-7 shadow-sm transition-shadow hover:border-[#ff6600]/20 hover:shadow-md"
+                <div
+                  className="h-full rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 p-7 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#ff6600]/20 hover:shadow-md motion-reduce:transform-none"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6600]/15 to-[#f27405]/10">
                     <Icon size={22} style={{ color: COLORS.primary }} />
                   </div>
-                  <h3 className="mt-5 text-lg font-bold text-stone-900">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-stone-600">{item.text}</p>
-                </motion.div>
+                  <h3 className="mt-5 text-lg font-bold text-stone-900 dark:text-stone-100">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-stone-600 dark:text-stone-400">{item.text}</p>
+                </div>
               </ScrollReveal>
             );
           })}

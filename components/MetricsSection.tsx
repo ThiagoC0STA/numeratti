@@ -3,12 +3,13 @@
 import dynamic from "next/dynamic";
 import { useRef, useEffect, useLayoutEffect, useState } from "react";
 import { BarChart3, Users, TrendingUp, Activity } from "lucide-react";
-import { motion } from "framer-motion";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GsapCounter from "@/components/animations/GsapCounter";
 import ImpressionsShowcaseCard from "@/components/metrics/ImpressionsShowcaseCard";
 import MetricsChartMobileFallback from "@/components/metrics/MetricsChartMobileFallback";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 import { METRICS, COLORS } from "@/lib/constants";
 import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
@@ -53,28 +54,17 @@ function MetricCard({
   const Icon = ICON_MAP[metric.icon] ?? BarChart3;
 
   return (
-    <motion.div
-      initial={simplified ? false : { opacity: 0, y: 40 }}
-      whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
-      animate={simplified ? { opacity: 1, y: 0 } : undefined}
-      viewport={simplified ? undefined : { once: true, amount: 0.25 }}
-      transition={
-        simplified
-          ? { duration: 0 }
-          : { duration: 0.65, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }
-      }
-      whileHover={simplified ? undefined : { y: -6 }}
-    >
-      <div
-        className={`group relative overflow-hidden rounded-3xl border border-stone-200/80 bg-white p-8 shadow-[0_20px_60px_-28px_rgba(0,0,0,0.08)] transition-shadow duration-500 hover:border-[#ff6600]/25 hover:shadow-[0_28px_80px_-24px_rgba(255,102,0,0.12)] lg:p-10 ${className}`}
+    <ScrollReveal delay={index * 0.12}>
+      <SpotlightCard
+        className={`group overflow-hidden rounded-3xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 p-8 shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-all duration-500 hover:border-[#ff6600]/25 hover:-translate-y-1.5 hover:shadow-[0_28px_80px_rgba(255,102,0,0.12)] lg:p-10 ${className}`}
       >
-        <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gradient-to-br from-[#ff6600]/10 to-transparent transition-all duration-700 group-hover:scale-110" />
+        <div className="dark:hidden pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gradient-to-br from-[#ff6600]/10 to-transparent transition-all duration-700 group-hover:scale-110" />
 
         <div className="relative flex items-start justify-between">
           <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#ff6600]/15 to-[#f27405]/10 text-[#ff6600] shadow-inner transition-transform duration-300 group-hover:scale-105">
             <Icon size={28} />
           </div>
-          <span className="rounded-full border border-stone-100 bg-stone-50 px-3 py-1 text-xs font-semibold text-stone-500">
+          <span className="rounded-full border border-stone-100 dark:border-stone-800 bg-stone-50 dark:bg-neutral-950 px-3 py-1 text-xs font-semibold text-stone-500">
             {metric.label}
           </span>
         </div>
@@ -82,14 +72,14 @@ function MetricCard({
         <GsapCounter
           value={metric.value}
           suffix={metric.suffix}
-          className="mt-6 block text-4xl font-bold tracking-tight text-stone-900 md:text-5xl lg:text-6xl"
+          className="mt-6 block text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-5xl lg:text-6xl"
           duration={2}
           format="full"
         />
 
-        <p className="mt-4 text-sm leading-relaxed text-stone-600 lg:text-base">{metric.description}</p>
-      </div>
-    </motion.div>
+        <p className="mt-4 text-sm leading-relaxed text-stone-600 dark:text-stone-400 lg:text-base">{metric.description}</p>
+      </SpotlightCard>
+    </ScrollReveal>
   );
 }
 
@@ -144,14 +134,14 @@ export default function MetricsSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-gradient-to-b from-stone-50 via-white to-[#fff9f4] py-28 lg:py-36"
+      className="relative overflow-hidden bg-gradient-to-b from-stone-50 dark:from-neutral-950 via-white dark:via-neutral-950 to-stone-50 dark:to-neutral-950 py-28 lg:py-36 border-t border-stone-200/40 dark:border-stone-800/40"
     >
-      <div className="pointer-events-none absolute right-0 top-24 h-[420px] w-[420px] rounded-full bg-[#ff6600]/10 blur-[120px]" />
-      <div className="pointer-events-none absolute -left-32 bottom-20 h-80 w-80 rounded-full bg-violet-300/20 blur-[100px]" />
+      <div className="dark:hidden pointer-events-none absolute right-0 top-24 h-[420px] w-[420px] rounded-full bg-[#ff6600]/8 blur-[120px]" />
+      <div className="pointer-events-none absolute -left-32 bottom-20 h-80 w-80 rounded-full bg-violet-300/10 blur-[100px]" />
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.4]"
         style={{
-          backgroundImage: "radial-gradient(rgba(255,102,0,0.06) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
@@ -160,14 +150,14 @@ export default function MetricsSection() {
         <div className="text-center">
           <h2
             ref={headingRef}
-            className="text-4xl font-bold tracking-tight text-stone-900 md:text-5xl lg:text-6xl"
+            className="text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-100 md:text-5xl lg:text-6xl"
           >
             <span className="line block">Resultados que</span>
-            <span className="line block bg-gradient-to-r from-[#ff6600] to-[#f27405] bg-clip-text text-transparent">
+            <span className="line block text-shimmer">
               impressionam
             </span>
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-stone-600">
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-stone-600 dark:text-stone-400">
             Números reais gerados para nossos clientes em campanhas de performance
           </p>
         </div>
@@ -180,42 +170,35 @@ export default function MetricsSection() {
           </div>
         </div>
 
-        <motion.div
-          className="mt-12 overflow-hidden rounded-3xl border border-stone-200/80 bg-white shadow-[0_24px_70px_-30px_rgba(0,0,0,0.1)]"
-          initial={simplified ? false : { opacity: 0, y: 48 }}
-          whileInView={simplified ? undefined : { opacity: 1, y: 0 }}
-          animate={simplified ? { opacity: 1, y: 0 } : undefined}
-          viewport={simplified ? undefined : { once: true, amount: 0.15 }}
-          transition={
-            simplified ? { duration: 0 } : { duration: 0.85, ease: [0.22, 1, 0.36, 1] }
-          }
-        >
-          <div className="flex flex-col gap-4 border-b border-stone-100 p-8 sm:flex-row sm:items-center sm:justify-between lg:p-10">
-            <div>
-              <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#ff6600]/10">
-                  <Activity size={22} style={{ color: COLORS.primary }} />
+        <ScrollReveal delay={0.15}>
+          <div className="mt-12 overflow-hidden rounded-3xl border border-stone-200/80 dark:border-stone-800/80 bg-white dark:bg-neutral-950 shadow-[0_24px_70px_rgba(0,0,0,0.05)]">
+            <div className="flex flex-col gap-4 border-b border-stone-100 dark:border-stone-800 p-8 sm:flex-row sm:items-center sm:justify-between lg:p-10">
+              <div>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#ff6600]/10">
+                    <Activity size={22} style={{ color: COLORS.primary }} />
+                  </div>
+                  <h3 className="text-2xl font-bold text-stone-900 dark:text-stone-100">Acompanhamento diário</h3>
                 </div>
-                <h3 className="text-2xl font-bold text-stone-900">Acompanhamento diário</h3>
+                <p className="mt-2 text-stone-600 dark:text-stone-400">Painel com métricas de campanhas atualizadas diariamente</p>
               </div>
-              <p className="mt-2 text-stone-600">Painel com métricas de campanhas atualizadas diariamente</p>
+              <div className="flex items-center gap-2 rounded-full border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-neutral-950 px-4 py-2">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-[#ff6600]" />
+                <span className="text-sm font-medium text-stone-600 dark:text-stone-400">Tempo real</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-stone-200 bg-stone-50 px-4 py-2">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-[#ff6600]" />
-              <span className="text-sm font-medium text-stone-600">Tempo real</span>
-            </div>
-          </div>
 
-          <div className="bg-gradient-to-b from-stone-50/80 to-white p-6 lg:p-10">
-            <div className="h-72 lg:h-96">
-              {useLightweightChart ? (
-                <MetricsChartMobileFallback />
-              ) : (
-                <MetricsAreaChartLazy data={CHART_DATA} />
-              )}
+            <div className="bg-gradient-to-b from-stone-50/80 dark:from-neutral-950/80 to-white dark:to-neutral-950 p-6 lg:p-10">
+              <div className="h-72 lg:h-96">
+                {useLightweightChart ? (
+                  <MetricsChartMobileFallback />
+                ) : (
+                  <MetricsAreaChartLazy data={CHART_DATA} />
+                )}
+              </div>
             </div>
           </div>
-        </motion.div>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Geist, Plus_Jakarta_Sans } from "next/font/google";
 import { DEFAULT_OG_IMAGE_URL, SITE_URL } from "@/lib/constants";
+import ThemeProvider from "@/components/providers/ThemeProvider";
+import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
 import "./globals.css";
 
 const CookieConsent = dynamic(() => import("@/components/CookieConsent"));
@@ -40,7 +42,7 @@ export const metadata: Metadata = {
         url: DEFAULT_OG_IMAGE_URL,
         width: 1200,
         height: 630,
-        alt: "Numeratti — marketing digital e performance",
+        alt: "Numeratti,  marketing digital e performance",
       },
     ],
   },
@@ -75,17 +77,29 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${plusJakarta.variable} h-full antialiased`}
     >
       <head>
-        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://cdn.sanity.io"
+          crossOrigin="anonymous"
+        />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
-        <link rel="preconnect" href="https://numeratti.com.br" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://numeratti.com.br"
+          crossOrigin="anonymous"
+        />
         <link rel="dns-prefetch" href="https://numeratti.com.br" />
       </head>
-      <body className="min-h-full flex flex-col font-[family-name:var(--font-plus-jakarta)]">
-        {children}
-        <CookieConsent />
+      <body className="min-h-full flex flex-col bg-white font-[family-name:var(--font-plus-jakarta)] dark:bg-neutral-950">
+        <ThemeProvider>
+          <ScrollProgressBar />
+          {children}
+          <CookieConsent />
+        </ThemeProvider>
       </body>
     </html>
   );

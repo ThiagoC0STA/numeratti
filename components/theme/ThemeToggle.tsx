@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
-import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 
 const variantStyles = {
@@ -31,14 +30,13 @@ export default function ThemeToggle({ variant }: { variant: keyof typeof variant
   const isDark = resolvedTheme === "dark";
 
   return (
-    <motion.button
+    <button
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      whileTap={{ scale: 0.94 }}
-      className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors ${variantStyles[variant]}`}
+      className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-[background-color,transform] duration-150 active:scale-[0.94] motion-reduce:active:scale-100 ${variantStyles[variant]}`}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {isDark ? <Sun size={18} strokeWidth={2} /> : <Moon size={18} strokeWidth={2} />}
-    </motion.button>
+    </button>
   );
 }

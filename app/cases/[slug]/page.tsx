@@ -19,14 +19,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!detail) return { title: "Case | Numeratti" };
   const canonical = `${SITE_URL}/cases/${slug}`;
   return {
-    title: `${detail.title} — Case de Sucesso | Numeratti`,
+    title: `${detail.title},  Case de Sucesso | Numeratti`,
     description: detail.lead.slice(0, 160),
     alternates: { canonical },
     openGraph: {
       type: "article",
       locale: "pt_BR",
       url: canonical,
-      title: `${detail.title} — Case de Sucesso | Numeratti`,
+      title: `${detail.title},  Case de Sucesso | Numeratti`,
       description: detail.lead.slice(0, 160),
     },
   };

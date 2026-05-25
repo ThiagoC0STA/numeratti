@@ -38,39 +38,39 @@ const components: Partial<PortableTextReactComponents> = {
   },
   block: {
     h2: ({ children }) => (
-      <h2 className="mb-4 mt-10 text-2xl font-bold text-stone-900">
+      <h2 className="mb-4 mt-10 text-2xl font-bold text-stone-900 dark:text-stone-100">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="mb-3 mt-8 text-xl font-bold text-stone-900">
+      <h3 className="mb-3 mt-8 text-xl font-bold text-stone-900 dark:text-stone-100">
         {children}
       </h3>
     ),
     h4: ({ children }) => (
-      <h4 className="mb-2 mt-6 text-lg font-bold text-stone-900">
+      <h4 className="mb-2 mt-6 text-lg font-bold text-stone-900 dark:text-stone-100">
         {children}
       </h4>
     ),
     normal: ({ children }) => (
-      <p className="mb-5 text-base leading-relaxed text-stone-700">
+      <p className="mb-5 text-base leading-relaxed text-stone-700 dark:text-stone-300">
         {children}
       </p>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="my-6 border-l-4 border-[#ff6600] pl-4 italic text-stone-600">
+      <blockquote className="my-6 border-l-4 border-[#ff6600] pl-4 italic text-stone-600 dark:text-stone-400">
         {children}
       </blockquote>
     ),
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="mb-5 ml-6 list-disc space-y-2 text-stone-700">
+      <ul className="mb-5 ml-6 list-disc space-y-2 text-stone-700 dark:text-stone-300">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="mb-5 ml-6 list-decimal space-y-2 text-stone-700">
+      <ol className="mb-5 ml-6 list-decimal space-y-2 text-stone-700 dark:text-stone-300">
         {children}
       </ol>
     ),
@@ -98,11 +98,11 @@ const components: Partial<PortableTextReactComponents> = {
       );
     },
     strong: ({ children }) => (
-      <strong className="font-bold text-stone-900">{children}</strong>
+      <strong className="font-bold text-stone-900 dark:text-stone-100">{children}</strong>
     ),
     em: ({ children }) => <em>{children}</em>,
     code: ({ children }) => (
-      <code className="rounded bg-stone-100 px-1.5 py-0.5 text-sm font-mono text-[#ff6600]">
+      <code className="rounded bg-stone-100 dark:bg-neutral-900 px-1.5 py-0.5 text-sm font-mono text-[#ff6600]">
         {children}
       </code>
     ),
