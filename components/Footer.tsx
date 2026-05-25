@@ -19,7 +19,6 @@ import {
   LOGO_DESKTOP,
   SOCIAL_LINKS,
 } from "@/lib/constants";
-import { useSimplifiedMotion } from "@/lib/hooks/useSimplifiedMotion";
 
 const SOCIAL_ICON_MAP = {
   facebook: Facebook,
@@ -28,8 +27,6 @@ const SOCIAL_ICON_MAP = {
 } as const;
 
 export default function Footer() {
-  const simplified = useSimplifiedMotion();
-
   return (
     <footer className="relative overflow-hidden border-t border-white/5 bg-gradient-to-b from-[#0a0a0a] to-[#050505] text-stone-300">
       <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff6600]/40 to-transparent" />
