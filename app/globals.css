@@ -235,7 +235,7 @@ body {
   }
 }
 
-/* WordPress post HTML (injected) */
+/* Blog post HTML (injected) */
 .blog-prose {
   font-size: 1.125rem;
   line-height: 1.8;
@@ -246,7 +246,7 @@ body {
   color: #d6d3d1;
 }
 
-/* Neutralize WP “full width” blocks that break out of the reading column */
+/* Neutralize “full width” blocks that break out of the reading column */
 .blog-prose .alignfull,
 .blog-prose .alignwide {
   max-width: 100% !important;
