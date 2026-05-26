@@ -21,10 +21,8 @@ export const COLORS = {
   },
 } as const;
 
-export const LOGO_DESKTOP =
-  "https://numeratti.com.br/wp-content/themes/Numeratti/assets/images/logo_principal.svg";
-export const LOGO_MOBILE =
-  "https://numeratti.com.br/wp-content/themes/Numeratti/assets/images/logo_mobile.svg";
+export const LOGO_DESKTOP = "/logo-numeratti.png";
+export const LOGO_MOBILE = "/logo-numeratti.png";
 
 export const NAV_LINKS = [
   { href: "/quem-somos", label: "Quem Somos" },
@@ -137,135 +135,30 @@ export const PLATFORMS = [
   "Mídia Programática",
 ] as const;
 
-/** Official platform badge artwork (legacy site). */
+/** Official platform badge artwork. */
 export const PLATFORM_ASSETS = [
-  {
-    name: "Facebook Ads",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-47.png",
-  },
-  {
-    name: "Instagram Ads",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2022/04/jpbalthazar-graficos-instagram-ads.png",
-  },
-  {
-    name: "Google Ads",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2022/04/ads-logo-horizontal.png",
-  },
-  {
-    name: "Waze Ads",
-    image: "https://numeratti.com.br/wp-content/uploads/2022/04/unnamed.png",
-  },
-  {
-    name: "Criteo",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-51.png",
-  },
-  {
-    name: "RTB House",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-52.png",
-  },
-  {
-    name: "Voxus",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-53.png",
-  },
-  {
-    name: "Twitter Ads",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-55.png",
-  },
-  {
-    name: "Bing Ads",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-56.png",
-  },
-  {
-    name: "Pinterest Ads",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-57.png",
-  },
-  {
-    name: "TikTok Ads",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-58.png",
-  },
-  {
-    name: "LinkedIn Ads",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2022/04/Retangulo-49.png",
-  },
-  {
-    name: "Google Analytics",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2022/04/logo_lockup_analytics_icon_horizontal_black_2x.png",
-  },
-  {
-    name: "YouTube",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2023/09/Retangulo-108.png",
-  },
-  {
-    name: "Tinder Ads",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2023/09/Retangulo-109.png",
-  },
-  {
-    name: "Spotify",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2023/09/Retangulo-110.png",
-  },
-  {
-    name: "Mídia Programática",
-    image:
-      "https://numeratti.com.br/wp-content/uploads/2023/09/MIDIAPROGRAMATICA.png",
-  },
+  { name: "Facebook Ads", image: "/04/facebook-ads.png" },
+  { name: "Instagram Ads", image: "/04/instagram-ads.png" },
+  { name: "Google Ads", image: "/04/google-ads.png" },
+  { name: "Waze Ads", image: "/04/waze-ads.png" },
+  { name: "Criteo", image: "/04/criteo.png" },
+  { name: "RTB House", image: "/04/rtb-house.png" },
+  { name: "Voxus", image: "/04/voxus.png" },
+  { name: "Twitter Ads", image: "/04/twitter-ads.png" },
+  { name: "Bing Ads", image: "/04/bing.png" },
+  { name: "Pinterest Ads", image: "/04/pinterest-ads.png" },
+  { name: "TikTok Ads", image: "/04/tiktok-ads.png" },
+  { name: "LinkedIn Ads", image: "/04/linkedin-ads.png" },
+  { name: "Google Analytics", image: "/04/google-analytics.png" },
+  { name: "YouTube", image: "/04/youtube.png" },
+  { name: "Tinder Ads", image: "/04/tinder.png" },
+  { name: "Spotify", image: "/04/spotify.png" },
+  { name: "Mídia Programática", image: "/04/MIDIAPROGRAMATICA.png" },
 ] as const;
 
 export const CLIENT_LOGOS = [
-  {
-    name: "Nossa Fruta",
-    url: "https://numeratti.com.br/wp-content/uploads/2022/07/1689080881046-e1694713945899.jpg",
-  },
-  {
-    name: "Artplac",
-    url: "https://numeratti.com.br/wp-content/uploads/2023/09/LOGO-NUMERATTI-ArtPlac-Colorido-PNG.png",
-  },
-  {
-    name: "Babbi Osteria",
-    url: "https://numeratti.com.br/wp-content/uploads/2023/09/LOGO-NUMERATTI-Babbi-Colorido-PNG.png",
-  },
-  {
-    name: "Bem Viver Urbanismo",
-    url: "https://numeratti.com.br/wp-content/uploads/2023/09/LOGO-NUMERATTI-Bem-Viver-Colorido-PNG.png",
-  },
-  {
-    name: "Bipp",
-    url: "https://numeratti.com.br/wp-content/uploads/2023/09/LOGO-NUMERATTI-Bipp-Colorido-PNG.png",
-  },
-  {
-    name: "Conexo",
-    url: "https://numeratti.com.br/wp-content/uploads/2023/09/LOGO-NUMERATTI-Conexo-Colorido-PNG.png",
-  },
-  {
-    name: "Cortile",
-    url: "https://numeratti.com.br/wp-content/uploads/2023/09/LOGO-NUMERATTI-Cortile-Colorido-PNG.png",
-  },
-  {
-    name: "Fio Jeitoso",
-    url: "https://numeratti.com.br/wp-content/uploads/2023/09/LOGO-NUMERATTI-Fio-Jeitoso-Colorido-PNG.png",
-  },
-  {
-    name: "Grupo Geppos",
-    url: "https://numeratti.com.br/wp-content/uploads/2023/07/grupo-geppos-e1694714699388.png",
-  },
-  {
-    name: "IEL",
-    url: "https://numeratti.com.br/wp-content/uploads/2023/09/LOGO-NUMERATTI-IEL-Colorido-PNG.png",
-  },
+  { name: "Grupo Geppos", url: "/logos/geppos.png" },
+  { name: "IEL", url: "/logos/iel.png" },
   { name: "Acal", url: "/logos/acal.png" },
   { name: "Argos", url: "/logos/argos.png" },
   { name: "Avine", url: "/logos/avine.png" },
@@ -838,7 +731,7 @@ export const QUEM_SOMOS = {
     bio: "Publicitário com 14 anos de experiência em marketing digital de performance. Empreendedor, palestrante e consultor, contribuiu para o crescimento de marcas como Ibyte, San Paolo e RioMar.",
     credentials:
       "Google Partner Premier | Palestrante de marketing digital | +14 anos em mídia paga para marcas de alto ticket em Fortaleza e Brasil",
-    image: "https://numeratti.com.br/wp-content/uploads/2022/04/logo-1.png",
+    image: "/logo-numeratti.png",
   },
   award:
     "3º lugar no Prêmio Limitless RD Station 2022,  categoria Especialistas em Vendas, entre mais de 3.000 agências concorrentes no Brasil.",

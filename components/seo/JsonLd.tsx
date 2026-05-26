@@ -6,7 +6,7 @@ export function OrganizationJsonLd() {
     "@type": "Organization",
     name: "Numeratti",
     url: SITE_URL,
-    logo: "https://numeratti.com.br/wp-content/themes/Numeratti/assets/images/logo_principal.svg",
+    logo: `${SITE_URL}/logo-numeratti.png`,
     description:
       "Consultoria de Performance orientada a resultados. Geramos números reais e mensuráveis para seu negócio.",
     address: {
@@ -77,7 +77,7 @@ export function BlogPostJsonLd({
       name: "Numeratti",
       logo: {
         "@type": "ImageObject",
-        url: "https://numeratti.com.br/wp-content/themes/Numeratti/assets/images/logo_principal.svg",
+        url: `${SITE_URL}/logo-numeratti.png`,
       },
     },
     ...(imageUrl ? { image: imageUrl } : {}),
