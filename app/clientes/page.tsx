@@ -4,12 +4,14 @@ import PageShell from "@/components/layout/PageShell";
 import PageHero from "@/components/PageHero";
 import ClientsSection from "@/components/ClientsSection";
 import ClientesPageExtras from "@/components/pages/ClientesPageExtras";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Clientes - Numeratti",
+export const metadata = pageMetadata({
+  title: "Clientes",
   description:
     "Mais de 200 empresas escolheram a Numeratti para estruturar ou acelerar o crescimento.",
-};
+  path: "/clientes",
+});
 
 export default function ClientesPage() {
   return (

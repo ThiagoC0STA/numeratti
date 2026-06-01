@@ -3,12 +3,14 @@ import Footer from "@/components/Footer";
 import PageShell from "@/components/layout/PageShell";
 import PageHero from "@/components/PageHero";
 import SolucoesContent from "@/components/pages/SolucoesContent";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Soluções - Numeratti",
+export const metadata = pageMetadata({
+  title: "Soluções",
   description:
     "O seu negócio com resultados reais e mensuráveis. Consultoria, estratégias e operação com alta inteligência de mercado.",
-};
+  path: "/solucoes",
+});
 
 export default function SolucoesPage() {
   return (

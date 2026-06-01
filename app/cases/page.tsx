@@ -3,12 +3,14 @@ import Footer from "@/components/Footer";
 import PageShell from "@/components/layout/PageShell";
 import PageHero from "@/components/PageHero";
 import CasesContent from "@/components/pages/CasesContent";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Cases de Sucesso - Numeratti",
+export const metadata = pageMetadata({
+  title: "Cases de Sucesso",
   description:
     "Cases reais de empresas que aceleraram seus resultados com a Numeratti.",
-};
+  path: "/cases",
+});
 
 export default function CasesPage() {
   return (

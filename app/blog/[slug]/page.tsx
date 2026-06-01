@@ -11,7 +11,7 @@ import { getAllPostSlugs, getAllPostsSummaries, getPostBySlug } from "@/lib/blog
 import { formatPostDate } from "@/lib/blog/dates";
 import { COLORS, SITE_URL } from "@/lib/constants";
 import { ArrowLeft, Calendar } from "lucide-react";
-import { BlogPostJsonLd } from "@/components/seo/JsonLd";
+import { BlogPostJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -120,6 +120,13 @@ export default async function BlogArticlePage({ params }: Props) {
         url={`${SITE_URL}/blog/${post.slug}`}
         imageUrl={post.imageUrl}
         datePublished={post.date}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Início", path: "/" },
+          { name: "Blog", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ]}
       />
       <Header />
       <main>

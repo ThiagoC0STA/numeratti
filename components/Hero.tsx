@@ -182,12 +182,12 @@ export default function Hero() {
                   
                   <Image
                     src={slide.image}
-                    alt="Numeratti Hero"
+                    alt="Numeratti, consultoria de performance e marketing digital"
                     fill
                     className="object-cover object-center transition-transform duration-[1.8s] group-hover:scale-105"
                     sizes="(max-width: 768px) 90vw, 540px"
                     priority={slideIndex === 0}
-                    quality={100}
+                    quality={85}
                     fetchPriority={slideIndex === 0 ? "high" : "low"}
                   />
                 </div>

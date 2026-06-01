@@ -3,11 +3,13 @@ import Footer from "@/components/Footer";
 import PageShell from "@/components/layout/PageShell";
 import PageHero from "@/components/PageHero";
 import TrabalheConoscoContent from "@/components/pages/TrabalheConoscoContent";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Trabalhe Conosco - Numeratti",
+export const metadata = pageMetadata({
+  title: "Trabalhe Conosco",
   description: "Faça parte do time Numeratti. Venha crescer conosco.",
-};
+  path: "/trabalhe-conosco",
+});
 
 export default function TrabalheConoscoPage() {
   return (

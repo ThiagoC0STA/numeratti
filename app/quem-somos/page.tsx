@@ -3,12 +3,14 @@ import Footer from "@/components/Footer";
 import PageShell from "@/components/layout/PageShell";
 import PageHero from "@/components/PageHero";
 import QuemSomosContent from "@/components/pages/QuemSomosContent";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Quem Somos - Numeratti",
+export const metadata = pageMetadata({
+  title: "Quem Somos",
   description:
     "Empresa de Consultoria de Performance orientada a resultados. Dados, análises e números para o sucesso do seu negócio.",
-};
+  path: "/quem-somos",
+});
 
 export default function QuemSomosPage() {
   return (

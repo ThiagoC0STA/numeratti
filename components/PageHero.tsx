@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 import { ArrowRight } from "lucide-react";
 import { COLORS, WHATSAPP_URL } from "@/lib/constants";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import PageHeroVisual, { type PageHeroVisualKind } from "@/components/page-hero/PageHeroVisual";
 
 interface PageHeroProps {
@@ -26,10 +28,19 @@ export default function PageHero({
   visual = "default",
 }: PageHeroProps) {
   const words = useMemo(() => title.split(" ").filter(Boolean), [title]);
+  const pathname = usePathname();
+  const crumbs =
+    pathname && pathname !== "/"
+      ? [
+          { name: "Início", path: "/" },
+          { name: title, path: pathname },
+        ]
+      : null;
 
   if (backgroundImage) {
     return (
       <section className="relative min-h-[52vh] overflow-hidden lg:min-h-[56vh]">
+        {crumbs ? <BreadcrumbJsonLd items={crumbs} /> : null}
         <div className="absolute inset-0">
           <Image
             src={backgroundImage}
@@ -88,6 +99,7 @@ export default function PageHero({
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-stone-100 dark:from-neutral-950 via-white dark:via-neutral-950 to-[#fff7f0] dark:to-neutral-950 pb-0 pt-6 md:pt-10">
+      {crumbs ? <BreadcrumbJsonLd items={crumbs} /> : null}
       <div
         className="pointer-events-none absolute -left-32 top-0 h-[420px] w-[420px] rounded-full bg-[#ff6600]/[0.07] blur-[100px]"
         aria-hidden

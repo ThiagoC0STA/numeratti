@@ -6,11 +6,14 @@ import ContactForm from "@/components/contact/ContactForm";
 import ContactPageAside from "@/components/contact/ContactPageAside";
 import ContactPageExtras from "@/components/contact/ContactPageExtras";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Contato - Numeratti",
-  description: "Fale com um especialista da Numeratti. Estamos prontos para ajudar seu negócio.",
-};
+export const metadata = pageMetadata({
+  title: "Contato",
+  description:
+    "Fale com um especialista da Numeratti. Estamos prontos para ajudar seu negócio.",
+  path: "/contato",
+});
 
 export default function ContatoPage() {
   return (

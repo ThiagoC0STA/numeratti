@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageShell from "@/components/layout/PageShell";
 import CaseDetailContent from "@/components/pages/CaseDetailContent";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { CASE_DETAILS, CASES, SITE_URL } from "@/lib/constants";
 import type { CaseSlug } from "@/lib/constants";
 
@@ -39,6 +40,13 @@ export default async function CaseDetailPage({ params }: Props) {
 
   return (
     <PageShell>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Início", path: "/" },
+          { name: "Cases", path: "/cases" },
+          { name: detail.title, path: `/cases/${slug}` },
+        ]}
+      />
       <Header />
       <main>
         <CaseDetailContent detail={detail} />
