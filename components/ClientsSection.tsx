@@ -3,21 +3,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { CLIENT_LOGOS, COLORS } from "@/lib/constants";
+import { CLIENT_LOGOS, COLORS, type LogoFit } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
 
 type ClientsSectionVariant = "home" | "page";
 
-/** Same sizing rules used by the /clientes grid,  keeps brand presentation consistent. */
-const LARGER_IDXS = new Set([
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 15, 16, 17, 18, 19, 23, 31, 32, 33, 34,
-  36, 37, 38, 39,
-]);
-const COVER_IDXS = new Set([16, 18, 33]);
+/** Per-logo framing, derived from each logo's `fit` hint (default "fill"). */
+function logoFrame(fit: LogoFit = "fill") {
+  if (fit === "contain") {
+    return { pad: "p-5 md:p-6", box: "h-[75%] w-[90%]", object: "object-contain" };
+  }
+  if (fit === "cover") {
+    return { pad: "p-2", box: "h-full w-full", object: "object-cover" };
+  }
+  return { pad: "p-2", box: "h-full w-full", object: "object-contain" };
+}
 
 function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
-  const indexed = CLIENT_LOGOS.map((c, idx) => ({ ...c, idx }));
-  const ordered = direction === "left" ? indexed : [...indexed].reverse();
+  const ordered =
+    direction === "left" ? CLIENT_LOGOS : [...CLIENT_LOGOS].reverse();
   const loop = [...ordered, ...ordered];
 
   return (
@@ -49,23 +53,21 @@ function LogoMarquee({ direction = "left" }: { direction?: "left" | "right" }) {
         }`}
       >
         {loop.map((client, i) => {
-          const isLarger = LARGER_IDXS.has(client.idx);
-          const isCover = COVER_IDXS.has(client.idx);
+          const frame = logoFrame(client.fit);
           return (
             <div
               key={`${client.name}-${i}`}
-              className={`flex h-24 w-[10rem] shrink-0 items-center justify-center rounded-2xl border border-stone-200/60 bg-white shadow-[0_8px_28px_-14px_rgba(15,15,15,0.12)] ring-1 ring-stone-100/50 md:h-28 md:w-[14rem] ${
-                isLarger ? "p-2" : "p-5 md:p-6"
-              }`}
+              className={`flex h-24 w-[10rem] shrink-0 items-center justify-center rounded-2xl border border-stone-200/60 bg-white shadow-[0_8px_28px_-14px_rgba(15,15,15,0.12)] ring-1 ring-stone-100/50 md:h-28 md:w-[14rem] ${frame.pad}`}
             >
-              <div
-                className={`relative ${isLarger ? "h-full w-full" : "h-[75%] w-[90%]"}`}
-              >
+              <div className={`relative ${frame.box}`}>
                 <Image
                   src={client.url}
                   alt={client.name}
                   fill
-                  className={isCover ? "object-cover" : "object-contain"}
+                  className={frame.object}
+                  style={
+                    client.invert ? { filter: "brightness(0)" } : undefined
+                  }
                   sizes="(max-width: 768px) 10rem, 14rem"
                   quality={75}
                   loading="lazy"
@@ -117,22 +119,22 @@ export default function ClientsSection({
 
         {isPage ? (
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:mt-12 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-            {CLIENT_LOGOS.map((client, idx) => {
-              const isLarger = LARGER_IDXS.has(idx);
-              const isCover = COVER_IDXS.has(idx);
+            {CLIENT_LOGOS.map((client) => {
+              const frame = logoFrame(client.fit);
               return (
                 <div
                   key={client.name}
-                  className={`flex h-28 items-center justify-center rounded-2xl border border-stone-200/60 bg-white shadow-[0_8px_28px_-14px_rgba(15,15,15,0.12)] ring-1 ring-stone-100/50 ${isLarger ? "p-2" : "p-5"}`}
+                  className={`flex h-28 items-center justify-center rounded-2xl border border-stone-200/60 bg-white shadow-[0_8px_28px_-14px_rgba(15,15,15,0.12)] ring-1 ring-stone-100/50 ${frame.pad}`}
                 >
-                  <div
-                    className={`relative ${isLarger ? "h-full w-full" : "h-[75%] w-[90%]"}`}
-                  >
+                  <div className={`relative ${frame.box}`}>
                     <Image
                       src={client.url}
                       alt={client.name}
                       fill
-                      className={isCover ? "object-cover" : "object-contain"}
+                      className={frame.object}
+                      style={
+                        client.invert ? { filter: "brightness(0)" } : undefined
+                      }
                       quality={80}
                       loading="lazy"
                     />

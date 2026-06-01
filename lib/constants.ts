@@ -156,40 +156,64 @@ export const PLATFORM_ASSETS = [
   { name: "Mídia Programática", image: "/04/MIDIAPROGRAMATICA.png" },
 ] as const;
 
-export const CLIENT_LOGOS = [
+/**
+ * Logo framing hint, per-item so adding/removing logos never shifts another
+ * logo out of frame.
+ * - "fill": logo fills the card edge-to-edge (object-contain, tight padding)
+ * - "contain": logo sits smaller with breathing room (more padding)
+ * - "cover": logo crops to fill the card (full-bleed artwork only)
+ */
+export type LogoFit = "fill" | "contain" | "cover";
+
+export interface ClientLogo {
+  name: string;
+  url: string;
+  /** Defaults to "fill" when omitted. */
+  fit?: LogoFit;
+  /** Recolor a light/white logo to solid black so it shows on the white card. */
+  invert?: boolean;
+}
+
+export const CLIENT_LOGOS: readonly ClientLogo[] = [
   { name: "Grupo Geppos", url: "/logos/geppos.png" },
   { name: "IEL", url: "/logos/iel.png" },
   { name: "Acal", url: "/logos/acal.png" },
   { name: "Argos", url: "/logos/argos.png" },
   { name: "Avine", url: "/logos/avine.png" },
   { name: "Being", url: "/logos/being.png" },
-  { name: "BR Verde", url: "/logos/br-verde.png" },
   { name: "CDC", url: "/logos/cdc.png" },
-  { name: "Courofino", url: "/logos/courofino.png" },
+  { name: "Courofino", url: "/logos/courofino.png", fit: "cover" },
   { name: "Delta", url: "/logos/delta.png" },
-  { name: "Diamantes", url: "/logos/diamantes.jpg" },
-  { name: "Grupo Viper", url: "/logos/grupo-viper.png" },
-  { name: "Gym", url: "/logos/gym.png" },
+  { name: "Diamantes", url: "/logos/diamantes.jpg", fit: "cover" },
+  { name: "Grupo Viper", url: "/logos/grupo-viper.png", fit: "contain" },
+  { name: "Gym", url: "/logos/gym.png", fit: "contain" },
   { name: "Integral", url: "/logos/integral.png" },
-  { name: "J. Regás", url: "/logos/jregas.png" },
+  { name: "J. Regás", url: "/logos/jregas.png", fit: "contain" },
   { name: "Kamibaa", url: "/logos/kamibaa.png" },
-  { name: "Linkce", url: "/logos/linkce.png" },
+  { name: "Linkce", url: "/logos/linkce.png", fit: "contain" },
   { name: "Minalba", url: "/logos/minalba.png" },
-  { name: "Mono", url: "/logos/mono.jpg" },
+  { name: "Mono", url: "/logos/mono.jpg", fit: "contain" },
   { name: "Mosele", url: "/logos/mosele.webp" },
-  { name: "MyBlue", url: "/logos/myblue.png" },
-  { name: "NSF", url: "/logos/nsf.png" },
-  { name: "NS Joquei", url: "/logos/ns-joquei.png" },
+  { name: "MyBlue", url: "/logos/myblue.png", fit: "contain" },
+  { name: "NSF", url: "/logos/nsf.png", fit: "contain" },
+  { name: "NS Joquei", url: "/logos/ns-joquei.png", fit: "contain" },
   { name: "NSM", url: "/logos/nsm.png" },
-  { name: "Odonto", url: "/logos/odonto.png" },
-  { name: "Orolaser", url: "/logos/orolaser.jpg" },
-  { name: "Senai", url: "/logos/senai.png" },
-  { name: "Sesi", url: "/logos/sesi.png" },
-  { name: "Sicredi", url: "/logos/sicredi.jpg" },
-  { name: "SVC", url: "/logos/svc.png" },
-  { name: "VSS", url: "/logos/vss.jpg" },
+  { name: "Odonto", url: "/logos/odonto.png", fit: "contain" },
+  { name: "Orolaser", url: "/logos/orolaser.jpg", fit: "cover" },
+  { name: "Senai", url: "/logos/senai.png", fit: "contain" },
+  { name: "Sesi", url: "/logos/sesi.png", fit: "contain" },
+  { name: "Sicredi", url: "/logos/sicredi.jpg", fit: "contain" },
+  { name: "SVC", url: "/logos/svc.png", fit: "cover" },
+  { name: "VSS", url: "/logos/vss.jpg", fit: "contain" },
   { name: "Zenir", url: "/logos/zenir.png" },
-] as const;
+  { name: "Reali", url: "/logos/reali.png", fit: "contain" },
+  { name: "Via Sul", url: "/logos/via-sul.png", fit: "contain" },
+  { name: "Tudo Office", url: "/logos/tudo-office.png", fit: "cover" },
+  { name: "Sou Energy", url: "/logos/sou-energy.png", fit: "contain" },
+  { name: "Fan Capital", url: "/logos/fan.png", fit: "contain" },
+  { name: "Grupo AGP", url: "/logos/agp.webp", fit: "contain", invert: true },
+  { name: "Grupo Illa", url: "/logos/illa.png", fit: "cover" },
+];
 
 export const CASES = [
   {

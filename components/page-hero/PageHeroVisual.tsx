@@ -127,7 +127,7 @@ function HeroClientesLogos() {
               style={{
                 animation: `scaleUpFade 450ms ${i * 50}ms cubic-bezier(0.22,1,0.36,1) backwards`,
               }}
-              className="flex aspect-[5/3] items-center justify-center rounded-xl border border-stone-100 dark:border-stone-800 bg-stone-50/80 dark:bg-neutral-950/80 px-2 py-2 motion-reduce:animate-none"
+              className="flex aspect-[5/3] items-center justify-center rounded-xl border border-stone-200 bg-white px-2 py-2 shadow-sm motion-reduce:animate-none"
             >
               <Image
                 src={client.url}
