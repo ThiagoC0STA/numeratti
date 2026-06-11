@@ -833,6 +833,326 @@ body {
 }
 
 /* =====================================================================
+   Landing page: /medicos (Numeratti MED — captação de pacientes)
+   Família visual irmã da /diagnostico (dark warm + laranja), com um
+   acento verde-clínico (--med-clinical) reservado a sinais de ética /
+   compliance CFM. Todas as regras escopadas por .lp-medicos no layout.
+   ===================================================================== */
+
+.lp-medicos {
+  --orange-primary: #e8740c;
+  --orange-light: #fef0e3;
+  --orange-mid: #d4680a;
+  --dark-bg: #0a0a0a;
+  --dark-warm: #0f0a05;
+  --dark-mid: #1a0f05;
+  --dark-accent: #2a1508;
+  --dark-edge: #3d1e07;
+
+  /* Sinal semântico de ética / compliance — uso restrito (selos CFM, checks) */
+  --med-clinical: #2dd4bf;
+  --med-clinical-dim: rgba(45, 212, 191, 0.12);
+
+  background: var(--dark-bg);
+  color: #ffffff;
+  font-family: var(--font-body), system-ui, sans-serif;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+}
+
+.lp-medicos ::selection {
+  background: var(--orange-primary);
+  color: white;
+}
+
+/* Force dark theme on Tailwind utilities used by the original light design */
+.lp-medicos .bg-cream,
+.lp-medicos section.bg-cream {
+  background-color: var(--dark-bg);
+}
+.lp-medicos .bg-cream-dark {
+  background-color: var(--dark-warm);
+}
+.lp-medicos .bg-cream-dark\/60 {
+  background-color: rgba(15, 10, 5, 0.6);
+}
+.lp-medicos .bg-white {
+  background-color: var(--dark-warm);
+}
+.lp-medicos .text-ink {
+  color: #ffffff;
+}
+.lp-medicos .text-ink\/45 {
+  color: rgba(255, 255, 255, 0.45);
+}
+.lp-medicos .text-ink\/60 {
+  color: rgba(255, 255, 255, 0.6);
+}
+.lp-medicos .text-ink\/65 {
+  color: rgba(255, 255, 255, 0.65);
+}
+.lp-medicos .text-ink\/70 {
+  color: rgba(255, 255, 255, 0.7);
+}
+.lp-medicos .border-ink\/10 {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.lp-medicos .bg-ink\/10 {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.lp-medicos .grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.lp-medicos .grid-bg-dark {
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.lp-medicos .noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+}
+
+.lp-medicos .display {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+.lp-medicos .display-tight {
+  letter-spacing: -0.035em;
+}
+
+.lp-medicos .kw {
+  color: var(--orange-primary);
+}
+
+/* Rótulo de instrumento médico (mono, caixa-alta, tracking largo) */
+.lp-medicos .mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Numeral fantasma — grande, contornado, motivo de "prontuário/monitor" */
+.lp-medicos .ghost-num {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(232, 116, 12, 0.55);
+  pointer-events: none;
+  user-select: none;
+}
+
+.lp-medicos .glow-btn {
+  background: linear-gradient(135deg, #e8740c 0%, #d4680a 100%);
+  color: white;
+  border-radius: 28px;
+  padding: 18px 36px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(232, 116, 12, 0.25);
+  position: relative;
+  isolation: isolate;
+}
+.lp-medicos .glow-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 50px rgba(232, 116, 12, 0.45), 0 10px 40px rgba(232, 116, 12, 0.35);
+}
+
+.lp-medicos .ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-radius: 28px;
+  padding: 16px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+}
+.lp-medicos .ghost-btn:hover {
+  color: #ffffff;
+  border-color: rgba(232, 116, 12, 0.45);
+  background-color: rgba(232, 116, 12, 0.06);
+}
+
+.lp-medicos .glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+.lp-medicos .glass:hover {
+  border-color: rgba(232, 116, 12, 0.45);
+  box-shadow: 0 25px 60px -20px rgba(232, 116, 12, 0.35);
+  transform: translateY(-4px);
+}
+
+.lp-medicos .cream-card {
+  background: var(--dark-warm);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 22px;
+  color: #ffffff;
+  transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+.lp-medicos .cream-card:hover {
+  border-color: var(--orange-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px -25px rgba(232, 116, 12, 0.3);
+}
+
+.lp-medicos .orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.lp-medicos .deco-num {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.lp-medicos .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.lp-medicos .tag-dark {
+  background: rgba(232, 116, 12, 0.12);
+  color: #fef0e3;
+  border: 1px solid rgba(232, 116, 12, 0.3);
+}
+.lp-medicos .tag-light {
+  background: var(--orange-light);
+  color: var(--orange-mid);
+  border: 1px solid rgba(232, 116, 12, 0.2);
+}
+/* Selo de ética / compliance — único lugar onde o verde-clínico aparece */
+.lp-medicos .tag-clinical {
+  background: var(--med-clinical-dim);
+  color: var(--med-clinical);
+  border: 1px solid rgba(45, 212, 191, 0.35);
+}
+.lp-medicos .check-clinical {
+  color: var(--med-clinical);
+}
+
+.lp-medicos .particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--orange-primary);
+  border-radius: 50%;
+  filter: blur(1px);
+  box-shadow: 0 0 12px rgba(232, 116, 12, 0.8);
+  animation: lp-med-float-up linear infinite;
+}
+
+.lp-medicos :focus-visible {
+  outline: 2px solid var(--orange-primary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@keyframes lp-med-float-up {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-120vh) translateX(20px); opacity: 0; }
+}
+
+/* Hero: barras do mock de agenda sobem ao entrar em cena */
+@keyframes lp-med-bar-rise {
+  from { transform: scaleY(0); opacity: 0; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+.lp-medicos .med-bar {
+  transform-origin: bottom;
+  animation: lp-med-bar-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+/* --------------------------------------------------------------------
+   Efeito "área da saúde": traçado de ECG / batimento cardíaco.
+   A linha é desenhada da esquerda para a direita em loop (stroke-dash),
+   e um ponto luminoso percorre o caminho — motivo inconfundível de saúde.
+   -------------------------------------------------------------------- */
+.lp-medicos .ecg-path {
+  stroke-dasharray: var(--ecg-len, 1200);
+  stroke-dashoffset: var(--ecg-len, 1200);
+  animation: lp-med-ecg-draw var(--ecg-speed, 4s) linear infinite;
+}
+@keyframes lp-med-ecg-draw {
+  0%   { stroke-dashoffset: var(--ecg-len, 1200); }
+  60%  { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.lp-medicos .ecg-pulse {
+  animation: lp-med-ecg-blip 1.4s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes lp-med-ecg-blip {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.25); }
+}
+
+/* "Heartbeat" suave para selos/elementos vivos */
+.lp-medicos .heartbeat {
+  animation: lp-med-heartbeat 1.6s ease-in-out infinite;
+}
+@keyframes lp-med-heartbeat {
+  0%, 100% { transform: scale(1); }
+  14%      { transform: scale(1.12); }
+  28%      { transform: scale(1); }
+  42%      { transform: scale(1.08); }
+  56%      { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-medicos .med-bar,
+  .lp-medicos .ecg-path,
+  .lp-medicos .ecg-pulse,
+  .lp-medicos .heartbeat {
+    animation: none;
+    transform: none;
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* =====================================================================
    Shared reveal / fade-in utilities (no JS lib required)
    ===================================================================== */
 .lp-reveal {
