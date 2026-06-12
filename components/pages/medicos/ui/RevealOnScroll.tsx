@@ -17,11 +17,20 @@ export default function RevealOnScroll({
   once = true,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  // Keep SSR content visible. Once hydrated, only off-screen elements are
+  // hidden for the entrance animation, so a client-side failure never leaves
+  // the page permanently blank.
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+
+    if (isInViewport && once) return;
+    if (!("IntersectionObserver" in window)) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -29,12 +38,12 @@ export default function RevealOnScroll({
           if (entry.isIntersecting) {
             setVisible(true);
             if (once) observer.disconnect();
-          } else if (!once) {
+          } else {
             setVisible(false);
           }
         }
       },
-      { threshold: 0.2 },
+      { threshold: 0.05 },
     );
 
     observer.observe(el);

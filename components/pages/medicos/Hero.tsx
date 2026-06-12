@@ -6,8 +6,8 @@ import EcgLine from "./ui/EcgLine";
 
 const features = [
   "Campanhas no Google e Meta Ads geridas de ponta a ponta",
-  "Anúncios 100% dentro da Resolução CFM 2.336/2023",
-  "Você acompanha o custo por consulta agendada",
+  "Roteiro de cada anúncio construído por nós, você só valida",
+  "Anúncios 100% dentro da Resolução CFM nº 2.336/2023",
 ];
 
 export default function Hero() {
@@ -50,7 +50,7 @@ export default function Hero() {
               Mais pacientes <span className="kw">particulares</span> na sua agenda, todo mês.
             </h1>
 
-            {/* Traçado de ECG sob o título — assinatura visual da saúde */}
+            {/* Traçado de ECG sob o título: assinatura visual da saúde */}
             <div className="lp-fade-up mt-6 max-w-md" style={{ animationDelay: "0.32s" }}>
               <EcgLine color="#e8740c" speed="4s" height={40} />
             </div>

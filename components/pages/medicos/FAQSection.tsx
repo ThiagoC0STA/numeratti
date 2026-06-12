@@ -5,15 +5,15 @@ import RevealOnScroll from "./ui/RevealOnScroll";
 const faqs = [
   {
     q: "Tráfego pago para médico é permitido pelo CFM?",
-    a: "Sim. A publicidade médica é regulamentada — não proibida. A Resolução CFM nº 2.336/2023 (em vigor desde 2024) permite anúncios para captar pacientes em canais próprios, inclusive divulgar valores de consulta. O que ela veda é promessa de resultado, sensacionalismo e autopromoção excessiva. Toda campanha que veiculamos opera dentro dessa fronteira.",
+    a: "Sim. A publicidade médica é regulamentada, não proibida. A Resolução CFM nº 2.336/2023, em vigor desde 2024, permite anúncios para captar pacientes em canais próprios. O que ela veda é promessa de resultado, sensacionalismo e autopromoção excessiva. Toda campanha que veiculamos opera dentro dessa fronteira.",
   },
   {
-    q: "Não tenho tempo de gravar ou criar os anúncios. Como fica?",
-    a: "Os criativos são por nossa conta — produzimos as imagens e vídeos dos anúncios (inclusive com Inteligência Artificial). Você só aprova; não precisa parar a agenda para gravar nada.",
+    q: "Quem escreve os anúncios?",
+    a: "Nós construímos o roteiro de cada anúncio com base no que os pacientes da sua especialidade mais pesquisam, já na linguagem que a norma de publicidade médica permite. Você valida tudo antes de qualquer campanha ir ao ar.",
   },
   {
     q: "Quanto custa?",
-    a: "O investimento (gestão + verba de mídia) é definido junto com você num briefing, de acordo com a sua especialidade, cidade e meta de pacientes. Comece pelo diagnóstico gratuito: a partir dele montamos a proposta sob medida, sem compromisso.",
+    a: "A oferta é personalizada. Montamos a proposta em um briefing, de acordo com a sua especialidade, a sua cidade e a sua meta de pacientes. O primeiro passo é o diagnóstico gratuito, sem compromisso.",
   },
   {
     q: "Existe contrato de fidelidade?",
@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: "Em quanto tempo vejo resultado?",
-    a: "Campanhas de busca no Google começam a gerar contatos já nas primeiras semanas. No diagnóstico você recebe uma estimativa realista para o seu caso — prometer prazo igual para todos seria o tipo de promessa que não fazemos.",
+    a: "Campanhas de busca no Google começam a gerar contatos já nas primeiras semanas. No diagnóstico você recebe uma estimativa realista para o seu caso. Prometer prazo igual para todos seria o tipo de promessa que não fazemos.",
   },
 ];
 
@@ -97,8 +97,10 @@ export default function FAQSection() {
 
       <div className="relative max-w-3xl mx-auto px-6 lg:px-10">
         <RevealOnScroll className="text-center mb-12">
-          <span className="tag tag-dark mb-6 inline-flex">Dúvidas</span>
-          <h2 className="display display-tight text-white text-3xl md:text-5xl mt-4 leading-[1.05]">
+          <span className="mono text-orange-primary text-[11px] uppercase tracking-[0.28em]">
+            / dúvidas
+          </span>
+          <h2 className="display display-tight text-white text-3xl md:text-5xl mt-5 leading-[1.05]">
             Perguntas diretas. <span className="kw">Respostas diretas.</span>
           </h2>
         </RevealOnScroll>

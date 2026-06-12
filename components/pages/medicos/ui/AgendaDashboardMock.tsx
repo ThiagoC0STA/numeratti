@@ -3,10 +3,10 @@ import AnimatedCounter from "./AnimatedCounter";
 import EcgLine from "./EcgLine";
 
 /**
- * Visual do hero: um "monitor de agenda" no estilo de equipamento médico —
+ * Visual do hero: um "monitor de agenda" no estilo de equipamento médico, com
  * traçado de ECG no topo, leitura principal de consultas e barras de
  * crescimento semanal. 100% HTML/CSS/SVG (sem imagem) para LCP rápido.
- * Os números são ILUSTRATIVOS — rotulados como simulação.
+ * Os números são ILUSTRATIVOS: rotulados como simulação.
  */
 const weeks = [
   { label: "Sem 1", value: 38 },

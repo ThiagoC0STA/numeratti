@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Sora, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { pageMetadata } from "@/lib/seo";
 
-// Display: Sora — geométrica e precisa, com ar de health-tech. Diferencia a LP
+// Display: Sora: geométrica e precisa, com ar de health-tech. Diferencia a LP
 // do restante do site (Geist / Bricolage) e substitui a serifada antiga.
 const display = Sora({
   subsets: ["latin"],
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   ...pageMetadata({
     title: "Tráfego Pago para Médicos: Mais Pacientes",
     description:
-      "Gestão de campanhas de tráfego pago (Google e Meta Ads) para médicos: mais pacientes particulares na sua agenda, dentro do CFM. Diagnóstico gratuito, sem fidelidade.",
+      "Gestão de campanhas de tráfego pago para médicos: mais pacientes particulares na agenda, roteiros prontos e anúncios dentro do CFM. Diagnóstico gratuito.",
     path: "/medicos",
   }),
   keywords: [

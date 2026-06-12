@@ -20,7 +20,7 @@ const steps = [
     code: "03",
     label: "alcance",
     title: "Meta Ads",
-    desc: "Campanhas para ampliar alcance e reativar quem já demonstrou interesse no seu consultório.",
+    desc: "Campanhas para ampliar alcance e reimpactar quem já demonstrou interesse no seu consultório.",
     offset: "lg:mt-8",
   },
   {
@@ -30,6 +30,12 @@ const steps = [
     desc: "Acompanhamos cada lead até virar agendamento e relatamos quanto custou cada consulta.",
     offset: "lg:mt-0",
   },
+];
+
+const rxLines = [
+  "Construído sobre o que os pacientes da sua especialidade pesquisam",
+  "Linguagem dentro da norma de publicidade médica",
+  "Validado por você antes de qualquer campanha ir ao ar",
 ];
 
 export default function MethodSection() {
@@ -52,13 +58,13 @@ export default function MethodSection() {
           </RevealOnScroll>
           <RevealOnScroll delay={0.1}>
             <h2 className="display display-tight text-white text-3xl md:text-5xl lg:text-6xl mt-5 leading-[1.02]">
-              Tráfego pago que vira <span className="kw">consulta agendada.</span>
+              Gestão de campanhas que vira <span className="kw">consulta agendada.</span>
             </h2>
           </RevealOnScroll>
           <RevealOnScroll delay={0.2}>
             <p className="mt-6 text-white/55 text-lg max-w-2xl leading-relaxed">
-              Cuidamos das campanhas de ponta a ponta. Quatro passos que sobem a sua agenda mês após
-              mês, medidos pelo que importa.
+              Cuidamos das suas campanhas de ponta a ponta. Quatro passos que sobem a sua agenda mês
+              após mês, medidos pelo que importa.
             </p>
           </RevealOnScroll>
         </div>
@@ -81,17 +87,61 @@ export default function MethodSection() {
           ))}
         </div>
 
-        {/* Destaque: o que mais entregamos além da gestão */}
+        {/* Receituário: o roteiro do anúncio sai daqui */}
         <RevealOnScroll delay={0.1}>
-          <div className="mt-10 flex flex-col md:flex-row md:items-center gap-5 rounded-[22px] border border-orange-primary/25 bg-orange-primary/[0.06] p-6 md:p-7">
-            <div className="shrink-0 w-12 h-12 rounded-2xl bg-orange-primary/15 grid place-items-center text-orange-primary">
-              <IconScript />
+          <div
+            className="relative mt-12 rounded-[22px] p-7 md:p-10 overflow-hidden"
+            style={{ background: "#fdf8f3", color: "#111111", boxShadow: "0 40px 80px -40px rgba(232,116,12,0.35)" }}
+          >
+            <div className="relative grid lg:grid-cols-12 gap-8">
+              <div className="lg:col-span-7">
+                <span className="mono text-[10px] uppercase tracking-[0.24em]" style={{ color: "#0d9488" }}>
+                  receituário do anúncio
+                </span>
+                <h3
+                  className="text-2xl md:text-4xl mt-3 leading-[1.05]"
+                  style={{ fontFamily: "var(--font-display), sans-serif", fontWeight: 700, letterSpacing: "-0.03em" }}
+                >
+                  O roteiro de cada anúncio é <span style={{ color: "#d4680a" }}>construído por nós.</span>
+                </h3>
+                <p className="mt-4 text-base md:text-lg leading-relaxed" style={{ color: "rgba(17,17,17,0.7)" }}>
+                  Você não precisa pensar no que dizer. Entregamos o roteiro pronto para cada campanha
+                  e você só valida.
+                </p>
+
+                <ul className="mt-6 space-y-0">
+                  {rxLines.map((line) => (
+                    <li
+                      key={line}
+                      className="flex items-start gap-3 py-3 text-sm md:text-base"
+                      style={{ borderBottom: "1px dashed rgba(17,17,17,0.18)", color: "rgba(17,17,17,0.85)" }}
+                    >
+                      <svg className="mt-0.5 shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4680a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                      {line}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="lg:col-span-5 flex flex-col justify-end items-start lg:items-end gap-2">
+                <div className="lg:text-right">
+                  <div
+                    className="display text-xl"
+                    style={{ fontFamily: "var(--font-display), sans-serif", fontWeight: 700, color: "#111111" }}
+                  >
+                    Numeratti MED
+                  </div>
+                  <div
+                    className="mono text-[10px] uppercase tracking-[0.2em] pt-2 mt-1"
+                    style={{ borderTop: "1px solid rgba(17,17,17,0.4)", color: "rgba(17,17,17,0.5)" }}
+                  >
+                    responsável pelo roteiro
+                  </div>
+                </div>
+              </div>
             </div>
-            <p className="text-white/75 text-base md:text-lg leading-relaxed">
-              <span className="text-white font-semibold">Roteiro por nossa conta.</span>{" "}
-              Sugerimos o roteiro de cada anúncio com base no que seus pacientes mais pesquisam, para
-              a campanha falar a língua de quem você quer atender.
-            </p>
           </div>
         </RevealOnScroll>
 
@@ -105,14 +155,5 @@ export default function MethodSection() {
         </RevealOnScroll>
       </div>
     </section>
-  );
-}
-
-function IconScript() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M5 3h10l4 4v14a0 0 0 010 0H5a0 0 0 010 0V3z" />
-      <path d="M14 3v4h4M8 12h8M8 16h6" />
-    </svg>
   );
 }
