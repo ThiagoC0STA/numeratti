@@ -10,7 +10,7 @@ const canDo = [
 
 const cannotDo = [
   "Prometer ou insinuar resultados garantidos",
-  "Sensacionalismo e “técnica milagrosa/revolucionária”",
+  "Sensacionalismo e “técnica milagrosa”",
   "Autopromoção que desqualifique colegas",
   "Publicidade de medicamentos e selos a produtos",
   "Peças sem nome, CRM, título “médico” e RQE",
@@ -20,7 +20,7 @@ export default function ComplianceSection() {
   return (
     <section
       id="etica"
-      className="relative py-28 md:py-36 overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden"
       style={{ background: "#fdf8f3", color: "#111111" }}
     >
       <div
@@ -35,22 +35,14 @@ export default function ComplianceSection() {
       <div className="relative max-w-6xl mx-auto px-6 lg:px-10">
         <div className="max-w-3xl">
           <RevealOnScroll>
-            <span
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-[0.1em]"
-              style={{
-                background: "rgba(13,148,136,0.1)",
-                color: "#0d9488",
-                border: "1px solid rgba(13,148,136,0.25)",
-              }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#0d9488" }} />
-              Ética em primeiro lugar
+            <span className="mono text-[11px] uppercase tracking-[0.28em]" style={{ color: "#0d9488" }}>
+              / ética e norma
             </span>
           </RevealOnScroll>
           <RevealOnScroll delay={0.1}>
             <h2
-              className="text-4xl md:text-5xl lg:text-[56px] mt-6 leading-[1.02]"
-              style={{ fontFamily: "var(--font-display), sans-serif", fontWeight: 700, letterSpacing: "-0.045em" }}
+              className="text-3xl md:text-5xl lg:text-[52px] mt-5 leading-[1.04]"
+              style={{ fontFamily: "var(--font-display), sans-serif", fontWeight: 700, letterSpacing: "-0.03em" }}
             >
               As regras da publicidade médica{" "}
               <span style={{ color: "#e8740c" }}>mudaram em 2024.</span> Quem entendeu, saiu na
@@ -59,10 +51,10 @@ export default function ComplianceSection() {
           </RevealOnScroll>
           <RevealOnScroll delay={0.2}>
             <p className="mt-7 text-lg leading-relaxed" style={{ color: "rgba(17,17,17,0.7)" }}>
-              A Resolução CFM nº 2.336/2023, em vigor desde março de 2024, <strong>liberou</strong>{" "}
-              práticas que muitos médicos ainda acham proibidas — e manteve vedações que muitas
-              agências genéricas ignoram. Conhecer essa fronteira é a diferença entre crescer com
-              segurança e responder a um processo ético.
+              A Resolução CFM nº 2.336/2023, em vigor desde março de 2024,{" "}
+              <strong>liberou</strong> práticas que muitos médicos ainda acham proibidas e manteve
+              vedações que muitas agências ignoram. Conhecer essa fronteira é o que separa crescer
+              com segurança de responder a um processo ético.
             </p>
           </RevealOnScroll>
         </div>
@@ -73,13 +65,8 @@ export default function ComplianceSection() {
               className="h-full rounded-[22px] p-7 md:p-8"
               style={{ background: "#ffffff", border: "1px solid rgba(13,148,136,0.25)", boxShadow: "0 20px 50px -30px rgba(13,148,136,0.4)" }}
             >
-              <div className="flex items-center gap-2 mb-6">
-                <span
-                  className="text-[11px] uppercase tracking-[0.2em] font-bold px-2.5 py-1 rounded-full"
-                  style={{ background: "rgba(13,148,136,0.1)", color: "#0d9488" }}
-                >
-                  Hoje você pode
-                </span>
+              <div className="mono text-[10px] uppercase tracking-[0.2em] font-semibold mb-6 inline-block px-2.5 py-1 rounded-full" style={{ background: "rgba(13,148,136,0.1)", color: "#0d9488" }}>
+                hoje você pode
               </div>
               <ul className="space-y-4">
                 {canDo.map((item) => (
@@ -96,13 +83,8 @@ export default function ComplianceSection() {
               className="h-full rounded-[22px] p-7 md:p-8"
               style={{ background: "#ffffff", border: "1px solid rgba(232,116,12,0.25)", boxShadow: "0 20px 50px -30px rgba(232,116,12,0.35)" }}
             >
-              <div className="flex items-center gap-2 mb-6">
-                <span
-                  className="text-[11px] uppercase tracking-[0.2em] font-bold px-2.5 py-1 rounded-full"
-                  style={{ background: "rgba(232,116,12,0.1)", color: "#d4680a" }}
-                >
-                  Continua vedado
-                </span>
+              <div className="mono text-[10px] uppercase tracking-[0.2em] font-semibold mb-6 inline-block px-2.5 py-1 rounded-full" style={{ background: "rgba(232,116,12,0.1)", color: "#d4680a" }}>
+                continua vedado
               </div>
               <ul className="space-y-4">
                 {cannotDo.map((item) => (
@@ -117,23 +99,31 @@ export default function ComplianceSection() {
 
         <RevealOnScroll delay={0.1}>
           <div
-            className="mt-10 rounded-[22px] p-7 md:p-8 flex flex-col md:flex-row md:items-center gap-5"
+            className="mt-10 rounded-[22px] p-7 md:p-8 flex flex-col md:flex-row md:items-center gap-6"
             style={{ background: "#0f0a05", color: "#fff" }}
           >
-            <div className="shrink-0 w-12 h-12 rounded-2xl grid place-items-center" style={{ background: "rgba(45,212,191,0.12)", color: "#2dd4bf" }}>
-              <ShieldIcon />
-            </div>
-            <p className="text-white/85 text-base md:text-lg leading-relaxed">
-              Cada campanha, anúncio e vídeo que produzimos passa por checagem de conformidade antes
-              da veiculação. <strong className="text-white">Seu crescimento nunca deve custar seu registro.</strong>
+            <p className="flex-1 text-white/85 text-base md:text-lg leading-relaxed">
+              Cada campanha que veiculamos passa por checagem de conformidade antes de ir ao ar.{" "}
+              <strong className="text-white">Seu crescimento nunca deve custar seu registro.</strong>
             </p>
+            {/* Carimbo de conformidade */}
+            <div
+              className="mono shrink-0 self-start md:self-center -rotate-6 rounded-lg px-4 py-2.5 text-[10px] uppercase tracking-[0.18em] text-center leading-relaxed"
+              style={{ border: "2px solid #2dd4bf", color: "#2dd4bf" }}
+              aria-hidden
+            >
+              verificado
+              <br />
+              cfm 2.336/2023
+            </div>
           </div>
         </RevealOnScroll>
 
         <RevealOnScroll delay={0.1}>
           <p className="mt-6 text-[12px] leading-relaxed max-w-3xl" style={{ color: "rgba(17,17,17,0.5)" }}>
             A responsabilidade final pelo conteúdo publicado é do médico, conforme a Resolução.
-            Atuamos como executores tecnicamente alinhados à norma — não como consultoria jurídica.
+            Atuamos como gestores de campanha tecnicamente alinhados à norma, não como consultoria
+            jurídica.
           </p>
         </RevealOnScroll>
       </div>
@@ -153,14 +143,6 @@ function CrossIcon() {
     <svg className="mt-0.5 shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4680a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <line x1="18" y1="6" x2="6" y2="18" />
       <line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
-  );
-}
-function ShieldIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z" />
-      <path d="M9 12l2 2 4-4" />
     </svg>
   );
 }

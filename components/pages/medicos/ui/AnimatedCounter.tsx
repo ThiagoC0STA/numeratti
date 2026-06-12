@@ -18,11 +18,11 @@ export default function AnimatedCounter({ to, duration = 1.6, prefix = "", suffi
     const el = ref.current;
     if (!el) return;
     // Se já estiver visível na montagem (ex.: contador acima da dobra),
-    // dispara imediatamente — não depende do IntersectionObserver.
+    // dispara no próximo frame: não depende do IntersectionObserver.
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) {
-      setInView(true);
-      return;
+      const raf = requestAnimationFrame(() => setInView(true));
+      return () => cancelAnimationFrame(raf);
     }
     const observer = new IntersectionObserver(
       ([entry]) => {

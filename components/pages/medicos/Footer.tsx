@@ -24,8 +24,8 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-5 text-white/55 max-w-sm leading-relaxed">
-              Captação previsível de pacientes particulares para médicos — performance medida por
-              dados, dentro da ética da publicidade médica. Consultoria com base em Fortaleza/CE.
+              Gestão de campanhas de tráfego pago para médicos, com performance medida por dados e
+              dentro da ética da publicidade médica. Consultoria com base em Fortaleza/CE.
             </p>
           </div>
 
@@ -50,8 +50,8 @@ export default function Footer() {
             </div>
             <ul className="space-y-2 text-sm">
               <li><Link href="/" className="hover:text-white transition">Site Numeratti</Link></li>
-              <li><Link href="/videos-ia" className="hover:text-white transition">Vídeos com IA</Link></li>
               <li><Link href="/diagnostico" className="hover:text-white transition">Diagnóstico</Link></li>
+              <li><Link href="/cases" className="hover:text-white transition">Cases</Link></li>
             </ul>
           </div>
 
@@ -70,13 +70,13 @@ export default function Footer() {
                   WhatsApp
                 </a>
               </li>
-              <li>Fortaleza / Ceará — Brasil</li>
+              <li>Fortaleza / Ceará · Brasil</li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-6 border-t border-white/[0.05] flex flex-wrap items-center justify-between gap-3 text-xs text-white/40">
-          <span>© {currentYear()} Numeratti — Performance Digital para Médicos.</span>
+          <span>© {currentYear()} Numeratti · Performance Digital para Médicos.</span>
           <span>Numeratti MED · Todos os direitos reservados.</span>
         </div>
       </div>

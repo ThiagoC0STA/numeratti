@@ -1,5 +1,5 @@
 /**
- * Linha de ECG (batimento cardíaco) — motivo visual da área da saúde.
+ * Linha de ECG (batimento cardíaco): motivo visual da área da saúde.
  * O traçado é desenhado da esquerda para a direita em loop (animação de
  * stroke-dashoffset via classe .ecg-path). Puramente decorativo.
  */
